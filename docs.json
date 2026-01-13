@@ -31,33 +31,7 @@
         }
       ]
     },
-    "tabs": [
-      {
-        "tab": "DARSLAR",
-        "dropdowns": [
-          {
-            "dropdown": "HTML",
-            "products": [
-              {
-                "product": "Untitled Product",
-                "pages": [
-                  "darslar/html/untitled-product/1-dars-kirish"
-                ]
-              },
-              {
-                "product": "Untitled Product",
-                "pages": [
-                  "darslar/html/untitled-product/asdsad"
-                ]
-              }
-            ]
-          },
-          {
-            "dropdown": "CSS"
-          }
-        ]
-      }
-    ]
+    "groups": []
   },
   "logo": {
     "light": "/logo/light.svg",
