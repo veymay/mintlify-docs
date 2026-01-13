@@ -33,9 +33,25 @@
         "icon": "computer",
         "groups": [
           {
-            "group": "1-MODUL. KIRISH",
+            "group": "1-MODUL. Kompyuter asoslari",
             "pages": [
-              "kiberxavfsizlik/1-modul/1-dars"
+              "it-savodxonlik/1-modul-kompyuter-asoslari/1-dars",
+              "it-savodxonlik/1-modul-kompyuter-asoslari/2-dars",
+              "it-savodxonlik/1-modul-kompyuter-asoslari/3-dars"
+            ]
+          },
+          {
+            "group": "2-MODUL. Operatsion tizimlar",
+            "pages": [
+              "it-savodxonlik/2-modul-operatsion-tizimlar/1-dars",
+              "it-savodxonlik/2-modul-operatsion-tizimlar/2-dars"
+            ]
+          },
+          {
+            "group": "3-MODUL. Internet va brauzerlar",
+            "pages": [
+              "it-savodxonlik/3-modul-internet-va-brauzerlar/1-dars",
+              "it-savodxonlik/3-modul-internet-va-brauzerlar/2-dars"
             ]
           }
         ]
@@ -45,30 +61,30 @@
         "icon": "gear-code",
         "groups": [
           {
-            "group": "1-MODUL. KIRISH",
-            "pages": [
-              "kiberxavfsizlik/1-modul-copied-2/1-dars"
-            ]
+            "group": "1-MODUL. Kirish",
+            "pages": ["frontend-pro/1-modul-kirish/1-dars"]
           },
           {
             "group": "2-MODUL. HTML",
-            "pages": []
+            "pages": ["frontend-pro/2-modul-html/1-dars"]
           },
           {
             "group": "3-MODUL. CSS",
-            "pages": []
+            "pages": ["frontend-pro/3-modul-css/1-dars"]
           }
         ]
       },
       {
-        "tab": "KIBERXAVFSIZLIK",
-        "icon": "lock-keyhole",
+        "tab": "KIBER XAVFSIZLIK",
+        "icon": "shield-halved",
         "groups": [
           {
-            "group": "1-MODUL. KIRISH",
-            "pages": [
-              "kiberxavfsizlik/1-modul-copied-1/1-dars"
-            ]
+            "group": "1-MODUL. Kirish",
+            "pages": ["kiber-xavfsizlik/1-modul-kirish/1-dars"]
+          },
+          {
+            "group": "2-MODUL. Tarmoq asoslari",
+            "pages": ["kiber-xavfsizlik/2-modul-tarmoq-asoslari/1-dars"]
           }
         ]
       }
@@ -88,15 +104,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "styling": {
     "latex": false

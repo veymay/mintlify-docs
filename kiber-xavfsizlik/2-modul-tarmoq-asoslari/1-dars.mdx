@@ -1,0 +1,391 @@
+---
+title: "Tarmoq asoslari"
+description: "Kompyuter tarmoqlari va TCP/IP"
+---
+
+## TODO
+- [ ] Tarmoq tushunchasini o'rganish
+- [ ] OSI modeli bilan tanishish
+- [ ] TCP/IP protokollarini bilish
+
+## Dars mazmuni
+
+### Kompyuter tarmog'i nima?
+
+**Tarmoq (Network)** - bir-biri bilan ma'lumot almashish uchun ulangan kompyuterlar va qurilmalar to'plami.
+
+**Maqsadi**:
+- Resurslarni bo'lishish (fayl, printer)
+- Ma'lumot almashish
+- Aloqa (email, chat, video)
+- Internet kirish
+
+### Tarmoq turlari
+
+#### 1. LAN (Local Area Network - Mahalliy tarmoq)
+- **O'lcham**: Kichik (uy, ofis, bino)
+- **Tezlik**: Yuqori (100 Mbps - 10 Gbps)
+- **Narx**: Arzon
+- **Misol**: Uyingiz yoki ofis tarmog'i
+- **Texnologiya**: Ethernet, Wi-Fi
+
+#### 2. WAN (Wide Area Network - Keng tarmoq)
+- **O'lcham**: Katta (shahar, mamlakat, dunyo)
+- **Tezlik**: O'rtacha
+- **Narx**: Qimmat
+- **Misol**: Internet
+- **Texnologiya**: Fiber, satellite
+
+#### 3. MAN (Metropolitan Area Network - Shahar tarmog'i)
+- **O'lcham**: Shahar miqyosida
+- **Misol**: Universitet campuslari
+- **Tezlik**: LAN dan past, WAN dan yuqori
+
+#### 4. PAN (Personal Area Network - Shaxsiy tarmoq)
+- **O'lcham**: Juda kichik (bir necha metr)
+- **Misol**: Bluetooth quloqchin, smartwatch
+- **Texnologiya**: Bluetooth, USB
+
+### Tarmoq topologiyalari
+
+#### 1. Bus Topology (Avtobus topologiyasi)
+```
+O---O---O---O---O
+```
+- Bitta markaziy kabel
+- Oddiy va arzon
+- Bitta nuqta buzilsa, hammasi to'xtaydi
+
+#### 2. Star Topology (Yulduz topologiyasi) - ✅ Eng mashhur
+```
+    O
+    |
+O---X---O
+    |
+    O
+```
+- Markaziy switch/hub
+- Bitta qurilma buzilsa, boshqalari ishlaydi
+- Markaziy qurilma buzilsa, hammasi to'xtaydi
+- Zamonaviy tarmoqlarda ishlatiladi
+
+#### 3. Ring Topology (Halqa topologiyasi)
+```
+O---O
+|   |
+O---O
+```
+- Halqa shaklida
+- Ma'lumot bir yo'nalishda harakatlanadi
+- Token passing
+
+#### 4. Mesh Topology (To'r topologiyasi)
+```
+O---O
+|\ /|
+| X |
+|/ \|
+O---O
+```
+- Har bir qurilma boshqalarga ulangan
+- Juda ishonchli
+- Qimmat va murakkab
+
+### OSI Model (7 qatlam)
+
+**OSI (Open Systems Interconnection)** - tarmoq aloqasini tushuntirish uchun nazariy model.
+
+#### Qatlamlar (yuqoridan pastga):
+
+**7. Application Layer (Ilova qatlami)**
+- Foydalanuvchi ilovalar bilan ishlaydi
+- Protokollar: HTTP, HTTPS, FTP, SMTP, DNS
+- Misol: Brauzer, email mijoz
+
+**6. Presentation Layer (Taqdimot qatlami)**
+- Ma'lumotlarni formatlash
+- Shifrlash/deshifrlash (Encryption/Decryption)
+- Siqish (Compression)
+
+**5. Session Layer (Sessiya qatlami)**
+- Seanslarni boshqarish
+- Ulanishni ochish, saqlash, yopish
+- Misol: Login sessiyasi
+
+**4. Transport Layer (Transport qatlami)**
+- To'g'ridan-to'g'ri aloqa
+- Protokollar: TCP, UDP
+- Portlar bilan ishlash
+- Ma'lumotni segmentlarga bo'lish
+
+**3. Network Layer (Tarmoq qatlami)**
+- IP manzillar bilan ishlash
+- Marshrutlash (Routing)
+- Protokol: IP, ICMP
+- Qurilma: Router
+
+**2. Data Link Layer (Ma'lumot aloqa qatlami)**
+- MAC manzillar bilan ishlash
+- Frame yaratish
+- Xatolarni aniqlash
+- Protokol: Ethernet, Wi-Fi
+- Qurilma: Switch, Bridge
+
+**1. Physical Layer (Jismoniy qatlam)**
+- Elektr signallari
+- Kabellar, radio to'lqinlar
+- Bit larni uzatish
+- Qurilma: Hub, kabellar
+
+**Eslab qolish uchun**: **Please Do Not Throw Sausage Pizza Away** (Physical, Data Link, Network, Transport, Session, Presentation, Application)
+
+### TCP/IP Model (4 qatlam)
+
+Amalda OSI dan ko'ra ko'proq ishlatiladi.
+
+**4. Application Layer** (OSI ning 5-7 qatlamlari)
+- HTTP, HTTPS, FTP, SMTP, DNS
+
+**3. Transport Layer**
+- TCP, UDP
+
+**2. Internet Layer** (OSI Network qatlami)
+- IP, ICMP, ARP
+
+**1. Network Access Layer** (OSI ning 1-2 qatlamlari)
+- Ethernet, Wi-Fi
+
+### IP Address (IP Manzil)
+
+**IP Address** - tarmoqdagi har bir qurilmaning noyob manzili.
+
+#### IPv4 (Internet Protocol version 4)
+**Format**: 4 ta oktet, har biri 0-255
+**Misol**: `192.168.1.1`
+
+**Turlari**:
+- **Public IP** - Internetda ko'rinadigan
+- **Private IP** - Mahalliy tarmoqda
+  - 10.0.0.0 - 10.255.255.255
+  - 172.16.0.0 - 172.31.255.255
+  - 192.168.0.0 - 192.168.255.255
+
+**Maxsus IP lar**:
+- **127.0.0.1** - Localhost (o'z kompyuteringiz)
+- **0.0.0.0** - Har qanday IP
+- **255.255.255.255** - Broadcast (hammaga)
+
+#### IPv6 (Internet Protocol version 6)
+**Format**: 8 ta guruh, 16lik sanoq sistemasida
+**Misol**: `2001:0db8:85a3:0000:0000:8a2e:0370:7334`
+
+**Nega kerak?**: IPv4 tugadi (4.3 milliard), IPv6 ko'proq (340 undecillion)
+
+### Subnet Mask (Subnet niqobi)
+
+**Vazifasi**: IP manzilni tarmoq va host qismiga ajratish
+
+**Misol**:
+```
+IP: 192.168.1.100
+Subnet: 255.255.255.0
+```
+
+**Tarmoq qismi**: `192.168.1` (255 bo'lgan joylar)
+**Host qismi**: `100` (0 bo'lgan joy)
+
+**Subnet turlari**:
+- `/24` yoki `255.255.255.0` - 254 ta host
+- `/16` yoki `255.255.0.0` - 65,534 ta host
+- `/8` yoki `255.0.0.0` - 16,777,214 ta host
+
+### Gateway (Darvoza)
+
+**Gateway (Router)** - turli tarmoqlarni bog'laydigan qurilma.
+
+**Vazifasi**:
+- Tarmoqlar orasida ma'lumot uzatish
+- Internetga chiqish yo'li
+- Odatda: `192.168.1.1` yoki `192.168.0.1`
+
+### DNS (Domain Name System)
+
+**Vazifasi**: Domen nomini IP ga o'zgartirish
+
+**Misol**:
+- `google.com` → `142.250.185.78`
+- `facebook.com` → `157.240.241.35`
+
+**DNS Serverlari**:
+- **Google**: `8.8.8.8`, `8.8.4.4`
+- **Cloudflare**: `1.1.1.1`, `1.0.0.1`
+- **Yandex**: `77.88.8.8`, `77.88.8.1`
+
+### Port raqamlari
+
+**Port** - ilovaning tarmoqdagi "eshigi"
+
+**Mashhur portlar**:
+- **20, 21** - FTP (File Transfer)
+- **22** - SSH (Secure Shell)
+- **23** - Telnet
+- **25** - SMTP (Email yuborish)
+- **53** - DNS
+- **80** - HTTP (veb-sayt)
+- **110** - POP3 (Email qabul qilish)
+- **143** - IMAP (Email)
+- **443** - HTTPS (xavfsiz veb)
+- **3306** - MySQL
+- **3389** - RDP (Remote Desktop)
+- **8080** - HTTP alternativa
+
+**Port diapazoni**: 0-65535
+- **0-1023**: Well-known ports (mashhur)
+- **1024-49151**: Registered ports
+- **49152-65535**: Dynamic ports
+
+### Protokollar
+
+#### Transport Layer
+
+**TCP (Transmission Control Protocol)**
+- **Xususiyati**: Ishonchli, tartibli
+- **Ulanish**: Ha (3-way handshake)
+- **Tezlik**: Sekinroq
+- **Uchun**: Veb, email, fayl uzatish
+- **Misol**: HTTP, HTTPS, FTP, SMTP
+
+**UDP (User Datagram Protocol)**
+- **Xususiyati**: Tez, ishonchsiz
+- **Ulanish**: Yo'q
+- **Tezlik**: Tezroq
+- **Uchun**: Video, audio stream, o'yinlar
+- **Misol**: DNS, DHCP, VoIP
+
+#### Application Layer
+
+**HTTP (HyperText Transfer Protocol)**
+- Port: 80
+- Veb-saytlar
+- Xavfsiz emas
+
+**HTTPS (HTTP Secure)**
+- Port: 443
+- Shifrlangan
+- SSL/TLS sertifikati
+
+**FTP (File Transfer Protocol)**
+- Port: 21
+- Fayl uzatish
+- Xavfsiz emas
+
+**SSH (Secure Shell)**
+- Port: 22
+- Masofadan boshqarish
+- Shifrlangan
+
+**SMTP (Simple Mail Transfer Protocol)**
+- Port: 25
+- Email yuborish
+
+### Tarmoq qurilmalari
+
+#### 1. Hub (Xab)
+- Qabul qilgan signalni barcha portlarga yuboradi
+- Oddiy va arzon
+- Xavfsiz emas, sekin
+- Hozir ishlatilmaydi
+
+#### 2. Switch (Kommutator)
+- MAC manzilga qarab to'g'ri portga yuboradi
+- Tez va xavfsizroq
+- Zamonaviy tarmoqlarda asosiy
+
+#### 3. Router (Marshrutizator)
+- Turli tarmoqlarni bog'laydi
+- IP manzil bilan ishlaydi
+- Internet uchun kerak
+
+#### 4. Firewall (Himoya devori)
+- Tarmoq trafigini filtrlaydi
+- Xavfsizlik uchun
+- Keraksiz portlarni yopadi
+
+### Tarmoq buyruqlari (Windows)
+
+```powershell
+# IP konfiguratsiyasini ko'rish
+ipconfig
+
+# To'liq ma'lumot
+ipconfig /all
+
+# Ping - ulanishni tekshirish
+ping google.com
+ping 8.8.8.8
+
+# Tracert - yo'lni ko'rish
+tracert google.com
+
+# Netstat - ochiq portlar
+netstat -an
+
+# Nslookup - DNS so'rov
+nslookup google.com
+
+# ARP - MAC manzillar
+arp -a
+```
+
+## Dars uchun vazifa
+
+1. O'z tarmoq sozlamalaringizni aniqlang:
+   - CMD da `ipconfig /all` buyrug'ini bajaring
+   - IP manzil, Subnet mask, Gateway, DNS larni yozib oling
+
+2. Ping buyrug'i bilan tajriba qiling:
+   ```
+   ping google.com
+   ping 8.8.8.8
+   ping 127.0.0.1
+   ```
+   Natijalarni tahlil qiling
+
+3. Tracert bilan yo'lni ko'ring:
+   ```
+   tracert google.com
+   ```
+   Qancha hop (sakrash) mavjud?
+
+## Uyga vazifa
+
+1. OSI modelining 7 ta qatlamini o'z so'zlaringiz bilan tushuntiring va har biriga misol keltiring
+
+2. TCP va UDP ni taqqoslang (jadval):
+   - Ishonchlilik
+   - Tezlik
+   - Ulanish
+   - Qo'llanish sohalari
+
+3. Quyidagi IP manzillar qaysi turkumga kiradi (Public/Private)?
+   - 192.168.1.50
+   - 8.8.8.8
+   - 10.0.0.5
+   - 172.16.10.20
+   - 157.240.241.35
+
+4. Port raqamlarini o'rganib, quyidagilarni aniqlang:
+   - HTTP
+   - HTTPS
+   - FTP
+   - SSH
+   - DNS
+
+5. Uyingiz yoki ofis tarmoq topologiyasini chizing:
+   - Qanday qurilmalar ulangan?
+   - Qaysi topologiya ishlatilgan?
+   - Qanday yaxshilash mumkin?
+
+6. DNS ni o'z so'zlaringiz bilan tushuntiring va nslookup buyrug'i bilan 5 ta saytning IP manzilini toping
+
+7. OSI va TCP/IP modellarini taqqoslash jadvali tuzing

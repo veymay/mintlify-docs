@@ -1,0 +1,408 @@
+---
+title: "CSS nima?"
+description: "CSS asoslari va uslublar yaratish"
+---
+
+## TODO
+- [ ] CSS tushunchasini o'rganish
+- [ ] CSS sintaksisini bilish
+- [ ] CSS ni HTML ga ulash
+
+## Dars mazmuni
+
+### CSS nima?
+
+**CSS (Cascading Style Sheets - Kaskadli uslublar jadvali)** - veb-sahifalarni bezash va dizayn qilish tili.
+
+**Vazifasi**:
+- Ranglar berish
+- O'lchamlarni o'zgartirish
+- Joylashuvni sozlash
+- Animatsiyalar qo'shish
+- Responsive dizayn yaratish
+
+**CSS siz HTML**:
+```
+⬜ Oq-qora
+⬜ Oddiy shrift
+⬜ Tartibsiz joylashuv
+⬜ Animatsiya yo'q
+```
+
+**CSS bilan HTML**:
+```
+🎨 Ranglar
+✨ Chiroyli shriftlar
+📐 Tartibli joylashuv
+🎬 Animatsiyalar
+```
+
+### CSS sintaksisi
+
+```css
+selector {
+    property: value;
+    property: value;
+}
+```
+
+**Misol**:
+```css
+h1 {
+    color: blue;
+    font-size: 32px;
+    text-align: center;
+}
+```
+
+**Qismlar**:
+- **Selector (Tanlash)** - `h1` - qaysi elementni bezash
+- **Property (Xossa)** - `color` - nima o'zgartirish
+- **Value (Qiymat)** - `blue` - qanday o'zgartirish
+- **Declaration (Deklaratsiya)** - `color: blue;` - bitta qoida
+- **Declaration Block** - `{ ... }` - barcha qoidalar
+
+### CSS ni HTML ga ulash
+
+#### 1. Inline CSS (Ichki CSS)
+Element ichida `style` atributi orqali:
+
+```html
+<h1 style="color: blue; font-size: 32px;">Sarlavha</h1>
+<p style="color: red;">Qizil matn</p>
+```
+
+**Afzalliklari**: Tez, bitta element uchun
+**Kamchiliklari**: Ko'p kod, takrorlanadi, qiyinroq
+
+#### 2. Internal CSS (Ichki CSS)
+`<head>` ichida `<style>` tegida:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1 {
+            color: blue;
+            font-size: 32px;
+        }
+        p {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sarlavha</h1>
+    <p>Paragraf</p>
+</body>
+</html>
+```
+
+**Afzalliklari**: Bir sahifada ishlaydi, yaxshiroq
+**Kamchiliklari**: Faqat bitta sahifa uchun
+
+#### 3. External CSS (Tashqi CSS) - ✅ ENG YAXSHI
+Alohida CSS faylda:
+
+**style.css**:
+```css
+h1 {
+    color: blue;
+    font-size: 32px;
+}
+
+p {
+    color: green;
+}
+```
+
+**index.html**:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Sarlavha</h1>
+    <p>Paragraf</p>
+</body>
+</html>
+```
+
+**Afzalliklari**: 
+- Ko'p sahifalarda ishlaydi
+- Kod tartibli
+- Tez yuklash (cache)
+- Jamoaviy ishlash qulay
+
+### CSS Selectors (Tanlash usullari)
+
+#### 1. Element Selector (Element tanlagich)
+Barcha bir xil elementlarga:
+
+```css
+p {
+    color: blue;
+}
+
+h1 {
+    font-size: 40px;
+}
+```
+
+#### 2. Class Selector (Sinf tanlagichi)
+`.` belgisi bilan, bir xil sinfli elementlarga:
+
+```html
+<p class="qizil-matn">Qizil</p>
+<p class="qizil-matn">Bu ham qizil</p>
+<p>Bu oddiy</p>
+```
+
+```css
+.qizil-matn {
+    color: red;
+}
+```
+
+**Xususiyat**: Bir nechta elementga bir xil sinf beriladi
+
+#### 3. ID Selector (ID tanlagichi)
+`#` belgisi bilan, faqat bitta noyob elementga:
+
+```html
+<p id="maxsus">Maxsus paragraf</p>
+```
+
+```css
+#maxsus {
+    color: purple;
+    font-size: 24px;
+}
+```
+
+**Qoida**: ID sahifada faqat bir marta ishlatiladi!
+
+#### 4. Universal Selector (Universal tanlagich)
+`*` belgisi, barcha elementlarga:
+
+```css
+* {
+    margin: 0;
+    padding: 0;
+}
+```
+
+#### 5. Group Selector (Guruh tanlagichi)
+Bir nechta elementga bir xil uslub:
+
+```css
+h1, h2, h3 {
+    color: navy;
+    font-family: Arial;
+}
+```
+
+### CSS Izohlar (Comments)
+
+```css
+/* Bu izoh, brauzer ko'rmaydi */
+
+h1 {
+    color: blue;  /* Rang - ko'k */
+}
+
+/*
+Ko'p qatorli
+izoh
+yozish mumkin
+*/
+```
+
+### CSS Ranglar
+
+#### 1. Rang nomlari (Color Names)
+```css
+color: red;
+color: blue;
+color: green;
+color: white;
+color: black;
+```
+
+140 ta rang nomi mavjud.
+
+#### 2. RGB (Red, Green, Blue)
+```css
+color: rgb(255, 0, 0);      /* Qizil */
+color: rgb(0, 255, 0);      /* Yashil */
+color: rgb(0, 0, 255);      /* Ko'k */
+color: rgb(255, 255, 255);  /* Oq */
+color: rgb(0, 0, 0);        /* Qora */
+```
+
+Har bir qiymat: 0-255
+
+#### 3. HEX (Hexadecimal - O'n oltilik)
+```css
+color: #FF0000;  /* Qizil */
+color: #00FF00;  /* Yashil */
+color: #0000FF;  /* Ko'k */
+color: #FFFFFF;  /* Oq */
+color: #000000;  /* Qora */
+color: #FFA500;  /* To'q sariq */
+```
+
+Format: `#RRGGBB`
+
+#### 4. RGBA (RGB + Alpha - Shaffoflik)
+```css
+color: rgba(255, 0, 0, 0.5);  /* 50% shaffof qizil */
+color: rgba(0, 0, 0, 0.8);    /* 80% shaffof qora */
+```
+
+Alpha: 0 (to'liq shaffof) - 1 (shaffof emas)
+
+### Asosiy CSS xossalari
+
+#### Matn xossalari
+```css
+/* Rang */
+color: blue;
+
+/* Shrift o'lchami */
+font-size: 16px;
+
+/* Shrift turi */
+font-family: Arial, sans-serif;
+
+/* Qalin */
+font-weight: bold;        /* yoki 700 */
+
+/* Kursiv */
+font-style: italic;
+
+/* Matn hizalanishi */
+text-align: left;         /* chap */
+text-align: center;       /* o'rta */
+text-align: right;        /* o'ng */
+
+/* Matn bezagi */
+text-decoration: underline;    /* tagiga chizish */
+text-decoration: line-through; /* o'rtasidan chiziq */
+text-decoration: none;         /* bezash yo'q */
+
+/* Katta/kichik harf */
+text-transform: uppercase;     /* KATTA */
+text-transform: lowercase;     /* kichik */
+text-transform: capitalize;    /* Har Bir So'z */
+```
+
+#### Fon xossalari
+```css
+/* Fon rangi */
+background-color: lightblue;
+
+/* Fon rasmi */
+background-image: url('rasm.jpg');
+
+/* Fon takrorlanishi */
+background-repeat: no-repeat;
+
+/* Fon o'lchami */
+background-size: cover;
+```
+
+### CSS o'lchov birliklari
+
+#### Absolyut birliklar
+- `px` - Pixel (eng ko'p ishlatiladigan)
+- `pt` - Point (chop etish uchun)
+- `cm`, `mm` - Santimetr, millimetr
+
+#### Nisbiy birliklar
+- `%` - Foiz (ota-elementga nisbatan)
+- `em` - Ota-element shrift o'lchamiga nisbatan
+- `rem` - Root element shrift o'lchamiga nisbatan
+- `vw` - Viewport width (ekran kengligi)
+- `vh` - Viewport height (ekran balandligi)
+
+**Misol**:
+```css
+/* Pixels */
+font-size: 16px;
+width: 300px;
+
+/* Foiz */
+width: 50%;           /* Ota-elementning 50% i */
+
+/* Viewport */
+width: 100vw;         /* Ekranning to'liq kengligi */
+height: 100vh;        /* Ekranning to'liq balandligi */
+```
+
+## Dars uchun vazifa
+
+1. Yangi HTML sahifa yarating va 3 usulda CSS qo'shing:
+   - Inline CSS
+   - Internal CSS
+   - External CSS (alohida `style.css` fayl)
+
+2. CSS da quyidagilarni amalga oshiring:
+   - Sarlavhani ko'k rangda qiling
+   - Paragrafni o'rtaga joylashtiring
+   - Fon rangini och sariq qiling
+
+3. Class va ID farqini amalda sinab ko'ring:
+   - 3 ta paragraf yarating
+   - 2 tasiga bir xil class bering
+   - 1 tasiga ID bering
+   - CSS da har biriga boshqa uslub bering
+
+## Uyga vazifa
+
+1. To'liq veb-sahifa yarating:
+   - HTML fayl: `portfolio.html`
+   - CSS fayl: `style.css`
+   - Kamida 5 ta turli CSS xossasini ishlating
+
+2. Quyidagi uslublarni qo'llang:
+   - Sarlavhalar: Katta, qalin, markazda
+   - Paragraflar: O'qish qulay, hizalangan
+   - Fon: Yoqimli rang
+   - Ranglar: Kamida 3 ta turli rang
+
+3. RGB, HEX va rang nomlari bilan tajriba o'tkazing:
+   - 5 ta rangni uchala usulda yozing
+   - Qaysi usul qulayroq?
+
+4. CSS selector turlarini taqqoslang:
+   - Element selector
+   - Class selector
+   - ID selector
+   - Har birining afzallik va kamchiliklari
+
+5. Quyidagi CSS kodini tushuntiring:
+```css
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+}
+
+#header {
+    background-color: #333;
+    color: #fff;
+}
+```
+
+6. Sevimli veb-saytingizni oching (F12 > Elements):
+   - Qanday CSS xossalar ishlatilgan?
+   - Qanday ranglar ko'p?
+   - Qanday shriftlar ishlatilgan?

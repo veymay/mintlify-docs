@@ -1,0 +1,273 @@
+---
+title: "HTML nima?"
+description: "HTML asoslari va birinchi sahifa yaratish"
+---
+
+## TODO
+- [ ] HTML tushunchasini o'rganish
+- [ ] HTML strukturasini bilish
+- [ ] Birinchi sahifa yaratish
+
+## Dars mazmuni
+
+### HTML nima?
+
+**HTML (HyperText Markup Language - Gipermatn belgilash tili)** - veb-sahifalarning asosiy tili. U sahifaning tuzilmasini (strukturasini) belgilaydi.
+
+**Xususiyatlari**:
+- Dasturlash tili emas, belgilash tili (Markup Language)
+- Faqat tuzilma beradi, dizayn bermaydi
+- Barcha veb-saytlar HTML dan boshlanadi
+- Fayl kengaytmasi: `.html`
+
+### HTML tarixi
+
+- **1991** - Tim Berners-Lee tomonidan yaratilgan
+- **HTML 4.01** - 1999 yil
+- **HTML5** - 2014 yil (hozirgi standart)
+
+### HTML elementi (Element)
+
+**Element** - HTML ning asosiy qurish bloki
+
+**Struktura**:
+```html
+<tegName>Kontent</tegName>
+```
+
+**Qismlar**:
+- **Opening tag (Ochuvchi teg)**: `<p>`
+- **Content (Kontent)**: Matn yoki boshqa elementlar
+- **Closing tag (Yopuvchi teg)**: `</p>`
+
+**Misol**:
+```html
+<p>Bu paragraf</p>
+<h1>Bu sarlavha</h1>
+```
+
+### Bo'sh elementlar (Void Elements)
+
+Ba'zi elementlar yopuvchi tegga ega emas:
+
+```html
+<br>    <!-- Yangi qator -->
+<hr>    <!-- Gorizontal chiziq -->
+<img src="rasm.jpg">  <!-- Rasm -->
+<input type="text">   <!-- Kirish maydoni -->
+```
+
+### HTML hujjat strukturasi
+
+Har bir HTML sahifa shu tuzilmaga ega:
+
+```html
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sahifa sarlavhasi</title>
+</head>
+<body>
+    <!-- Bu yerda kontent -->
+    <h1>Salom Dunyo!</h1>
+    <p>Bu mening birinchi veb-sahifam</p>
+</body>
+</html>
+```
+
+**Tushuntirish**:
+
+#### 1. `<!DOCTYPE html>`
+- Hujjat turi deklaratsiyasi
+- Brauzerga HTML5 ekanligini bildiradi
+- Doim birinchi qator
+
+#### 2. `<html>`
+- Asosiy konteyner
+- Barcha elementlar ichida
+- `lang="uz"` - til atributi (O'zbek tili)
+
+#### 3. `<head>`
+- Meta ma'lumotlar
+- Foydalanuvchi ko'rmaydi
+- Sozlamalar va ulanishlar
+
+**Head ichidagilar**:
+- `<meta charset="UTF-8">` - belgilar to'plami (Kiril alifbo uchun)
+- `<meta name="viewport"...>` - Mobil qurilmalar uchun
+- `<title>` - Brauzer varaqchasida ko'rinadi
+- `<link>` - CSS fayl ulash
+- `<script>` - JavaScript fayl ulash
+- `<meta name="description">` - Sayt tavsifi (SEO uchun)
+
+#### 4. `<body>`
+- Asosiy kontent
+- Foydalanuvchi ko'radigan qism
+- Barcha ko'rinadigan elementlar bu yerda
+
+### Atributlar (Attributes)
+
+**Atribut** - element haqida qo'shimcha ma'lumot
+
+**Sintaksis**:
+```html
+<tegName atribut="qiymat">Kontent</tegName>
+```
+
+**Mashhur atributlar**:
+- `id` - noyob identifikator
+- `class` - CSS uchun sinf
+- `style` - Inline CSS
+- `title` - Tooltip (ustidan o'tganda ko'rinadi)
+- `href` - Havola manzili (link uchun)
+- `src` - Fayl manzili (rasm, video uchun)
+- `alt` - Alternativ matn (rasm uchun)
+
+**Misol**:
+```html
+<a href="https://google.com" title="Google ga o'tish">Google</a>
+<img src="rasm.jpg" alt="Manzara rasmi">
+<p class="matn" id="birinchi">Bu paragraf</p>
+```
+
+### Izohlar (Comments)
+
+**Izoh** - kod ichida eslatma, brauzer ko'rsatmaydi
+
+```html
+<!-- Bu izoh, brauzer ko'rsatmaydi -->
+<p>Bu ko'rsatiladi</p>
+
+<!-- 
+Ko'p qatorli
+izoh
+yozish mumkin
+-->
+```
+
+**Foydasi**:
+- Kodga tushuntirish qo'shish
+- Vaqtinchalik kodni o'chirish
+- Jamoaviy ishlashda yordam
+
+### Birinchi HTML sahifa yaratish
+
+**Qadamlar**:
+
+1. **Yangi papka yaratish** - Desktop da `mening-sayti` nomli papka
+2. **Fayl yaratish** - Notepad yoki VS Code da yangi fayl
+3. **Kodni yozish**:
+
+```html
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Mening birinchi sahifam</title>
+</head>
+<body>
+    <h1>Salom, Dunyo!</h1>
+    <p>Bu mening birinchi HTML sahifam.</p>
+    <p>Men frontend developer bo'laman!</p>
+</body>
+</html>
+```
+
+4. **Saqlash** - `index.html` nomi bilan
+5. **Ochish** - Faylni brauzerda ochish (ikki marta bosish)
+
+### HTML fayl nomlari
+
+**Qoidalar**:
+- Kichik harflar ishlatish: `index.html` ✓, `INDEX.HTML` ✗
+- Bo'shliq yo'q: `my-page.html` ✓, `my page.html` ✗
+- Maxsus belgilar yo'q (faqat `-` va `_` mumkin)
+- **index.html** - asosiy sahifa nomi
+
+### HTML versiyalari
+
+- **HTML 1.0** (1991) - birinchi versiya
+- **HTML 2.0** (1995)
+- **HTML 3.2** (1997)
+- **HTML 4.01** (1999)
+- **XHTML** (2000) - qat'iy HTML
+- **HTML5** (2014) - hozirgi standart
+
+**HTML5 yangiliklari**:
+- Yangi semantik teglar (`<header>`, `<footer>`, `<article>`)
+- Video va audio teglar
+- Canvas (rasm chizish)
+- Yangi kirish turlari (email, date)
+- Offline saqlash (Local Storage)
+
+### HTML validatsiya
+
+**Validator** - HTML kodingizni tekshiradi
+
+- **Sayt**: validator.w3.org
+- Xatolarni ko'rsatadi
+- To'g'ri kod yozishga yordam beradi
+
+## Dars uchun vazifa
+
+1. VS Code da yangi HTML fayl yarating:
+   - Papka yarating: `frontend-darslar`
+   - Fayl yarating: `1-dars.html`
+   - Asosiy HTML strukturasini yozing
+   - Brauzerda oching
+
+2. O'z sahifangizga qo'shing:
+   - Sarlavha (heading)
+   - 2 ta paragraf
+   - 1 ta izoh
+
+3. HTML faylni ikki usulda oching:
+   - Ikki marta bosish orqali
+   - VS Code da "Open with Live Server" (agar kengaytma o'rnatilgan bo'lsa)
+
+## Uyga vazifa
+
+1. "Mening portfolio" nomli HTML sahifa yarating:
+   - O'zingiz haqingizda ma'lumot
+   - 3-4 ta paragraf
+   - Izohlar qo'shing
+   - To'g'ri strukturaga rioya qiling
+
+2. Quyidagi savolarga javob bering:
+   - HTML nima uchun kerak?
+   - `<head>` va `<body>` ning farqi nima?
+   - Atribut nima?
+   - Izoh nima uchun ishlatiladi?
+
+3. HTML hujjat strukturasining har bir qismini o'z so'zlaringiz bilan tushuntiring:
+   - `<!DOCTYPE html>`
+   - `<html>`
+   - `<head>`
+   - `<body>`
+
+4. Validatordan foydalaning:
+   - validator.w3.org saytiga kiring
+   - O'z HTML kodingizni tekshiring
+   - Xatolar bormi? Qanday?
+   - Tuzating va qaytadan tekshiring
+
+5. 3 ta turli veb-saytga kiring va ularning HTML kodini ko'ring (F12 > Elements):
+   - Qanday teglar ko'p ishlatilgan?
+   - Qanday atributlar mavjud?
+   - Nimadir yangilik topdingizmi?
+
+6. Quyidagi kodda nima xato? Tuzatib yozing:
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mening sahifam
+</head>
+<body>
+    <h1>Salom</h2>
+    <p>Bu paragraf
+    <br>
+</body>
+```
