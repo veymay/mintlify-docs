@@ -54,15 +54,7 @@
       },
       {
         "tab": "KIBERXAVFSIZLIK",
-        "icon": "lock-hashtag",
-        "groups": [
-          {
-            "group": "Kirish",
-            "pages": [
-              "cybersecurity/kirish/1-dars-windows-os-bilan-xavfsizlik"
-            ]
-          }
-        ]
+        "icon": "lock-keyhole"
       }
     ]
   },
