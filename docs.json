@@ -12,14 +12,17 @@
       "anchors": [
         {
           "anchor": "Website",
+          "icon": "link",
           "href": "https://veymay.uz"
         },
         {
           "anchor": "Telegram",
+          "icon": "link",
           "href": "https://t.me/veymayuz"
         },
         {
           "anchor": "Instagram",
+          "icon": "link",
           "href": "https://instagram.com/veymayuz"
         }
       ]
