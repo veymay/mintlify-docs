@@ -1,13 +1,12 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "maple",
-  "name": "Mint Starter Kit",
+  "name": "vStudy",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/images/veymay.jpg",
   "navigation": {
     "global": {
       "anchors": [
@@ -50,8 +49,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/logo_light.svg",
+    "dark": "/logo/logo_dark.svg"
   },
   "navbar": {
     "links": [
@@ -78,11 +77,11 @@
      "vscode"
    ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
-    }
-  }
+  "styling": {
+    "latex": false
+  },
+  "background": {
+    "decoration": "grid"
+  },
+  "favicon": "/vlogo.svg"
 }
