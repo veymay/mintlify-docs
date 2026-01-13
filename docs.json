@@ -29,7 +29,12 @@
     },
     "tabs": [
       {
-        "tab": "FRONTEND",
+        "tab": "IT SAVODXONLIK",
+        "icon": "computer"
+      },
+      {
+        "tab": "FRONTEND PRO",
+        "icon": "gear-code",
         "groups": [
           {
             "group": "HTML",
@@ -41,7 +46,8 @@
         ]
       },
       {
-        "tab": "CYBERSECURITY"
+        "tab": "CYBERSECURITY",
+        "icon": "lock-hashtag"
       }
     ]
   },
