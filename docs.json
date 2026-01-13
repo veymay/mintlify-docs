@@ -31,7 +31,23 @@
         }
       ]
     },
-    "groups": []
+    "tabs": [
+      {
+        "tab": "FRONTEND",
+        "groups": [
+          {
+            "group": "HTML",
+            "pages": [
+              "frontend/html/1-dars-kirish",
+              "frontend/html/2-dars-teglar"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "CYBERSECURITY"
+      }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
