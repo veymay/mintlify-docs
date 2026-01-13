@@ -1,0 +1,333 @@
+---
+title: "HTML Havolalar (Links)"
+description: "Linklar va navigatsiya"
+---
+
+## TODO
+- Havola yaratishni o'rganish
+- Havola turlarini bilish
+- Havola atributlarini o'rganish
+
+## Dars mazmuni
+
+### Havola nima?
+
+**Havola (Link/Hyperlink)** - bir sahifadan boshqasiga o'tish uchun element. Internetning asosi - havolalar.
+
+**`<a>` tegi** (anchor - langar):
+```html
+<a href="https://google.com">Google ga o'tish</a>
+```
+
+### href atributi
+
+**href (Hypertext Reference)** - havolaning manzili
+
+```html
+<a href="URL">Link matni</a>
+```
+
+### Havola turlari
+
+#### 1. Tashqi havola (External Link)
+Boshqa saytga:
+```html
+<a href="https://google.com">Google</a>
+<a href="https://github.com">GitHub</a>
+<a href="https://kun.uz">Kun.uz</a>
+```
+
+**To'liq URL** kerak: `https://` bilan
+
+#### 2. Ichki havola (Internal Link)
+O'z saytingiz ichida:
+```html
+<a href="about.html">Biz haqimizda</a>
+<a href="contact.html">Aloqa</a>
+<a href="products.html">Mahsulotlar</a>
+```
+
+**Nisbiy yo'l (Relative Path)**:
+```html
+<a href="pages/about.html">About</a>
+<a href="../index.html">Bosh sahifa</a>
+<a href="./contact.html">Aloqa</a>
+```
+
+#### 3. Anchor Link (Sahifa ichida)
+Sahifaning ma'lum joyiga:
+```html
+<!-- Havola -->
+<a href="#bolim1">1-bo'limga o'tish</a>
+
+<!-- Maqsad -->
+<h2 id="bolim1">1-bo'lim</h2>
+```
+
+**Yuqoriga qaytish**:
+```html
+<a href="#top">Yuqoriga</a>
+```
+
+#### 4. Email havola
+Email ochish:
+```html
+<a href="mailto:info@example.com">Email yuborish</a>
+```
+
+**Mavzu bilan**:
+```html
+<a href="mailto:info@example.com?subject=Savol">Email</a>
+```
+
+#### 5. Telefon havola
+Telefon qilish:
+```html
+<a href="tel:+998901234567">+998 90 123 45 67</a>
+```
+
+#### 6. Fayl yuklab olish
+```html
+<a href="files/document.pdf" download>PDF yuklab olish</a>
+```
+
+### target atributi
+
+**Qayerda ochilishi**:
+
+```html
+<!-- Joriy oynada (standart) -->
+<a href="page.html">Page</a>
+
+<!-- Yangi oynada -->
+<a href="https://google.com" target="_blank">Google</a>
+
+<!-- Parent frame da -->
+<a href="page.html" target="_parent">Parent</a>
+
+<!-- Top frame da -->
+<a href="page.html" target="_top">Top</a>
+```
+
+**Eng ko'p ishlatiladigan**: `target="_blank"` - yangi tab
+
+**Xavfsizlik uchun**:
+```html
+<a href="https://external.com" target="_blank" rel="noopener noreferrer">
+    External Link
+</a>
+```
+
+### title atributi
+
+**Tooltip** - ustidan o'tganda ko'rsatiladi:
+```html
+<a href="https://google.com" title="Google qidiruv tizimi">Google</a>
+```
+
+### Link ko'rinishi
+
+**Standart ko'rinish**:
+- **Ko'k** - oddiy havola
+- **Binafsha** - bosilgan havola  
+- **Tagiga chizilgan**
+
+**CSS bilan o'zgartirish mumkin** (keyingi darslarda)
+
+### Rasm havola qilish
+
+```html
+<a href="page.html">
+    <img src="button.png" alt="Tugma">
+</a>
+```
+
+### Button havola
+
+```html
+<a href="page.html">
+    <button type="button">Bu yerga bosing</button>
+</a>
+```
+
+**Yaxshiroq usul**: CSS bilan havolani tugma ko'rinishida qilish
+
+### Havola holatlar
+
+**Pseudo-classes** (CSS da):
+```css
+a:link { color: blue; }          /* Oddiy */
+a:visited { color: purple; }     /* Bosilgan */
+a:hover { color: red; }          /* Ustidan o'tilganda */
+a:active { color: orange; }      /* Bosilayotganda */
+```
+
+### Best Practices (Yaxshi amaliyotlar)
+
+#### 1. Ma'noli matn
+**Yaxshi** ✅:
+```html
+<a href="article.html">Batafsil maqolani o'qing</a>
+```
+
+**Yomon** ❌:
+```html
+<a href="article.html">Bu yerga bosing</a>
+<a href="article.html">Link</a>
+```
+
+#### 2. Tashqi havolalarda target="_blank"
+```html
+<a href="https://external.com" target="_blank" rel="noopener">
+    External Site
+</a>
+```
+
+#### 3. Tel va Email
+```html
+<a href="tel:+998901234567">+998 90 123 45 67</a>
+<a href="mailto:info@example.com">info@example.com</a>
+```
+
+#### 4. Accessibility
+```html
+<a href="page.html" aria-label="About sahifasiga o'tish">
+    About
+</a>
+```
+
+### Navigation Menu (Navigatsiya menyusi)
+
+**Oddiy menyu**:
+```html
+<nav>
+    <a href="index.html">Bosh sahifa</a>
+    <a href="about.html">Biz haqimizda</a>
+    <a href="services.html">Xizmatlar</a>
+    <a href="contact.html">Aloqa</a>
+</nav>
+```
+
+**List bilan**:
+```html
+<nav>
+    <ul>
+        <li><a href="index.html">Bosh sahifa</a></li>
+        <li><a href="about.html">Biz haqimizda</a></li>
+        <li><a href="services.html">Xizmatlar</a></li>
+        <li><a href="contact.html">Aloqa</a></li>
+    </ul>
+</nav>
+```
+
+### Bookmark (Xatcho'p)
+
+**Sahifa ichida sakrash**:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uzun sahifa</title>
+</head>
+<body>
+    <!-- Mundarija -->
+    <nav>
+        <h2>Mundarija</h2>
+        <ul>
+            <li><a href="#kirish">Kirish</a></li>
+            <li><a href="#asosiy">Asosiy qism</a></li>
+            <li><a href="#xulosa">Xulosa</a></li>
+        </ul>
+    </nav>
+
+    <!-- Kontent -->
+    <h2 id="kirish">Kirish</h2>
+    <p>Lorem ipsum...</p>
+
+    <h2 id="asosiy">Asosiy qism</h2>
+    <p>Lorem ipsum...</p>
+
+    <h2 id="xulosa">Xulosa</h2>
+    <p>Lorem ipsum...</p>
+
+    <!-- Yuqoriga -->
+    <a href="#top">⬆️ Yuqoriga</a>
+</body>
+</html>
+```
+
+### Xatolar va hal qilish
+
+**1. Havola ishlamayapti**
+```html
+<!-- Xato -->
+<a href="www.google.com">Google</a>
+
+<!-- To'g'ri -->
+<a href="https://www.google.com">Google</a>
+```
+
+**2. Download ishlamayapti**
+```html
+<!-- Faqat download atributi yetarli -->
+<a href="file.pdf" download>PDF</a>
+```
+
+**3. Email ochilmayapti**
+```html
+<!-- To'g'ri format -->
+<a href="mailto:example@email.com">Email</a>
+```
+
+## Dars uchun vazifa
+
+1. Turli xil havolalar yarating:
+   - Google ga tashqi havola
+   - O'z sahifalaringizga ichki havola
+   - Email havola
+   - Telefon havola
+
+2. Navigation menyu yarating:
+   - Kamida 4 ta havola
+   - List (`<ul>`, `<li>`) ishlatib
+
+3. Sahifa ichida bookmark yarating:
+   - Mundarija
+   - 3 ta bo'lim
+   - Har biriga havola
+
+## Uyga vazifa
+
+1. **To'liq navigatsion sayt** yarating:
+   - index.html - bosh sahifa
+   - about.html - biz haqimizda
+   - services.html - xizmatlar
+   - contact.html - aloqa
+   - Har bir sahifada navigatsiya menyusi
+   - Barcha sahifalar bir-biriga ulangan
+
+2. **One-page website** (Bitta uzun sahifa):
+   - Yuqorida navigatsiya
+   - 5 ta bo'lim
+   - Har bir bo'limga bookmark havola
+   - "Yuqoriga qaytish" tugmasi
+
+3. **Aloqa sahifasi** yarating:
+   - Email havola (mailto:)
+   - Telefon havola (tel:)
+   - Ijtimoiy tarmoq havolalari (telegram, instagram)
+   - Manzil (Google Maps link)
+
+4. Quyidagi savolarga javob bering:
+   - `href` va `target` ning farqi nima?
+   - `target="_blank"` dan foydalanganda nima xavf bor?
+   - `rel="noopener"` nima uchun kerak?
+
+5. **Link collection** sahifa:
+   - Foydali veb-saytlar ro'yxati
+   - Kategoriyalar bo'yicha (Ta'lim, Yangiliklar, Sport...)
+   - Har biri yangi tabda ochilsin
+   - Title atribut bilan
+
+6. Absolute va Relative path larning farqini tushuntiring va har biridan 3 tadan misol keltiring

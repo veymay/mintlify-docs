@@ -1,0 +1,620 @@
+---
+title: "JavaScript asoslari"
+description: "JavaScript tilining sintaksisi va asosiy tushunchalari"
+---
+
+## TODO
+- JavaScript sintaksisini o'rganish
+- O'zgaruvchilar va ma'lumot turlari
+- Operatorlar va shartlar
+
+## Dars mazmuni
+
+### JavaScript nima?
+
+**JavaScript** - web sahifalarni interaktiv qiluvchi dasturlash tili.
+
+**Vazifalar**:
+- Sahifani dinamik o'zgartirish
+- Foydalanuvchi bilan o'zaro aloqa
+- Ma'lumotlarni qayta ishlash
+- Server bilan aloqa (AJAX)
+
+**JavaScript qo'shish**:
+
+```html
+<!-- Inline -->
+<button onclick="alert('Salom!')">Click</button>
+
+<!-- Internal -->
+<script>
+    console.log('Salom!');
+</script>
+
+<!-- External -->
+<script src="script.js"></script>
+```
+
+**Qayerga qo'yish?**:
+- `<head>` - sahifa yuklanishidan oldin
+- `<body>` oxirida - to'liq yuklanganidan keyin (tavsiya etiladi)
+
+### Console
+
+**Ishlab chiqishda tekshirish**:
+
+```javascript
+console.log('Oddiy xabar');
+console.error('Xato xabari');
+console.warn('Ogohlantirish');
+console.info('Ma'lumot');
+console.table([1, 2, 3]);
+```
+
+**Browser**:
+- F12 yoki Ctrl+Shift+I
+- Console tab
+
+### O'zgaruvchilar
+
+**3 ta usul**:
+
+#### var (eski)
+
+```javascript
+var ism = 'Ali';
+var yosh = 25;
+```
+
+**Muammolar**:
+- Function scope
+- Hoisting
+- Qayta e'lon qilish mumkin
+
+#### let (zamonaviy)
+
+```javascript
+let ism = 'Ali';
+ism = 'Vali';  // O'zgartirish mumkin
+
+let yosh = 25;
+yosh = 26;
+```
+
+**Xususiyatlari**:
+- Block scope
+- Qayta e'lon qilish mumkin emas
+- O'zgartirish mumkin
+
+#### const (o'zgarmas)
+
+```javascript
+const PI = 3.14159;
+// PI = 3.14;  // Xato!
+
+const ism = 'Ali';
+// ism = 'Vali';  // Xato!
+```
+
+**Qoidalar**:
+- Block scope
+- Qayta e'lon qilish mumkin emas
+- O'zgartirish mumkin emas
+- E'lon qilishda qiymat berish shart
+
+**Object bilan**:
+```javascript
+const user = { ism: 'Ali' };
+user.ism = 'Vali';  // OK (object ichini o'zgartirish)
+// user = {};  // Xato! (object o'zini o'zgartirish)
+```
+
+### Nomlash qoidalari
+
+**To'g'ri**:
+```javascript
+let ism;
+let ismFamiliya;
+let ism_familiya;
+let $price;
+let _count;
+let age2;
+```
+
+**Noto'g'ri**:
+```javascript
+let 2age;        // Raqam bilan boshlanmaydi
+let ism-familiya;  // Defis ishlatilmaydi
+let let;         // Kalit so'z
+let class;       // Kalit so'z
+```
+
+**camelCase** (tavsiya etiladi):
+```javascript
+let firstName = 'Ali';
+let lastName = 'Valiyev';
+let isStudent = true;
+let studentAge = 20;
+```
+
+### Ma'lumot turlari
+
+#### Primitive turlar
+
+**1. String (matn)**:
+
+```javascript
+let ism = 'Ali';
+let familiya = "Valiyev";
+let toliq = `${ism} ${familiya}`;  // Template literal
+```
+
+**Template literal**:
+```javascript
+let ism = 'Ali';
+let yosh = 25;
+let matn = `Mening ismim ${ism}, yoshim ${yosh}`;
+console.log(matn);  // Mening ismim Ali, yoshim 25
+```
+
+**Escape belgilari**:
+```javascript
+let matn1 = 'Salom\'dan';  // Salom'dan
+let matn2 = "Salom\"dan";  // Salom"dan
+let matn3 = 'Qator\nYangi qator';
+let matn4 = 'Tab\tbelgi';
+```
+
+**2. Number (son)**:
+
+```javascript
+let butun = 42;
+let onlik = 3.14;
+let manfiy = -100;
+let katta = 1e6;  // 1000000
+let kichik = 1e-6;  // 0.000001
+```
+
+**Maxsus qiymatlar**:
+```javascript
+let infinity = Infinity;
+let negInfinity = -Infinity;
+let notNumber = NaN;  // Not a Number
+```
+
+**3. Boolean (mantiqiy)**:
+
+```javascript
+letrost = true;
+let yolg'on = false;
+
+let katta = 10 > 5;  // true
+let kichik = 10 < 5;  // false
+```
+
+**4. undefined**:
+
+```javascript
+let x;
+console.log(x);  // undefined
+
+let y = undefined;
+```
+
+**5. null**:
+
+```javascript
+let user = null;  // Bo'sh qiymat
+```
+
+**6. Symbol** (kamdan-kam):
+
+```javascript
+let id = Symbol('id');
+```
+
+**7. BigInt** (juda katta sonlar):
+
+```javascript
+let katta = 9007199254740991n;
+let juda_katta = BigInt(9007199254740991);
+```
+
+#### typeof operatori
+
+```javascript
+console.log(typeof 'Ali');      // string
+console.log(typeof 42);         // number
+console.log(typeof true);       // boolean
+console.log(typeof undefined);  // undefined
+console.log(typeof null);       // object (xato!)
+console.log(typeof {});         // object
+console.log(typeof []);         // object
+console.log(typeof function(){}); // function
+```
+
+### Type Conversion (Tur o'zgartirish)
+
+**String ga**:
+
+```javascript
+let num = 123;
+let str = String(num);  // "123"
+let str2 = num.toString();  // "123"
+let str3 = "" + num;  // "123"
+```
+
+**Number ga**:
+
+```javascript
+let str = "123";
+let num = Number(str);  // 123
+let num2 = +str;  // 123
+let num3 = parseInt(str);  // 123
+let num4 = parseFloat("3.14");  // 3.14
+```
+
+**Boolean ga**:
+
+```javascript
+Boolean(1);       // true
+Boolean(0);       // false
+Boolean("Ali");   // true
+Boolean("");      // false
+Boolean(null);    // false
+Boolean(undefined); // false
+```
+
+**Falsy qiymatlar**:
+- `false`
+- `0`
+- `""` (bo'sh string)
+- `null`
+- `undefined`
+- `NaN`
+
+### Operatorlar
+
+#### Arifmetik
+
+```javascript
+let a = 10;
+let b = 3;
+
+console.log(a + b);  // 13 Qo'shish
+console.log(a - b);  // 7  Ayirish
+console.log(a * b);  // 30 Ko'paytirish
+console.log(a / b);  // 3.333... Bo'lish
+console.log(a % b);  // 1  Qoldiq
+console.log(a ** b); // 1000 Daraja
+
+a++;  // 11 Increment
+b--;  // 2  Decrement
+```
+
+**++ va --**:
+
+```javascript
+let x = 5;
+console.log(x++);  // 5 (keyin oshadi)
+console.log(x);    // 6
+
+let y = 5;
+console.log(++y);  // 6 (oldin oshadi)
+console.log(y);    // 6
+```
+
+#### Qiymat berish
+
+```javascript
+let x = 10;
+x += 5;   // x = x + 5;  (15)
+x -= 3;   // x = x - 3;  (12)
+x *= 2;   // x = x * 2;  (24)
+x /= 4;   // x = x / 4;  (6)
+x %= 5;   // x = x % 5;  (1)
+x **= 3;  // x = x ** 3; (1)
+```
+
+#### Taqqoslash
+
+```javascript
+10 == 10;   // true  Teng
+10 != 5;    // true  Teng emas
+10 > 5;     // true  Katta
+10 < 5;     // false Kichik
+10 >= 10;   // true  Katta yoki teng
+10 <= 5;    // false Kichik yoki teng
+```
+
+**== vs ===**:
+
+```javascript
+// == (faqat qiymat)
+5 == "5";   // true
+0 == false; // true
+null == undefined; // true
+
+// === (qiymat va tur)
+5 === "5";   // false
+0 === false; // false
+null === undefined; // false
+```
+
+**Har doim === ishlatish tavsiya etiladi!**
+
+#### Mantiqiy
+
+```javascript
+// && (AND - VA)
+true && true;   // true
+true && false;  // false
+false && false; // false
+
+// || (OR - YOKI)
+true || false;  // true
+false || false; // false
+
+// ! (NOT - EMAS)
+!true;   // false
+!false;  // true
+
+// Misollar
+let yosh = 25;
+let talaba = true;
+
+yosh > 18 && talaba;  // true
+yosh < 18 || talaba;  // true
+!(yosh < 18);         // true
+```
+
+#### String operatorlari
+
+```javascript
+let ism = 'Ali';
+let familiya = 'Valiyev';
+
+// Birlashtirish
+let toliq = ism + ' ' + familiya;  // "Ali Valiyev"
+
+// Template literal (yaxshiroq)
+let toliq2 = `${ism} ${familiya}`;  // "Ali Valiyev"
+
+// += operator
+let matn = 'Salom';
+matn += ' dunyo';  // "Salom dunyo"
+```
+
+### Shartli operatorlar
+
+#### if statement
+
+```javascript
+let yosh = 18;
+
+if (yosh >= 18) {
+    console.log('Voyaga yetgan');
+}
+```
+
+#### if...else
+
+```javascript
+let yosh = 16;
+
+if (yosh >= 18) {
+    console.log('Voyaga yetgan');
+} else {
+    console.log('Voyaga yetmagan');
+}
+```
+
+#### if...else if...else
+
+```javascript
+let ball = 85;
+
+if (ball >= 90) {
+    console.log('A');
+} else if (ball >= 80) {
+    console.log('B');
+} else if (ball >= 70) {
+    console.log('C');
+} else {
+    console.log('F');
+}
+```
+
+#### Ternary operator
+
+```javascript
+let yosh = 20;
+let status = yosh >= 18 ? 'Voyaga yetgan' : 'Voyaga yetmagan';
+
+// Bir xil:
+// let status;
+// if (yosh >= 18) {
+//     status = 'Voyaga yetgan';
+// } else {
+//     status = 'Voyaga yetmagan';
+// }
+```
+
+#### switch statement
+
+```javascript
+let kun = 'Dushanba';
+
+switch (kun) {
+    case 'Dushanba':
+        console.log('Ish kuni');
+        break;
+    case 'Seshanba':
+        console.log('Ish kuni');
+        break;
+    case 'Shanba':
+    case 'Yakshanba':
+        console.log('Dam olish');
+        break;
+    default:
+        console.log('Noma\'lum kun');
+}
+```
+
+### Sikllar (Loops)
+
+#### for loop
+
+```javascript
+for (let i = 0; i < 5; i++) {
+    console.log(i);  // 0 1 2 3 4
+}
+```
+
+**Qismlar**:
+1. Boshlang'ich: `let i = 0`
+2. Shart: `i < 5`
+3. Qadami: `i++`
+
+```javascript
+// Teskari
+for (let i = 5; i > 0; i--) {
+    console.log(i);  // 5 4 3 2 1
+}
+
+// 2 qadam
+for (let i = 0; i < 10; i += 2) {
+    console.log(i);  // 0 2 4 6 8
+}
+```
+
+#### while loop
+
+```javascript
+let i = 0;
+while (i < 5) {
+    console.log(i);
+    i++;
+}
+```
+
+#### do...while loop
+
+```javascript
+let i = 0;
+do {
+    console.log(i);
+    i++;
+} while (i < 5);
+```
+
+**Farqi**: kamida 1 marta bajariladi
+
+#### break va continue
+
+```javascript
+// break - to'xtatish
+for (let i = 0; i < 10; i++) {
+    if (i === 5) break;
+    console.log(i);  // 0 1 2 3 4
+}
+
+// continue - o'tkazib yuborish
+for (let i = 0; i < 10; i++) {
+    if (i % 2 === 0) continue;
+    console.log(i);  // 1 3 5 7 9
+}
+```
+
+## Dars uchun vazifa
+
+1. O'zgaruvchilar yarating:
+   - let va const
+   - Turli ma'lumot turlari
+   - console.log() bilan chiqaring
+
+2. Arifmetik operatorlar:
+   - 2 ta son
+   - Barcha amallarni bajaring
+   - Natijani chiqaring
+
+3. Taqqoslash:
+   - == va === farqini ko'ring
+   - 5 ta misol
+
+4. if...else:
+   - Yosh tekshirish
+   - 3 ta holat
+
+5. for loop:
+   - 1 dan 10 gacha
+   - Faqat juft sonlar
+   - Teskari
+
+## Uyga vazifa
+
+1. **Calculator** yarating:
+   - 2 ta son
+   - 4 ta amal (+, -, *, /)
+   - switch statement
+
+2. **Grade Calculator**:
+   - Ball (0-100)
+   - if...else if
+   - A, B, C, D, F
+
+3. **FizzBuzz**:
+   - 1 dan 100 gacha
+   - 3 ga bo'linadigan: "Fizz"
+   - 5 ga bo'linadigan: "Buzz"
+   - Ikkisiga ham: "FizzBuzz"
+   - Aks holda: raqam
+
+4. **Number Guesser** (Console):
+   - Random son (1-100)
+   - Foydalanuvchi topadi
+   - "Katta", "Kichik", "To'g'ri"
+   - 10 ta urinish
+
+5. Quyidagi savolarga javob bering:
+   - let va const farqi?
+   - == va === farqi?
+   - Falsy qiymatlar qaysilar?
+   - for va while farqi?
+
+6. **Multiplication Table**:
+   - 1 dan 10 gacha
+   - Har biri uchun 1 dan 10 gacha ko'paytirish
+   - Jadval shaklida console.table()
+
+7. **Palindrome Checker**:
+   - String qabul qiladi
+   - Palindrome yoki yo'qligini tekshiradi
+   - true/false qaytaradi
+
+8. **Prime Number Checker**:
+   - Son qabul qiladi
+   - Tub son yoki yo'qligini tekshiradi
+   - for loop ishlatib
+
+9. **Sum of Digits**:
+   - Son qabul qiladi (masalan 123)
+   - Raqamlar yig'indisini topadi (1+2+3 = 6)
+   - while loop ishlatib
+
+10. **Pattern Printer**:
+```
+*
+**
+***
+****
+*****
+```
+va
+```
+*****
+****
+***
+**
+*
+```

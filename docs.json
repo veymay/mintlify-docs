@@ -53,6 +53,14 @@
               "it-savodxonlik/3-modul-internet-va-brauzerlar/1-dars",
               "it-savodxonlik/3-modul-internet-va-brauzerlar/2-dars"
             ]
+          },
+          {
+            "group": "4-MODUL. Ofis dasturlari",
+            "pages": [
+              "it-savodxonlik/4-modul-ofis-dasturlari/1-dars",
+              "it-savodxonlik/4-modul-ofis-dasturlari/2-dars",
+              "it-savodxonlik/4-modul-ofis-dasturlari/3-dars"
+            ]
           }
         ]
       },
@@ -66,11 +74,33 @@
           },
           {
             "group": "2-MODUL. HTML",
-            "pages": ["frontend-pro/2-modul-html/1-dars"]
+            "pages": [
+              "frontend-pro/2-modul-html/1-dars",
+              "frontend-pro/2-modul-html/2-dars",
+              "frontend-pro/2-modul-html/3-dars",
+              "frontend-pro/2-modul-html/4-dars",
+              "frontend-pro/2-modul-html/5-dars",
+              "frontend-pro/2-modul-html/6-dars",
+              "frontend-pro/2-modul-html/7-dars",
+              "frontend-pro/2-modul-html/8-dars"
+            ]
           },
           {
             "group": "3-MODUL. CSS",
-            "pages": ["frontend-pro/3-modul-css/1-dars"]
+            "pages": [
+              "frontend-pro/3-modul-css/1-dars",
+              "frontend-pro/3-modul-css/2-dars",
+              "frontend-pro/3-modul-css/3-dars",
+              "frontend-pro/3-modul-css/4-dars"
+            ]
+          },
+          {
+            "group": "4-MODUL. JavaScript",
+            "pages": [
+              "frontend-pro/4-modul-javascript/1-dars",
+              "frontend-pro/4-modul-javascript/2-dars",
+              "frontend-pro/4-modul-javascript/3-dars"
+            ]
           }
         ]
       },
@@ -84,7 +114,24 @@
           },
           {
             "group": "2-MODUL. Tarmoq asoslari",
-            "pages": ["kiber-xavfsizlik/2-modul-tarmoq-asoslari/1-dars"]
+            "pages": [
+              "kiber-xavfsizlik/2-modul-tarmoq-asoslari/1-dars",
+              "kiber-xavfsizlik/2-modul-tarmoq-asoslari/2-dars"
+            ]
+          },
+          {
+            "group": "3-MODUL. Linux asoslari",
+            "pages": [
+              "kiber-xavfsizlik/3-modul-linux-asoslari/1-dars",
+              "kiber-xavfsizlik/3-modul-linux-asoslari/2-dars"
+            ]
+          },
+          {
+            "group": "4-MODUL. Veb xavfsizligi",
+            "pages": [
+              "kiber-xavfsizlik/4-modul-veb-xavfsizligi/1-dars",
+              "kiber-xavfsizlik/4-modul-veb-xavfsizligi/2-dars"
+            ]
           }
         ]
       }

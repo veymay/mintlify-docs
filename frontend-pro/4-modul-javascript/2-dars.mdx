@@ -1,0 +1,650 @@
+---
+title: "DOM Manipulation"
+description: "HTML elementlari bilan JavaScript orqali ishlash"
+---
+
+## TODO
+- DOM (Document Object Model) tushunchasini bilish
+- Elementlarni tanlash va o'zgartirish
+- Event Listener lar bilan ishlash
+
+## Dars mazmuni
+
+### DOM nima?
+
+**DOM** (Document Object Model) - HTML hujjatning JavaScript uchun ob'ekt shakli.
+
+**Daraxt tuzilmasi**:
+
+```
+document
+  └── html
+      ├── head
+      │   ├── title
+      │   └── meta
+      └── body
+          ├── div
+          │   ├── p
+          │   └── button
+          └── footer
+```
+
+### Elementlarni tanlash
+
+#### getElementById
+
+**ID orqali**:
+
+```javascript
+const element = document.getElementById('myId');
+```
+
+```html
+<div id="myId">Salom</div>
+```
+
+#### getElementsByClassName
+
+**Class orqali** (ko'plik):
+
+```javascript
+const elements = document.getElementsByClassName('myClass');
+console.log(elements[0]);  // Birinchi element
+```
+
+```html
+<div class="myClass">1</div>
+<div class="myClass">2</div>
+```
+
+#### getElementsByTagName
+
+**Tag orqali**:
+
+```javascript
+const paragraphs = document.getElementsByTagName('p');
+const allDivs = document.getElementsByTagName('div');
+```
+
+#### querySelector
+
+**CSS selector** (birinchisi):
+
+```javascript
+const element = document.querySelector('.myClass');
+const element2 = document.querySelector('#myId');
+const element3 = document.querySelector('div > p');
+```
+
+**Eng ko'p ishlatiladi!**
+
+#### querySelectorAll
+
+**CSS selector** (hammas):
+
+```javascript
+const elements = document.querySelectorAll('.myClass');
+
+// Har biriga murojaat
+elements.forEach(el => {
+    console.log(el);
+});
+```
+
+### Elementlarni o'zgartirish
+
+#### textContent
+
+**Matnni o'zgartirish**:
+
+```javascript
+const p = document.querySelector('p');
+console.log(p.textContent);  // O'qish
+p.textContent = 'Yangi matn';  // Yozish
+```
+
+#### innerHTML
+
+**HTML bilan**:
+
+```javascript
+const div = document.querySelector('.container');
+div.innerHTML = '<p>Yangi <strong>matn</strong></p>';
+```
+
+**Xavfli!** XSS hujumlariga ochiq.
+
+#### innerText
+
+**Ko'rinadigan matn**:
+
+```javascript
+const element = document.querySelector('.text');
+console.log(element.innerText);
+```
+
+**textContent vs innerText**:
+- `textContent` - hamma matn (yashirin ham)
+- `innerText` - faqat ko'rinadigan matn
+
+### Attribute lar
+
+#### getAttribute / setAttribute
+
+```javascript
+const link = document.querySelector('a');
+
+// O'qish
+const href = link.getAttribute('href');
+console.log(href);
+
+// Yozish
+link.setAttribute('href', 'https://example.com');
+link.setAttribute('target', '_blank');
+```
+
+#### Bevosita murojaat
+
+```javascript
+const img = document.querySelector('img');
+
+// O'qish
+console.log(img.src);
+console.log(img.alt);
+
+// Yozish
+img.src = 'new-image.jpg';
+img.alt = 'Yangi rasm';
+```
+
+#### data-* attributes
+
+```html
+<div data-user-id="123" data-role="admin">User</div>
+```
+
+```javascript
+const div = document.querySelector('div');
+
+// O'qish
+console.log(div.dataset.userId);  // "123"
+console.log(div.dataset.role);    // "admin"
+
+// Yozish
+div.dataset.status = 'active';
+```
+
+### Style lar
+
+#### style xususiyati
+
+```javascript
+const box = document.querySelector('.box');
+
+// O'qish
+console.log(box.style.color);
+
+// Yozish
+box.style.color = 'red';
+box.style.backgroundColor = 'blue';
+box.style.fontSize = '20px';
+box.style.padding = '10px';
+```
+
+**camelCase** ishlatiladi: `background-color` → `backgroundColor`
+
+#### Ko'p style
+
+```javascript
+const box = document.querySelector('.box');
+
+// Bir-bir
+box.style.color = 'white';
+box.style.backgroundColor = 'blue';
+box.style.padding = '20px';
+
+// cssText
+box.style.cssText = `
+    color: white;
+    background-color: blue;
+    padding: 20px;
+`;
+```
+
+#### getComputedStyle
+
+**Hisoblangan style**:
+
+```javascript
+const box = document.querySelector('.box');
+const styles = getComputedStyle(box);
+
+console.log(styles.color);
+console.log(styles.fontSize);
+console.log(styles.width);
+```
+
+### Class lar
+
+#### className
+
+```javascript
+const element = document.querySelector('.box');
+
+// O'qish
+console.log(element.className);
+
+// Yozish (hamma classlar o'zgaradi!)
+element.className = 'new-class';
+```
+
+#### classList
+
+**Yaxshiroq usul**:
+
+```javascript
+const element = document.querySelector('.box');
+
+// Qo'shish
+element.classList.add('active');
+element.classList.add('highlight', 'big');
+
+// O'chirish
+element.classList.remove('active');
+
+// Toggle (bor-yo'qligini o'zgartirish)
+element.classList.toggle('active');
+
+// Tekshirish
+if (element.classList.contains('active')) {
+    console.log('Active!');
+}
+
+// Almashtirish
+element.classList.replace('old-class', 'new-class');
+```
+
+**Misol - Active menu**:
+
+```javascript
+const menuItems = document.querySelectorAll('.menu-item');
+
+menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+        // Hammasidan active ni olib tashlash
+        menuItems.forEach(i => i.classList.remove('active'));
+        
+        // Bosilganni active qilish
+        item.classList.add('active');
+    });
+});
+```
+
+### Element yaratish va o'chirish
+
+#### createElement
+
+```javascript
+const newDiv = document.createElement('div');
+newDiv.textContent = 'Yangi element';
+newDiv.classList.add('box');
+
+// Qo'shish
+document.body.appendChild(newDiv);
+```
+
+#### appendChild
+
+```javascript
+const container = document.querySelector('.container');
+const newP = document.createElement('p');
+newP.textContent = 'Yangi paragraf';
+
+container.appendChild(newP);  // Oxiriga
+```
+
+#### insertBefore
+
+```javascript
+const container = document.querySelector('.container');
+const newElement = document.createElement('div');
+const referenceElement = container.children[0];
+
+container.insertBefore(newElement, referenceElement);
+```
+
+#### insertAdjacentHTML
+
+```javascript
+const container = document.querySelector('.container');
+
+// beforebegin - element oldidan
+// afterbegin - element ichidan boshida
+// beforeend - element ichidan oxirida
+// afterend - element keyinidan
+
+container.insertAdjacentHTML('beforeend', '<p>Yangi</p>');
+```
+
+#### remove
+
+```javascript
+const element = document.querySelector('.remove-me');
+element.remove();
+```
+
+#### removeChild
+
+```javascript
+const container = document.querySelector('.container');
+const child = container.children[0];
+
+container.removeChild(child);
+```
+
+### Event lar
+
+#### addEventListener
+
+```javascript
+const button = document.querySelector('button');
+
+button.addEventListener('click', function() {
+    console.log('Bosildi!');
+});
+```
+
+**Arrow function bilan**:
+
+```javascript
+button.addEventListener('click', () => {
+    console.log('Bosildi!');
+});
+```
+
+#### Event parametr
+
+```javascript
+button.addEventListener('click', (event) => {
+    console.log(event);
+    console.log(event.target);  // Bosilgan element
+    console.log(event.type);    // 'click'
+});
+```
+
+#### Turli eventlar
+
+```javascript
+const input = document.querySelector('input');
+const link = document.querySelector('a');
+const form = document.querySelector('form');
+
+// Click
+button.addEventListener('click', () => {});
+
+// Double click
+button.addEventListener('dblclick', () => {});
+
+// Mouse enter/leave
+button.addEventListener('mouseenter', () => {});
+button.addEventListener('mouseleave', () => {});
+
+// Input
+input.addEventListener('input', (e) => {
+    console.log(e.target.value);
+});
+
+// Change
+input.addEventListener('change', () => {});
+
+// Focus/Blur
+input.addEventListener('focus', () => {});
+input.addEventListener('blur', () => {});
+
+// Keypress
+input.addEventListener('keypress', (e) => {
+    console.log(e.key);
+});
+
+// Keydown/Keyup
+input.addEventListener('keydown', () => {});
+input.addEventListener('keyup', () => {});
+
+// Form submit
+form.addEventListener('submit', (e) => {
+    e.preventDefault();  // Sahifa yangilanmasın
+    console.log('Form yuborildi');
+});
+
+// Link click
+link.addEventListener('click', (e) => {
+    e.preventDefault();  // Linkka o'tmasın
+    console.log('Link bosildi');
+});
+```
+
+#### Event Delegation
+
+**Ota elementga listener**:
+
+```javascript
+const list = document.querySelector('ul');
+
+list.addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI') {
+        console.log(e.target.textContent);
+    }
+});
+```
+
+**Afzalligi**: Yangi elementlar ham ishlaydi
+
+```javascript
+// Yomon usul
+const items = document.querySelectorAll('.item');
+items.forEach(item => {
+    item.addEventListener('click', () => {
+        console.log('Clicked');
+    });
+});
+
+// Yaxshi usul (Event Delegation)
+document.querySelector('.container').addEventListener('click', (e) => {
+    if (e.target.classList.contains('item')) {
+        console.log('Clicked');
+    }
+});
+```
+
+### Amaliy misollar
+
+#### To-Do List
+
+```javascript
+const input = document.querySelector('#todo-input');
+const addBtn = document.querySelector('#add-btn');
+const list = document.querySelector('#todo-list');
+
+addBtn.addEventListener('click', () => {
+    const text = input.value.trim();
+    
+    if (text) {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span>${text}</span>
+            <button class="delete">O'chirish</button>
+        `;
+        
+        list.appendChild(li);
+        input.value = '';
+    }
+});
+
+// Event Delegation
+list.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete')) {
+        e.target.parentElement.remove();
+    }
+});
+```
+
+#### Counter
+
+```javascript
+const countDisplay = document.querySelector('#count');
+const increaseBtn = document.querySelector('#increase');
+const decreaseBtn = document.querySelector('#decrease');
+const resetBtn = document.querySelector('#reset');
+
+let count = 0;
+
+function updateDisplay() {
+    countDisplay.textContent = count;
+    countDisplay.style.color = count > 0 ? 'green' : count < 0 ? 'red' : 'black';
+}
+
+increaseBtn.addEventListener('click', () => {
+    count++;
+    updateDisplay();
+});
+
+decreaseBtn.addEventListener('click', () => {
+    count--;
+    updateDisplay();
+});
+
+resetBtn.addEventListener('click', () => {
+    count = 0;
+    updateDisplay();
+});
+```
+
+#### Tab lar
+
+```javascript
+const tabs = document.querySelectorAll('.tab');
+const contents = document.querySelectorAll('.tab-content');
+
+tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+        // Hammasini o'chirish
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        
+        // Bosilganni faollashtirish
+        tab.classList.add('active');
+        contents[index].classList.add('active');
+    });
+});
+```
+
+#### Modal
+
+```javascript
+const modal = document.querySelector('.modal');
+const openBtn = document.querySelector('#open-modal');
+const closeBtn = document.querySelector('#close-modal');
+const overlay = document.querySelector('.overlay');
+
+function openModal() {
+    modal.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function closeModal() {
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+}
+
+openBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', closeModal);
+```
+
+## Dars uchun vazifa
+
+1. Element tanlash:
+   - querySelector ishlatib 5 ta usul
+   - textContent o'zgartirish
+   - style o'zgartirish
+
+2. Class manipulation:
+   - classList.add
+   - classList.remove
+   - classList.toggle
+   - contains tekshirish
+
+3. Button yarating:
+   - Click eventini qo'shing
+   - Paragraph matnini o'zgartirsin
+   - Style o'zgartirsin
+
+4. Input yarating:
+   - input eventi
+   - Yozilganini display qilish
+   - Real-time
+
+## Uyga vazifa
+
+1. **Counter App**:
+   - Display (0 dan boshlash)
+   - + tugma
+   - - tugma
+   - Reset tugma
+   - Rang o'zgarsin (musbat-manfiy)
+
+2. **To-Do List**:
+   - Input field
+   - Add tugma
+   - Lista
+   - Delete tugma (har birida)
+   - Event delegation
+
+3. **Theme Switcher**:
+   - Toggle tugma
+   - Light/Dark mode
+   - classList.toggle
+   - backgroundColor o'zgartirish
+
+4. **Image Gallery**:
+   - 6 ta kichik rasm
+   - Click qilganda katta ko'rsatish
+   - Modal yoki alohida div
+
+5. **Form Validation**:
+   - Ism input
+   - Email input
+   - Submit button
+   - Bo'sh bo'lsa xato ko'rsatish
+   - Email format tekshirish
+
+6. **Tabs Component**:
+   - 3 ta tab
+   - Har birida kontent
+   - Active class
+   - Smooth transition (CSS)
+
+7. **Modal Window**:
+   - Open button
+   - Close button
+   - Overlay
+   - Overlay click qilsa yopilsin
+
+8. **Character Counter**:
+   - Textarea
+   - Real-time belgilar soni
+   - Limit (100)
+   - Qizil rang limit yetsa
+
+9. **Dropdown Menu**:
+   - Button
+   - Menu (yashirin)
+   - Click toggle
+   - Tashqariga click qilsa yopilsin
+
+10. **Interactive Calculator**:
+    - Raqam tugmalari (0-9)
+    - Operator tugmalari (+,-,*,/)
+    - Display
+    - = tugma
+    - Clear tugma

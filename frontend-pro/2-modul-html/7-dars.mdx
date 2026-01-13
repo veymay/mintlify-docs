@@ -1,0 +1,469 @@
+---
+title: "HTML Formalar (Forms) - 1-qism"
+description: "Form elementlari va input turlari"
+---
+
+## TODO
+- Form yaratishni o'rganish
+- Input turlarini bilish
+- Form atributlarini o'rganish
+
+## Dars mazmuni
+
+### Form nima?
+
+**Form** - foydalanuvchidan ma'lumot olish uchun ishlatiladi.
+
+**Misol**: 
+- Ro'yxatdan o'tish (Registration)
+- Kirish (Login)
+- Qidiruv
+- Aloqa formasi
+- Survey va so'rovnomalar
+
+### `<form>` tegi
+
+```html
+<form action="/submit" method="POST">
+    <!-- Form elementlari bu yerda -->
+</form>
+```
+
+**Asosiy atributlar**:
+- `action` - ma'lumot qayerga yuboriladi
+- `method` - qanday yuboriladi (GET yoki POST)
+
+### Input elementi
+
+**`<input>` tegi** - eng ko'p ishlatiladigan form elementi:
+
+```html
+<input type="text" name="username">
+```
+
+### Input turlari
+
+#### 1. Text - Oddiy matn
+
+```html
+<label for="name">Ism:</label>
+<input type="text" id="name" name="name">
+```
+
+#### 2. Password - Parol
+
+```html
+<label for="password">Parol:</label>
+<input type="password" id="password" name="password">
+```
+
+Yozilgan belgilar yashirinadi: •••••••
+
+#### 3. Email - Email manzil
+
+```html
+<label for="email">Email:</label>
+<input type="email" id="email" name="email">
+```
+
+**Avtomatik validatsiya** - to'g'ri email formatini tekshiradi
+
+#### 4. Number - Raqam
+
+```html
+<label for="age">Yosh:</label>
+<input type="number" id="age" name="age" min="1" max="100">
+```
+
+**Atributlar**:
+- `min` - minimal qiymat
+- `max` - maksimal qiymat
+- `step` - qadam (masalan 0.5)
+
+#### 5. Tel - Telefon
+
+```html
+<label for="phone">Telefon:</label>
+<input type="tel" id="phone" name="phone" pattern="[0-9]{9}">
+```
+
+#### 6. URL - Veb-sayt manzili
+
+```html
+<label for="website">Website:</label>
+<input type="url" id="website" name="website">
+```
+
+#### 7. Date - Sana
+
+```html
+<label for="birthday">Tug'ilgan kun:</label>
+<input type="date" id="birthday" name="birthday">
+```
+
+**Boshqa sana turlari**:
+- `datetime-local` - sana va vaqt
+- `month` - oy
+- `week` - hafta
+- `time` - vaqt
+
+#### 8. Color - Rang
+
+```html
+<label for="favcolor">Sevimli rang:</label>
+<input type="color" id="favcolor" name="favcolor" value="#ff0000">
+```
+
+#### 9. Range - Slider
+
+```html
+<label for="volume">Ovoz balandligi:</label>
+<input type="range" id="volume" name="volume" min="0" max="100" value="50">
+```
+
+#### 10. Search - Qidiruv
+
+```html
+<label for="search">Qidiruv:</label>
+<input type="search" id="search" name="search">
+```
+
+#### 11. File - Fayl yuklash
+
+```html
+<label for="myfile">Fayl tanlang:</label>
+<input type="file" id="myfile" name="myfile">
+```
+
+**Ko'p fayl**:
+```html
+<input type="file" name="files" multiple>
+```
+
+**Faqat rasm**:
+```html
+<input type="file" name="image" accept="image/*">
+```
+
+### Checkbox - Belgilash katagi
+
+**Bir nechta variant tanlash**:
+
+```html
+<h3>Qaysi tillarni bilasiz?</h3>
+<input type="checkbox" id="html" name="skills" value="html">
+<label for="html">HTML</label><br>
+
+<input type="checkbox" id="css" name="skills" value="css">
+<label for="css">CSS</label><br>
+
+<input type="checkbox" id="js" name="skills" value="js">
+<label for="js">JavaScript</label>
+```
+
+**Standart belgilangan**:
+```html
+<input type="checkbox" id="remember" name="remember" checked>
+<label for="remember">Meni eslab qol</label>
+```
+
+### Radio Button - Bir variant tanlash
+
+**Faqat bitta tanlov**:
+
+```html
+<h3>Jinsingiz:</h3>
+<input type="radio" id="male" name="gender" value="male">
+<label for="male">Erkak</label><br>
+
+<input type="radio" id="female" name="gender" value="female">
+<label for="female">Ayol</label>
+```
+
+**Muhim**: Bir guruh uchun `name` bir xil bo'lishi kerak!
+
+### Label elementi
+
+**`<label>` tegi** - input ning tavsifi:
+
+```html
+<!-- for va id bog'langan -->
+<label for="username">Foydalanuvchi nomi:</label>
+<input type="text" id="username" name="username">
+```
+
+**Yoki ichiga olish**:
+```html
+<label>
+    Email:
+    <input type="email" name="email">
+</label>
+```
+
+**Foyda**: Label ni bosish = input ni bosish
+
+### Input atributlari
+
+#### placeholder
+
+**Yordam matni**:
+```html
+<input type="text" name="name" placeholder="Ismingizni kiriting">
+```
+
+#### required
+
+**Majburiy maydon**:
+```html
+<input type="email" name="email" required>
+```
+
+#### readonly
+
+**Faqat o'qish**:
+```html
+<input type="text" name="username" value="ali123" readonly>
+```
+
+#### disabled
+
+**O'chirilgan**:
+```html
+<input type="text" name="field" disabled>
+```
+
+#### value
+
+**Standart qiymat**:
+```html
+<input type="text" name="country" value="Uzbekistan">
+```
+
+#### maxlength
+
+**Maksimal belgilar**:
+```html
+<input type="text" name="zipcode" maxlength="6">
+```
+
+#### minlength
+
+**Minimal belgilar**:
+```html
+<input type="password" name="pass" minlength="8">
+```
+
+#### pattern
+
+**Regex bilan validatsiya**:
+```html
+<input type="tel" name="phone" pattern="[0-9]{9}" placeholder="123456789">
+```
+
+#### autocomplete
+
+**Avtomatik to'ldirish**:
+```html
+<input type="email" name="email" autocomplete="email">
+```
+
+### Button turlari
+
+#### Submit tugmasi
+
+**Formani yuborish**:
+```html
+<button type="submit">Yuborish</button>
+<!-- yoki -->
+<input type="submit" value="Yuborish">
+```
+
+#### Reset tugmasi
+
+**Formani tozalash**:
+```html
+<button type="reset">Tozalash</button>
+```
+
+#### Button tugmasi
+
+**JavaScript uchun**:
+```html
+<button type="button" onclick="alert('Salom!')">Bosing</button>
+```
+
+### Textarea - Ko'p qatorli matn
+
+```html
+<label for="message">Xabar:</label>
+<textarea id="message" name="message" rows="5" cols="30">
+Standart matn...
+</textarea>
+```
+
+**Atributlar**:
+- `rows` - qatorlar soni
+- `cols` - ustunlar soni
+- `maxlength` - maksimal belgilar
+
+### Select - Dropdown menyu
+
+```html
+<label for="country">Mamlakat:</label>
+<select id="country" name="country">
+    <option value="">Tanlang...</option>
+    <option value="uz">O'zbekiston</option>
+    <option value="kz">Qozog'iston</option>
+    <option value="tj">Tojikiston</option>
+</select>
+```
+
+**Standart tanlangan**:
+```html
+<option value="uz" selected>O'zbekiston</option>
+```
+
+**Ko'p tanlov**:
+```html
+<select name="languages" multiple>
+    <option value="html">HTML</option>
+    <option value="css">CSS</option>
+    <option value="js">JavaScript</option>
+</select>
+```
+
+**Guruhlar**:
+```html
+<select name="course">
+    <optgroup label="Frontend">
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+    </optgroup>
+    <optgroup label="Backend">
+        <option value="python">Python</option>
+        <option value="php">PHP</option>
+    </optgroup>
+</select>
+```
+
+### Fieldset va Legend
+
+**Form bo'limlarini guruhlash**:
+
+```html
+<form>
+    <fieldset>
+        <legend>Shaxsiy ma'lumotlar</legend>
+        <label for="name">Ism:</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+    </fieldset>
+    
+    <fieldset>
+        <legend>Manzil</legend>
+        <label for="city">Shahar:</label>
+        <input type="text" id="city" name="city"><br>
+        <label for="street">Ko'cha:</label>
+        <input type="text" id="street" name="street">
+    </fieldset>
+</form>
+```
+
+### To'liq misol - Ro'yxatdan o'tish
+
+```html
+<form action="/register" method="POST">
+    <h2>Ro'yxatdan o'tish</h2>
+    
+    <label for="username">Foydalanuvchi nomi:</label>
+    <input type="text" id="username" name="username" required minlength="3"><br><br>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+    
+    <label for="password">Parol:</label>
+    <input type="password" id="password" name="password" required minlength="8"><br><br>
+    
+    <label for="birthday">Tug'ilgan sana:</label>
+    <input type="date" id="birthday" name="birthday"><br><br>
+    
+    <label>Jins:</label><br>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">Erkak</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Ayol</label><br><br>
+    
+    <input type="checkbox" id="terms" name="terms" required>
+    <label for="terms">Shartlarga roziman</label><br><br>
+    
+    <button type="submit">Ro'yxatdan o'tish</button>
+    <button type="reset">Tozalash</button>
+</form>
+```
+
+## Dars uchun vazifa
+
+1. Kirish formasi yarating:
+   - Email
+   - Parol
+   - "Eslab qol" checkbox
+   - Kirish tugmasi
+
+2. Turli input turlarini sinab ko'ring:
+   - text, email, password, number
+   - date, color, range
+   - Har biriga label qo'shing
+
+3. Dropdown menyu yarating:
+   - 5 ta variant
+   - Bitta standart tanlangan
+
+## Uyga vazifa
+
+1. **To'liq ro'yxatdan o'tish formasi**:
+   - Ism, Familiya
+   - Email (validatsiya bilan)
+   - Parol (kamida 8 ta belgi)
+   - Telefon
+   - Tug'ilgan sana
+   - Jins (radio)
+   - Mamlakat (select)
+   - Shartlarga rozilik (checkbox, majburiy)
+   - Yuborish va Tozalash tugmalari
+
+2. **Aloqa formasi**:
+   - Ism
+   - Email
+   - Mavzu (select: Savol, Taklif, Shikoyat)
+   - Xabar (textarea, 10 qator)
+   - Fayl biriktirish (ixtiyoriy)
+   - Yuborish tugmasi
+
+3. **Survey formasi**:
+   - Yosh (number, 1-100)
+   - Kasb (text)
+   - Tajriba yillari (range, 0-20)
+   - Qaysi tillarni bilasiz? (checkbox: HTML, CSS, JS, Python)
+   - Sevimli dasturlash tili (radio)
+   - Qo'shimcha fikr (textarea)
+
+4. **Filter formasi** (mahsulotlarni saralash uchun):
+   - Narx oralig'i (2 ta number input)
+   - Kategoriya (select)
+   - Brendlar (checkbox lar)
+   - Qidiruv (search input)
+   - Filtr tugmasi
+
+5. Quyidagi savolarga javob bering:
+   - Checkbox va Radio button ning farqi nima?
+   - required atributi nima qiladi?
+   - placeholder va value ning farqi?
+   - Label nima uchun muhim?
+
+6. Form validatsiya turlarini o'rganing:
+   - HTML5 validatsiya
+   - pattern atributi
+   - Qanday xato xabarlari ko'rsatiladi?
+
+7. Real veb-saytlardan 5 ta form topib, ularning qanday input turlarini ishlatganini tahlil qiling

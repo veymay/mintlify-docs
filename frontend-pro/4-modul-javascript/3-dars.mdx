@@ -1,0 +1,730 @@
+---
+title: "ES6+ Xususiyatlari"
+description: "Zamonaviy JavaScript: Arrow functions, Destructuring, Modules"
+---
+
+## TODO
+- Arrow functions
+- Template literals
+- Destructuring
+- Spread/Rest operators
+- Modules
+
+## Dars mazmuni
+
+### Arrow Functions
+
+**Oddiy function**:
+
+```javascript
+function add(a, b) {
+    return a + b;
+}
+```
+
+**Arrow function**:
+
+```javascript
+const add = (a, b) => {
+    return a + b;
+};
+
+// Qisqa (1 ta ifoda)
+const add = (a, b) => a + b;
+```
+
+#### Sintaksis variantlari
+
+```javascript
+// Parametrsiz
+const greet = () => console.log('Salom!');
+
+// 1 ta parametr (qavs shart emas)
+const square = x => x * x;
+
+// Ko'p parametr
+const add = (a, b) => a + b;
+
+// Block body
+const multiply = (a, b) => {
+    const result = a * b;
+    return result;
+};
+
+// Object qaytarish
+const makePerson = (name, age) => ({ name, age });
+// yoki
+const makePerson = (name, age) => {
+    return { name, age };
+};
+```
+
+#### this bilan farq
+
+**Oddiy function - o'z this**:
+
+```javascript
+const person = {
+    name: 'Ali',
+    sayHi: function() {
+        setTimeout(function() {
+            console.log(this.name);  // undefined
+        }, 1000);
+    }
+};
+```
+
+**Arrow function - ota this**:
+
+```javascript
+const person = {
+    name: 'Ali',
+    sayHi: function() {
+        setTimeout(() => {
+            console.log(this.name);  // 'Ali'
+        }, 1000);
+    }
+};
+```
+
+#### Qachon ishlatilmaydi
+
+**Object method sifatida**:
+
+```javascript
+// Yomon
+const person = {
+    name: 'Ali',
+    sayHi: () => {
+        console.log(this.name);  // Ishlamaydi!
+    }
+};
+
+// Yaxshi
+const person = {
+    name: 'Ali',
+    sayHi() {
+        console.log(this.name);  // Ishlaydi
+    }
+};
+```
+
+### Template Literals
+
+**Oddiy string**:
+
+```javascript
+const name = 'Ali';
+const age = 25;
+const message = 'Mening ismim ' + name + ', yoshim ' + age;
+```
+
+**Template literal**:
+
+```javascript
+const name = 'Ali';
+const age = 25;
+const message = `Mening ismim ${name}, yoshim ${age}`;
+```
+
+#### Multi-line strings
+
+```javascript
+// Oddiy (qiyin)
+const html = '<div>\n' +
+             '  <p>Salom</p>\n' +
+             '</div>';
+
+// Template literal (oson)
+const html = `
+<div>
+  <p>Salom</p>
+</div>
+`;
+```
+
+#### Expression lar
+
+```javascript
+const a = 10;
+const b = 20;
+console.log(`Yig'indi: ${a + b}`);  // 30
+
+const isLogged = true;
+console.log(`Status: ${isLogged ? 'Online' : 'Offline'}`);
+
+const user = { name: 'Ali' };
+console.log(`Salom, ${user.name}!`);
+```
+
+#### Tagged templates
+
+```javascript
+function highlight(strings, ...values) {
+    return strings.reduce((result, str, i) => {
+        return `${result}${str}<strong>${values[i] || ''}</strong>`;
+    }, '');
+}
+
+const name = 'Ali';
+const age = 25;
+const html = highlight`Ism: ${name}, Yosh: ${age}`;
+```
+
+### Destructuring
+
+#### Array Destructuring
+
+**Oddiy usul**:
+
+```javascript
+const arr = [1, 2, 3];
+const first = arr[0];
+const second = arr[1];
+```
+
+**Destructuring**:
+
+```javascript
+const arr = [1, 2, 3];
+const [first, second, third] = arr;
+console.log(first);   // 1
+console.log(second);  // 2
+console.log(third);   // 3
+```
+
+**O'tkazib yuborish**:
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const [first, , third] = arr;
+console.log(first);  // 1
+console.log(third);  // 3
+```
+
+**Default qiymat**:
+
+```javascript
+const arr = [1];
+const [first, second = 0] = arr;
+console.log(second);  // 0
+```
+
+**Rest pattern**:
+
+```javascript
+const arr = [1, 2, 3, 4, 5];
+const [first, second, ...rest] = arr;
+console.log(rest);  // [3, 4, 5]
+```
+
+**Swap**:
+
+```javascript
+let a = 1;
+let b = 2;
+[a, b] = [b, a];
+console.log(a, b);  // 2 1
+```
+
+#### Object Destructuring
+
+**Oddiy usul**:
+
+```javascript
+const user = {
+    name: 'Ali',
+    age: 25,
+    email: 'ali@example.com'
+};
+
+const name = user.name;
+const age = user.age;
+```
+
+**Destructuring**:
+
+```javascript
+const user = {
+    name: 'Ali',
+    age: 25,
+    email: 'ali@example.com'
+};
+
+const { name, age, email } = user;
+console.log(name);  // 'Ali'
+console.log(age);   // 25
+```
+
+**Nom o'zgartirish**:
+
+```javascript
+const user = { name: 'Ali', age: 25 };
+const { name: userName, age: userAge } = user;
+console.log(userName);  // 'Ali'
+console.log(userAge);   // 25
+```
+
+**Default qiymat**:
+
+```javascript
+const user = { name: 'Ali' };
+const { name, age = 18 } = user;
+console.log(age);  // 18
+```
+
+**Nested destructuring**:
+
+```javascript
+const user = {
+    name: 'Ali',
+    address: {
+        city: 'Toshkent',
+        street: 'Amir Temur'
+    }
+};
+
+const { address: { city, street } } = user;
+console.log(city);    // 'Toshkent'
+console.log(street);  // 'Amir Temur'
+```
+
+**Function parametrda**:
+
+```javascript
+function greet({ name, age }) {
+    console.log(`Salom ${name}, ${age} yoshda`);
+}
+
+greet({ name: 'Ali', age: 25 });
+```
+
+### Spread Operator (...)
+
+#### Array bilan
+
+**Nusxa olish**:
+
+```javascript
+const arr1 = [1, 2, 3];
+const arr2 = [...arr1];
+console.log(arr2);  // [1, 2, 3]
+```
+
+**Birlashtirish**:
+
+```javascript
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2];
+console.log(combined);  // [1, 2, 3, 4, 5, 6]
+
+// O'rtasiga qo'shish
+const result = [0, ...arr1, 3.5, ...arr2, 7];
+```
+
+**Array ga element qo'shish**:
+
+```javascript
+const arr = [1, 2, 3];
+const newArr = [...arr, 4, 5];
+const newArr2 = [0, ...arr];
+```
+
+#### Object bilan
+
+**Nusxa olish**:
+
+```javascript
+const user = { name: 'Ali', age: 25 };
+const copy = { ...user };
+```
+
+**Birlashtirish**:
+
+```javascript
+const user = { name: 'Ali', age: 25 };
+const details = { email: 'ali@example.com', phone: '123' };
+const fullUser = { ...user, ...details };
+```
+
+**O'zgartirish**:
+
+```javascript
+const user = { name: 'Ali', age: 25 };
+const updated = { ...user, age: 26 };
+console.log(updated);  // { name: 'Ali', age: 26 }
+```
+
+#### Function argumentda
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+console.log(Math.max(...numbers));  // 5
+
+function sum(a, b, c) {
+    return a + b + c;
+}
+const nums = [1, 2, 3];
+console.log(sum(...nums));  // 6
+```
+
+### Rest Parameter
+
+**Barcha argumentlarni array ga**:
+
+```javascript
+function sum(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+
+console.log(sum(1, 2, 3));        // 6
+console.log(sum(1, 2, 3, 4, 5));  // 15
+```
+
+**Birinchisini ajratib**:
+
+```javascript
+function greet(greeting, ...names) {
+    console.log(`${greeting} ${names.join(', ')}!`);
+}
+
+greet('Salom', 'Ali', 'Vali', 'Sobir');
+// Salom Ali, Vali, Sobir!
+```
+
+**Spread vs Rest**:
+
+```javascript
+// Spread - array ni alohida elementlarga
+const arr = [1, 2, 3];
+console.log(...arr);  // 1 2 3
+
+// Rest - alohida elementlarni array ga
+function func(...args) {
+    console.log(args);  // [1, 2, 3]
+}
+func(1, 2, 3);
+```
+
+### Default Parameters
+
+```javascript
+function greet(name = 'Guest', age = 18) {
+    console.log(`Salom ${name}, ${age} yoshda`);
+}
+
+greet();                    // Salom Guest, 18 yoshda
+greet('Ali');               // Salom Ali, 18 yoshda
+greet('Ali', 25);           // Salom Ali, 25 yoshda
+greet(undefined, 30);       // Salom Guest, 30 yoshda
+```
+
+**Expression**:
+
+```javascript
+function getDefaultName() {
+    return 'Guest';
+}
+
+function greet(name = getDefaultName()) {
+    console.log(`Salom ${name}`);
+}
+```
+
+### Enhanced Object Literals
+
+**Property shorthand**:
+
+```javascript
+const name = 'Ali';
+const age = 25;
+
+// Eski
+const user = {
+    name: name,
+    age: age
+};
+
+// Yangi
+const user = { name, age };
+```
+
+**Method shorthand**:
+
+```javascript
+// Eski
+const user = {
+    name: 'Ali',
+    greet: function() {
+        console.log('Salom');
+    }
+};
+
+// Yangi
+const user = {
+    name: 'Ali',
+    greet() {
+        console.log('Salom');
+    }
+};
+```
+
+**Computed property names**:
+
+```javascript
+const prop = 'name';
+const user = {
+    [prop]: 'Ali',
+    ['age']: 25,
+    [`is${prop}Valid`]: true
+};
+
+console.log(user);  // { name: 'Ali', age: 25, isNameValid: true }
+```
+
+### Modules
+
+#### Export
+
+**Named export**:
+
+```javascript
+// utils.js
+export const PI = 3.14159;
+
+export function add(a, b) {
+    return a + b;
+}
+
+export class Calculator {
+    add(a, b) {
+        return a + b;
+    }
+}
+```
+
+**Export qilgan holda e'lon**:
+
+```javascript
+// math.js
+const PI = 3.14159;
+function add(a, b) {
+    return a + b;
+}
+
+export { PI, add };
+```
+
+**Default export**:
+
+```javascript
+// user.js
+export default class User {
+    constructor(name) {
+        this.name = name;
+    }
+}
+
+// yoki
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+}
+export default User;
+```
+
+#### Import
+
+**Named import**:
+
+```javascript
+// app.js
+import { PI, add } from './utils.js';
+
+console.log(PI);      // 3.14159
+console.log(add(2, 3));  // 5
+```
+
+**Hammasini import**:
+
+```javascript
+import * as utils from './utils.js';
+
+console.log(utils.PI);
+console.log(utils.add(2, 3));
+```
+
+**Nom o'zgartirish**:
+
+```javascript
+import { add as sum } from './utils.js';
+
+console.log(sum(2, 3));
+```
+
+**Default import**:
+
+```javascript
+import User from './user.js';
+
+const user = new User('Ali');
+```
+
+**Mixed import**:
+
+```javascript
+import User, { PI, add } from './module.js';
+```
+
+### Amaliy misollar
+
+#### User Service (Module)
+
+```javascript
+// userService.js
+const users = [];
+
+export function addUser(user) {
+    users.push(user);
+}
+
+export function getUser(id) {
+    return users.find(u => u.id === id);
+}
+
+export function getAllUsers() {
+    return [...users];
+}
+
+export default class UserService {
+    constructor() {
+        this.users = [];
+    }
+    
+    add(user) {
+        this.users.push(user);
+    }
+    
+    getAll() {
+        return [...this.users];
+    }
+}
+```
+
+```javascript
+// app.js
+import UserService, { addUser, getUser } from './userService.js';
+
+const service = new UserService();
+service.add({ id: 1, name: 'Ali' });
+
+addUser({ id: 2, name: 'Vali' });
+console.log(getUser(2));
+```
+
+#### API Helper
+
+```javascript
+// api.js
+const BASE_URL = 'https://api.example.com';
+
+export async function fetchData(endpoint) {
+    const response = await fetch(`${BASE_URL}${endpoint}`);
+    return response.json();
+}
+
+export async function postData(endpoint, data) {
+    const response = await fetch(`${BASE_URL}${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
+```
+
+## Dars uchun vazifa
+
+1. Arrow functions:
+   - 5 ta misol
+   - Har xil parametr soni
+   - Array methods bilan
+
+2. Destructuring:
+   - Array
+   - Object
+   - Nested
+   - Function parametrda
+
+3. Spread operator:
+   - Array nusxalash
+   - Object birlashtirish
+   - Function argument
+
+4. Module:
+   - 2 ta file
+   - Export/Import
+   - Named va Default
+
+## Uyga vazifa
+
+1. **Calculator Module**:
+   - add, subtract, multiply, divide
+   - Named export
+   - Default class
+
+2. **User Manager**:
+   - addUser (destructuring)
+   - updateUser (spread)
+   - getAllUsers (rest)
+   - Module qilish
+
+3. **Array Helper Functions**:
+   - unique (spread + Set)
+   - merge (spread)
+   - partition (destructuring)
+   - Module qilish
+
+4. **Shopping Cart**:
+   - addItem (spread)
+   - removeItem (filter + destructuring)
+   - getTotal (reduce + arrow function)
+   - Template literals
+
+5. Quyidagi savolarga javob bering:
+   - Arrow function qachon ishlatilmaydi?
+   - Spread va Rest farqi?
+   - Named va Default export farqi?
+   - Destructuring afzalliklari?
+
+6. **API Service Module**:
+   - GET, POST, PUT, DELETE
+   - Arrow functions
+   - Template literals
+   - Default parameters
+
+7. **Utility Functions**:
+   - debounce (arrow function)
+   - throttle (arrow function)
+   - curry (arrow function)
+   - Module qilish
+
+8. **Object Operations**:
+   - merge (spread)
+   - pick (destructuring)
+   - omit (rest)
+   - clone (spread)
+
+9. **Array Operations**:
+   - flatMap arrow function bilan
+   - groupBy arrow function bilan
+   - chunk (destructuring)
+   - zip (destructuring)
+
+10. To'liq **Todo App Module** yarating:
+    - todoService.js (CRUD)
+    - domHelpers.js (createElement, etc.)
+    - app.js (main logic)
+    - Barcha ES6+ xususiyatlarni ishlatib

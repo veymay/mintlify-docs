@@ -1,0 +1,353 @@
+---
+title: "HTML Rasmlar (Images)"
+description: "Rasmlar bilan ishlash"
+---
+
+## TODO
+- Rasm qo'shishni o'rganish
+- Rasm atributlarini bilish
+- Rasm formatlarini farqlash
+
+## Dars mazmuni
+
+### Rasm qo'shish
+
+**`<img>` tegi** - rasm qo'shish (yopuvchi teg yo'q):
+
+```html
+<img src="rasm.jpg" alt="Rasm tavsifi">
+```
+
+**Asosiy atributlar**:
+- `src` - rasm manzili (majburiy)
+- `alt` - alternativ matn (majburiy)
+
+### src atributi
+
+**Rasm manzili** - ikki xil bo'lishi mumkin:
+
+#### 1. Nisbiy yo'l (Relative path)
+```html
+<!-- Joriy papkada -->
+<img src="rasm.jpg" alt="Rasm">
+
+<!-- images papkasida -->
+<img src="images/rasm.jpg" alt="Rasm">
+
+<!-- Yuqori papkada -->
+<img src="../rasm.jpg" alt="Rasm">
+```
+
+#### 2. Absolyut URL
+```html
+<img src="https://example.com/images/rasm.jpg" alt="Rasm">
+```
+
+### alt atributi
+
+**Alternative text** - rasm yuklanmasa ko'rsatiladigan matn
+
+```html
+<img src="kompyuter.jpg" alt="Zamonaviy noutbuk stol ustida">
+```
+
+**Nima uchun muhim?**
+- Rasm yuklanmasa matn ko'rsatiladi
+- SEO uchun muhim
+- Screen reader lar (ko'zi ojiz odamlar uchun)
+- Rasmni tushuntiradi
+
+**Yaxshi alt matn** ✅:
+```html
+<img src="sunset.jpg" alt="Okeanda quyosh botishi, pushti osmon">
+<img src="laptop.jpg" alt="MacBook Pro rasmli ekran bilan">
+```
+
+**Yomon alt matn** ❌:
+```html
+<img src="sunset.jpg" alt="rasm">
+<img src="laptop.jpg" alt="img123">
+```
+
+### width va height atributlari
+
+**O'lchamlarni belgilash**:
+
+```html
+<!-- Pixels da -->
+<img src="rasm.jpg" alt="Rasm" width="300" height="200">
+
+<!-- CSS da (yaxshiroq) -->
+<img src="rasm.jpg" alt="Rasm" style="width:300px;height:200px;">
+```
+
+**Faqat width**:
+```html
+<img src="rasm.jpg" alt="Rasm" width="500">
+<!-- height avtomatik hisoblanadi -->
+```
+
+**Foiz bilan** (CSS):
+```html
+<img src="rasm.jpg" alt="Rasm" style="width:100%;">
+<!-- Konteynerning 100% i -->
+```
+
+### Rasm formatlari
+
+#### JPEG (.jpg, .jpeg)
+- **Uchun**: Foto rasmlar
+- **Xususiyat**: Siqilgan, kichik hajm
+- **Shaffoflik**: Yo'q
+- **Misol**: Peyzaj, portret
+
+#### PNG (.png)
+- **Uchun**: Logo, icon, grafika
+- **Xususiyat**: Yuqori sifat
+- **Shaffoflik**: Bor (transparent)
+- **Misol**: Logo, tugma
+
+#### GIF (.gif)
+- **Uchun**: Animatsiya
+- **Xususiyat**: Harakatlanadi
+- **Rang**: 256 ta rang
+- **Misol**: Animatsion icon, meme
+
+#### SVG (.svg)
+- **Uchun**: Vektor grafika
+- **Xususiyat**: Kattalashtirsa buziلmaydi
+- **Hajm**: Juda kichik
+- **Misol**: Logo, icon, grafik
+
+#### WebP (.webp)
+- **Uchun**: Veb uchun
+- **Xususiyat**: JPEG dan 30% kichik
+- **Zamonaviy**: Yangi format
+- **Misol**: Hamma narsa (zamonaviy brauzerlar uchun)
+
+### Rasm joylashuvi
+
+**CSS bilan** (keyingi darslarda batafsil):
+
+```html
+<!-- Markazda -->
+<img src="rasm.jpg" alt="Rasm" style="display:block; margin:0 auto;">
+
+<!-- Chapda -->
+<img src="rasm.jpg" alt="Rasm" style="float:left;">
+
+<!-- O'ngda -->
+<img src="rasm.jpg" alt="Rasm" style="float:right;">
+```
+
+### Rasm havola qilish
+
+**Rasmni bosilsa sahifaga o'tsin**:
+
+```html
+<a href="big-image.jpg">
+    <img src="small-image.jpg" alt="Rasm" width="200">
+</a>
+```
+
+**Boshqa sahifaga**:
+```html
+<a href="page.html">
+    <img src="icon.png" alt="Icon">
+</a>
+```
+
+### title atributi
+
+**Tooltip** - ustidan o'tsangiz ko'rsatiladi:
+
+```html
+<img src="rasm.jpg" alt="Manzara" title="Tog'larda quyosh botishi">
+```
+
+### loading atributi
+
+**Lazy loading** - kerak bo'lganda yuklanadi:
+
+```html
+<img src="rasm.jpg" alt="Rasm" loading="lazy">
+```
+
+**lazy** - scroll qilganda
+**eager** - darhol (standart)
+
+### Responsive rasm
+
+**Har xil ekranlarda yaxshi ko'rinishi**:
+
+```html
+<img src="rasm.jpg" alt="Rasm" style="max-width:100%; height:auto;">
+```
+
+### Figure va Figcaption
+
+**Rasm va tavsifi**:
+
+```html
+<figure>
+    <img src="sunset.jpg" alt="Quyosh botishi" width="400">
+    <figcaption>Okeanda go'zal quyosh botishi</figcaption>
+</figure>
+```
+
+**CSS bilan**:
+```html
+<figure style="text-align:center;">
+    <img src="chart.png" alt="Grafik">
+    <figcaption>2024-yil sotish statistikasi</figcaption>
+</figure>
+```
+
+### Picture elementi
+
+**Turli ekranlar uchun turli rasm**:
+
+```html
+<picture>
+    <source media="(min-width: 800px)" srcset="large.jpg">
+    <source media="(min-width: 400px)" srcset="medium.jpg">
+    <img src="small.jpg" alt="Rasm">
+</picture>
+```
+
+### Background rasm (CSS)
+
+**Fon rasm** - HTML emas, CSS (keyinroq):
+
+```html
+<div style="background-image: url('rasm.jpg'); height:400px;">
+</div>
+```
+
+### Rasm optimallashtirish
+
+**Yaxshi amaliyotlar**:
+
+1. **To'g'ri format tanlash**:
+   - Foto → JPEG
+   - Logo → PNG yoki SVG
+   - Animatsiya → GIF
+   - Zamonaviy → WebP
+
+2. **Hajmni kamaytirish**:
+   - Tinypng.com
+   - Compressor.io
+   - Squoosh.app
+
+3. **To'g'ri o'lcham**:
+   - Kerakli o'lchamda saqlang
+   - 3000px rasm 300px da ko'rsatish - yomon
+
+4. **Lazy loading**:
+   ```html
+   <img src="rasm.jpg" alt="Rasm" loading="lazy">
+   ```
+
+5. **Alt matn qo'shish**:
+   - Doim yozing
+   - Ma'noli bo'lsin
+
+### Rasm bilan umumiy xatolar
+
+**1. Yo'l xatosi**
+```html
+<!-- Xato -->
+<img src="images\rasm.jpg" alt="Rasm">
+
+<!-- To'g'ri -->
+<img src="images/rasm.jpg" alt="Rasm">
+```
+
+**2. Alt yo'q**
+```html
+<!-- Yomon -->
+<img src="rasm.jpg">
+
+<!-- Yaxshi -->
+<img src="rasm.jpg" alt="Rasm tavsifi">
+```
+
+**3. Katta hajmli rasm**
+```html
+<!-- 5MB rasm - juda sekin -->
+<!-- Optimal: 100-300KB -->
+```
+
+### Image Map (Rasm xaritasi)
+
+**Rasmning turli joylarini bosilsa**:
+
+```html
+<img src="workspace.jpg" alt="Workspace" usemap="#workmap">
+
+<map name="workmap">
+    <area shape="rect" coords="34,44,270,350" alt="Computer" href="computer.html">
+    <area shape="rect" coords="290,172,333,250" alt="Phone" href="phone.html">
+    <area shape="circle" coords="337,300,44" alt="Cup" href="cup.html">
+</map>
+```
+
+**Shape turlari**:
+- `rect` - to'rtburchak
+- `circle` - doira
+- `poly` - ko'pburchak
+
+## Dars uchun vazifa
+
+1. 5 ta turli rasmni qo'shing:
+   - Kompyuterdan (nisbiy yo'l)
+   - Internetdan (absolyut URL)
+   - Har biriga alt matn
+   - Turli o'lchamlarda
+
+2. Figure va Figcaption ishlatib galereya yarating:
+   - 3 ta rasm
+   - Har biriga tavsif
+
+3. Rasm havolalarini yarating:
+   - Bosilsa katta versiyasi ochilsin
+   - 4 ta rasm
+
+## Uyga vazifa
+
+1. **Photo Gallery** yarating:
+   - Kamida 9 ta rasm
+   - 3x3 grid (CSS keyinroq)
+   - Har birida figcaption
+   - Lazy loading qo'shing
+
+2. **Turli formatlardagi rasmlar** sahifasi:
+   - JPEG foto
+   - PNG logo (shaffof fonli)
+   - GIF animatsiya
+   - SVG icon
+   - Har birining farqini izohlab yozing
+
+3. **Responsive rasmlar**:
+   - Picture elementi bilan
+   - 3 ta turli o'lcham
+   - Desktop, Tablet, Mobile
+
+4. Quyidagi rasmlarni optimallashtiring:
+   - 5 ta foto topib, hajmini kamaytiring
+   - tinypng.com dan foydalaning
+   - Oldingi va keyingi hajmlarni taqqoslang
+
+5. **Product page** yarating:
+   - Asosiy mahsulot rasmi
+   - 4 ta kichik rasm (thumbnail)
+   - Har biri bosilsa kattasi ko'rinsin
+   - To'liq ma'lumot va tavsif
+
+6. Alt matn yozish qoidalarini 5 ta bandda yozing va har biriga misol keltiring
+
+7. Quyidagi savolarga javob bering:
+   - JPEG va PNG ning farqi nima?
+   - Lazy loading nima va nima uchun kerak?
+   - WebP nima va afzalliklari?
+   - Figure elementi nima uchun ishlatiladi?

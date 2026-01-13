@@ -1,0 +1,504 @@
+---
+title: "Tarmoq Protokollari"
+description: "TCP/IP, HTTP, DNS va boshqa muhim protokollar"
+---
+
+## TODO
+- TCP/IP modelini tushunish
+- HTTP/HTTPS protokollari
+- DNS va qanday ishlashini bilish
+
+## Dars mazmuni
+
+### TCP/IP Model
+
+**TCP/IP** - Internet ning asosi bo'lgan protokollar to'plami.
+
+**4 ta qatlam**:
+
+```
+┌─────────────────────┐
+│  Application Layer  │  (HTTP, FTP, SMTP, DNS)
+├─────────────────────┤
+│   Transport Layer   │  (TCP, UDP)
+├─────────────────────┤
+│   Internet Layer    │  (IP, ICMP)
+├─────────────────────┤
+│  Network Interface  │  (Ethernet, Wi-Fi)
+└─────────────────────┘
+```
+
+### IP Protocol (Internet Protocol)
+
+**IP manzil** - qurilmaning tarmoqdagi manzili.
+
+#### IPv4
+
+**Format**: `192.168.1.1` (4 ta oktet, 0-255)
+
+**Turkumlari**:
+- **Class A**: 1.0.0.0 - 126.255.255.255 (katta tarmoqlar)
+- **Class B**: 128.0.0.0 - 191.255.255.255 (o'rta)
+- **Class C**: 192.0.0.0 - 223.255.255.255 (kichik)
+
+**Maxsus manzillar**:
+- `127.0.0.1` - localhost
+- `192.168.x.x` - private network
+- `10.x.x.x` - private network
+- `0.0.0.0` - har qanday manzil
+
+#### IPv6
+
+**Format**: `2001:0db8:85a3:0000:0000:8a2e:0370:7334`
+
+**Sabab**: IPv4 tugayapti (4.3 milliard manzil)
+
+**IPv6**: 340 undecillion manzil
+
+### TCP (Transmission Control Protocol)
+
+**Xususiyatlari**:
+- **Ishonchli** - ma'lumot yetib borishini kafolatlaydi
+- **Tartibli** - ketma-ketlikda yetib boradi
+- **Connection-oriented** - ulanish kerak
+
+#### 3-way Handshake
+
+```
+Client                Server
+  │                      │
+  │─────── SYN ────────>│
+  │                      │
+  │<────── SYN-ACK ─────│
+  │                      │
+  │─────── ACK ────────>│
+  │                      │
+  │   Ulanish o'rnatildi │
+```
+
+**Qadamlar**:
+1. Client: SYN (Synchronize)
+2. Server: SYN-ACK (Synchronize-Acknowledge)
+3. Client: ACK (Acknowledge)
+
+#### TCP Portlar
+
+**Tez-tez ishlatiladigan**:
+- `20, 21` - FTP
+- `22` - SSH
+- `23` - Telnet
+- `25` - SMTP (email)
+- `80` - HTTP
+- `443` - HTTPS
+- `3306` - MySQL
+- `3389` - RDP (Remote Desktop)
+- `5432` - PostgreSQL
+- `8080` - HTTP alternate
+
+### UDP (User Datagram Protocol)
+
+**Xususiyatlari**:
+- **Tez** - overhead kam
+- **Ishonchsiz** - ma'lumot yoqolishi mumkin
+- **Connectionless** - ulanish kerak emas
+
+**Ishlatiladi**:
+- Video streaming
+- Online games
+- VoIP (telefon)
+- DNS queries
+
+**UDP vs TCP**:
+
+| TCP | UDP |
+|-----|-----|
+| Sekin | Tez |
+| Ishonchli | Ishonchsiz |
+| Ulanish kerak | Ulanish kerak emas |
+| HTTP, FTP, Email | Gaming, Streaming, DNS |
+
+### HTTP (HyperText Transfer Protocol)
+
+**Web ning asosi** - brauzer va server o'rtasida.
+
+#### HTTP Request
+
+```
+GET /index.html HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+```
+
+**Qismlari**:
+1. **Method** - GET, POST, PUT, DELETE
+2. **Path** - `/index.html`
+3. **Version** - HTTP/1.1
+4. **Headers** - qo'shimcha ma'lumot
+
+#### HTTP Methods
+
+**GET** - ma'lumot olish:
+```
+GET /api/users HTTP/1.1
+Host: example.com
+```
+
+**POST** - yangi yaratish:
+```
+POST /api/users HTTP/1.1
+Host: example.com
+Content-Type: application/json
+
+{"name": "Ali", "age": 25}
+```
+
+**PUT** - yangilash:
+```
+PUT /api/users/1 HTTP/1.1
+Host: example.com
+Content-Type: application/json
+
+{"name": "Vali", "age": 26}
+```
+
+**DELETE** - o'chirish:
+```
+DELETE /api/users/1 HTTP/1.1
+Host: example.com
+```
+
+#### HTTP Response
+
+```
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1234
+
+<!DOCTYPE html>
+<html>...
+```
+
+**Qismlari**:
+1. **Status Line** - HTTP/1.1 200 OK
+2. **Headers** - Content-Type, Content-Length
+3. **Body** - HTML kontent
+
+#### HTTP Status Codes
+
+**1xx - Informational**:
+- `100` - Continue
+
+**2xx - Success**:
+- `200` - OK
+- `201` - Created
+- `204` - No Content
+
+**3xx - Redirection**:
+- `301` - Moved Permanently
+- `302` - Found (Temporary)
+- `304` - Not Modified
+
+**4xx - Client Error**:
+- `400` - Bad Request
+- `401` - Unauthorized
+- `403` - Forbidden
+- `404` - Not Found
+- `405` - Method Not Allowed
+
+**5xx - Server Error**:
+- `500` - Internal Server Error
+- `502` - Bad Gateway
+- `503` - Service Unavailable
+
+### HTTPS (HTTP Secure)
+
+**HTTP + SSL/TLS** - shifrlangan HTTP.
+
+**Farqi**:
+- HTTP: port 80, shifrlanmagan
+- HTTPS: port 443, shifrlangan
+
+**SSL/TLS**:
+- Ma'lumotni shifrlaydi
+- Server identifikatsiyasi
+- Ma'lumot yaxlitligi
+
+**Certificate** - server haqiqiyligini tasdiqlaydi.
+
+```
+┌──────────┐           ┌──────────┐
+│  Client  │◄────TLS───►│  Server  │
+└──────────┘  Encrypted └──────────┘
+```
+
+### DNS (Domain Name System)
+
+**DNS** - domen nomini IP manzilga o'zgartiradi.
+
+**Misol**: `google.com` → `142.250.185.46`
+
+#### DNS Resolution
+
+```
+1. Browser cache tekshiradi
+2. OS cache tekshiradi
+3. Router ga so'raydi
+4. ISP DNS ga so'raydi
+5. Root DNS server
+6. TLD DNS server (.com)
+7. Authoritative DNS server
+```
+
+**DNS Query turlari**:
+- **Recursive** - to'liq javob
+- **Iterative** - keyingi server manzili
+
+#### DNS Record turlari
+
+**A** - IPv4 manzil:
+```
+example.com → 93.184.216.34
+```
+
+**AAAA** - IPv6 manzil:
+```
+example.com → 2606:2800:220:1:248:1893:25c8:1946
+```
+
+**CNAME** - alias:
+```
+www.example.com → example.com
+```
+
+**MX** - email server:
+```
+example.com → mail.example.com
+```
+
+**TXT** - text ma'lumot:
+```
+example.com → "v=spf1 include:_spf.google.com ~all"
+```
+
+**NS** - nameserver:
+```
+example.com → ns1.example.com
+```
+
+#### nslookup va dig
+
+**nslookup** (Windows):
+```cmd
+nslookup google.com
+```
+
+**dig** (Linux):
+```bash
+dig google.com
+dig google.com A
+dig google.com MX
+```
+
+### FTP (File Transfer Protocol)
+
+**Fayl uzatish** - server va client o'rtasida.
+
+**Portlar**:
+- `20` - data transfer
+- `21` - control commands
+
+**Xavflilik**: ma'lumot shifrlanmagan
+
+**SFTP** (SSH FTP) - xavfsiz versiya.
+
+### SMTP, POP3, IMAP
+
+**Email protokollari**:
+
+**SMTP** (Simple Mail Transfer Protocol):
+- Email yuborish
+- Port: 25, 587 (TLS)
+
+**POP3** (Post Office Protocol):
+- Email qabul qilish
+- Port: 110, 995 (SSL)
+- Serverdan o'chiradi
+
+**IMAP** (Internet Message Access Protocol):
+- Email qabul qilish
+- Port: 143, 993 (SSL)
+- Serverda qoladi
+
+### SSH (Secure Shell)
+
+**Xavfsiz ulanish** - masofadan boshqarish.
+
+**Port**: 22
+
+**Ishlatiladi**:
+- Remote server boshqarish
+- Fayl uzatish (SCP, SFTP)
+- Tunneling
+
+**Misol**:
+```bash
+ssh user@192.168.1.100
+```
+
+**Key-based authentication**:
+```bash
+ssh-keygen -t rsa
+ssh-copy-id user@server
+ssh user@server
+```
+
+### ICMP (Internet Control Message Protocol)
+
+**Diagnostika** - tarmoq muammolarini aniqlash.
+
+**ping** - ulanish tekshirish:
+```cmd
+ping google.com
+ping 8.8.8.8
+```
+
+**traceroute/tracert** - yo'lni ko'rish:
+```cmd
+tracert google.com
+```
+
+**ICMP paketlari**:
+- Echo Request/Reply (ping)
+- Destination Unreachable
+- Time Exceeded
+- Redirect
+
+### ARP (Address Resolution Protocol)
+
+**IP → MAC** - IP manzildan MAC manzilni topish.
+
+**ARP Table**:
+```cmd
+arp -a
+```
+
+```
+Internet Address      Physical Address
+192.168.1.1          00-11-22-33-44-55
+192.168.1.100        AA-BB-CC-DD-EE-FF
+```
+
+### DHCP (Dynamic Host Configuration Protocol)
+
+**Avtomatik IP berish** - qurilmalarga IP manzil tayinlash.
+
+**DHCP server**:
+1. Client: DHCP Discover
+2. Server: DHCP Offer
+3. Client: DHCP Request
+4. Server: DHCP ACK
+
+**Beradigan ma'lumotlar**:
+- IP manzil
+- Subnet mask
+- Default gateway
+- DNS server
+
+### NAT (Network Address Translation)
+
+**Private → Public** - ichki IP ni tashqi IP ga o'zgartirish.
+
+**Sabab**: IPv4 tugayapti
+
+**Misol**:
+```
+Inside: 192.168.1.100:5000
+Outside: 203.0.113.5:12345
+```
+
+**NAT turlari**:
+- **Static NAT** - 1:1 mapping
+- **Dynamic NAT** - pool dan
+- **PAT** (Port Address Translation) - 1 public IP, turli portlar
+
+## Dars uchun vazifa
+
+1. Wireshark o'rnating:
+   - HTTP so'rov qiling
+   - TCP handshake ni ko'ring
+   - UDP paketini ko'ring
+
+2. Command line:
+   - `ping google.com`
+   - `tracert google.com`
+   - `nslookup google.com`
+   - Natijalarni tahlil qiling
+
+3. Browser Developer Tools:
+   - Network tab
+   - HTTP request/response
+   - Status code lar
+   - Headers
+
+4. DNS lookup:
+   - 5 ta mashhur sayt
+   - A record
+   - MX record
+
+## Uyga vazifa
+
+1. **Protocol Analysis** (Wireshark):
+   - HTTP so'rov
+   - HTTPS so'rov (shifrlanganligini ko'ring)
+   - DNS query
+   - Screenshot va tahlil
+
+2. **Network Commands**:
+   - `ipconfig /all` (Windows) yoki `ifconfig` (Linux)
+   - Ma'lumotlarni tushuntiring
+   - `arp -a` ni tahlil qiling
+
+3. Quyidagi savolarga javob bering:
+   - TCP va UDP farqi? Har biri qachon ishlatiladi?
+   - 3-way handshake qanday ishlaydi?
+   - HTTP va HTTPS farqi?
+   - DNS qanday ishlaydi?
+   - NAT nima uchun kerak?
+
+4. **HTTP Headers tahlil**:
+   - Browser DevTools
+   - 10 ta header
+   - Har birini tushuntiring
+
+5. **Port Scanning**:
+   - `netstat -ano` (Windows)
+   - Ochiq portlarni ko'ring
+   - Har bir portni aniqlang
+
+6. **Traceroute tahlil**:
+   - 3 ta xorijiy sayt
+   - Nechta hop?
+   - Qaysi mamlakatlardan o'tadi?
+
+7. **DNS Records**:
+   - O'z domeningiz (yoki mashhur sayt)
+   - A, AAAA, MX, TXT, NS
+   - nslookup yoki online tool
+
+8. Diagramma chizing:
+   - HTTP request/response jarayoni
+   - TCP 3-way handshake
+   - DNS resolution
+
+9. **Protocol comparison jadval** yarating:
+   - HTTP vs HTTPS
+   - TCP vs UDP
+   - FTP vs SFTP
+   - POP3 vs IMAP
+
+10. **Network Troubleshooting scenario**:
+    - Internet ishlamayapti
+    - Qanday diagnostika qilasiz?
+    - Qaysi commandlarni ishlatasiz?
+    - Tartibini yozing

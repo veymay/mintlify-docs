@@ -1,0 +1,354 @@
+---
+title: "HTML Elementlari - Sarlavhalar va Paragraflar"
+description: "Matn elementlari bilan ishlash"
+---
+
+## TODO
+- Sarlavha teglarini o'rganish
+- Paragraf elementini bilish
+- Matn formatlash teglari
+
+## Dars mazmuni
+
+### Sarlavha teglari (Headings)
+
+**HTML da 6 xil sarlavha** bor: `<h1>` dan `<h6>` gacha
+
+```html
+<h1>Eng katta sarlavha</h1>
+<h2>2-darajali sarlavha</h2>
+<h3>3-darajali sarlavha</h3>
+<h4>4-darajali sarlavha</h4>
+<h5>5-darajali sarlavha</h5>
+<h6>Eng kichik sarlavha</h6>
+```
+
+**O'lchamlari** (standart):
+- `<h1>` - 32px (eng katta)
+- `<h2>` - 24px
+- `<h3>` - 18.72px
+- `<h4>` - 16px
+- `<h5>` - 13.28px
+- `<h6>` - 10.72px (eng kichik)
+
+**Qoidalar**:
+- Sahifada faqat **bitta `<h1>`** bo'lishi kerak (SEO uchun muhim)
+- Ketma-ketlikni saqlang: `<h1>` → `<h2>` → `<h3>`
+- Tuzilmani yaratish uchun ishlating, dizayn uchun emas
+
+**Noto'g'ri** ❌:
+```html
+<h1>Asosiy sarlavha</h1>
+<h5>Kichik matnga o'xshasin deb</h5>
+<h2>Keyingi bo'lim</h2>
+```
+
+**To'g'ri** ✅:
+```html
+<h1>Asosiy sarlavha</h1>
+<h2>Bo'lim 1</h2>
+<h3>Kichik bo'lim 1.1</h3>
+<h2>Bo'lim 2</h2>
+```
+
+### Paragraf (Paragraph)
+
+**`<p>` tegi** - paragraf yaratish uchun
+
+```html
+<p>Bu birinchi paragraf. Uning ichida bir nechta jumla bo'lishi mumkin.</p>
+<p>Bu ikkinchi paragraf. Brauzer avtomatik ravishda paragraflar orasida bo'shliq qoldiradi.</p>
+```
+
+**Xususiyatlari**:
+- Block element (yangi qatordan boshlanadi)
+- Yuqori va pastida avtomatik margin bor
+- Ichida inline elementlar bo'lishi mumkin
+
+### Line Break (Yangi qator)
+
+**`<br>` tegi** - yangi qatorga o'tish (yopuvchi teg yo'q)
+
+```html
+<p>Birinchi qator<br>Ikkinchi qator<br>Uchinchi qator</p>
+```
+
+**Natija**:
+```
+Birinchi qator
+Ikkinchi qator
+Uchinchi qator
+```
+
+**Eslatma**: Ko'p `<br>` ishlatish yomon amaliyot. CSS dan foydalaning.
+
+### Horizontal Rule (Gorizontal chiziq)
+
+**`<hr>` tegi** - gorizontal chiziq (yopuvchi teg yo'q)
+
+```html
+<p>Birinchi bo'lim</p>
+<hr>
+<p>Ikkinchi bo'lim</p>
+```
+
+**Ishlatiladi**: Bo'limlarni ajratish uchun
+
+### Matn formatlash teglari
+
+#### Bold (Qalin matn)
+
+**`<strong>` tegi** - muhim matn (semantik):
+```html
+<p>Bu <strong>muhim</strong> matn</p>
+```
+
+**`<b>` tegi** - shunchaki qalin (semantik emas):
+```html
+<p>Bu <b>qalin</b> matn</p>
+```
+
+**Farq**: `<strong>` - muhimligini bildiradi, SEO va screen reader lar uchun yaxshi
+
+#### Italic (Kursiv)
+
+**`<em>` tegi** - urg'u (emphasis):
+```html
+<p>Bu <em>urg'ulangan</em> matn</p>
+```
+
+**`<i>` tegi** - shunchaki kursiv:
+```html
+<p>Bu <i>kursiv</i> matn</p>
+```
+
+#### Underline (Tagiga chizish)
+
+**`<u>` tegi**:
+```html
+<p>Bu <u>tagiga chizilgan</u> matn</p>
+```
+
+**Eslatma**: Havolaga o'xshab ketmasligi uchun ehtiyot bo'ling
+
+#### Strike (O'rtasidan chizish)
+
+**`<s>` yoki `<del>` tegi**:
+```html
+<p>Bu mahsulot narxi <s>100,000 so'm</s> 80,000 so'm</p>
+<p><del>Eski ma'lumot</del> <ins>Yangi ma'lumot</ins></p>
+```
+
+#### Small (Kichik matn)
+
+**`<small>` tegi**:
+```html
+<p>&copy; 2026 Kompaniya. <small>Barcha huquqlar himoyalangan</small></p>
+```
+
+#### Mark (Belgilash)
+
+**`<mark>` tegi** - marker kabi:
+```html
+<p>Bu <mark>belgilangan</mark> matn</p>
+```
+
+Natija: sariq fonda
+
+### Subscript va Superscript
+
+**`<sub>` tegi** - pastki indeks:
+```html
+<p>H<sub>2</sub>O - Suv formulasi</p>
+```
+
+**`<sup>` tegi** - yuqori indeks:
+```html
+<p>E = mc<sup>2</sup></p>
+<p>2<sup>10</sup> = 1024</p>
+```
+
+### Pre (Preformatted text)
+
+**`<pre>` tegi** - formatlangan matn:
+```html
+<pre>
+Bu matn
+    aynan shunday
+        ko'rsatiladi
+    Barcha bo'shliqlar
+    va yangi qatorlar bilan
+</pre>
+```
+
+**Xususiyati**: Bo'shliqlar va enter lar saqlanadi
+
+### Code (Kod)
+
+**`<code>` tegi** - kod ko'rinishi:
+```html
+<p>HTML da <code>&lt;p&gt;</code> tegi paragraf yaratadi</p>
+```
+
+**Ko'p qatorli kod uchun**:
+```html
+<pre>
+<code>
+function salom() {
+    console.log("Salom Dunyo!");
+}
+</code>
+</pre>
+```
+
+### Blockquote (Iqtibos)
+
+**`<blockquote>` tegi** - katta iqtibos:
+```html
+<blockquote cite="https://example.com">
+    <p>Bilim - kuchdir.</p>
+    <footer>— Francis Bacon</footer>
+</blockquote>
+```
+
+**`<q>` tegi** - qisqa iqtibos (inline):
+```html
+<p>U dedi: <q>Biz albatta g'alaba qilamiz</q></p>
+```
+
+### Abbreviation (Qisqartma)
+
+**`<abbr>` tegi**:
+```html
+<p><abbr title="HyperText Markup Language">HTML</abbr> veb-sahifalar yaratish tilidir</p>
+```
+
+Ustidan o'tganda to'liq nomi ko'rsatiladi
+
+### Address (Manzil)
+
+**`<address>` tegi**:
+```html
+<address>
+    Yozuvchi: Ali Valiyev<br>
+    Email: <a href="mailto:ali@example.com">ali@example.com</a><br>
+    Manzil: Toshkent, O'zbekiston
+</address>
+```
+
+### Maxsus belgilar (HTML Entities)
+
+Ba'zi belgilar HTML da maxsus ma'noga ega. Ularni ko'rsatish uchun entities ishlatiladi:
+
+```html
+&lt;    <    (less than)
+&gt;    >    (greater than)
+&amp;   &    (ampersand)
+&quot;  "    (quote)
+&apos;  '    (apostrophe)
+&nbsp;       (non-breaking space - bo'sh joy)
+&copy;  ©    (copyright)
+&reg;   ®    (registered)
+&trade; ™    (trademark)
+```
+
+**Misol**:
+```html
+<p>HTML teglar &lt;p&gt; va &lt;div&gt; bilan boshlanadi</p>
+<p>&copy; 2026 Kompaniya nomi</p>
+```
+
+### Semantic HTML
+
+**Semantic (Ma'noli)** teglar - mazmunini bildiradi
+
+**Yaxshi** ✅:
+```html
+<strong>Muhim xabar</strong>
+<em>Urg'ulangan so'z</em>
+```
+
+**Yomon** ❌:
+```html
+<b>Muhim xabar</b>  <!-- Faqat ko'rinish -->
+<i>Urg'ulangan so'z</i>  <!-- Ma'nosiz -->
+```
+
+**Nima uchun muhim?**
+- SEO yaxshilanadi
+- Screen reader lar tushunadi
+- Kod tushunarli bo'ladi
+- Accessibility yaxshilanadi
+
+## Dars uchun vazifa
+
+1. Quyidagi HTML sahifani yarating:
+```html
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Mening blog postim</title>
+</head>
+<body>
+    <h1>Blog sarlavhasi</h1>
+    <h2>Bo'lim 1</h2>
+    <p>Paragraf matni...</p>
+    <h3>Kichik bo'lim</h3>
+    <p>Batafsil ma'lumot...</p>
+</body>
+</html>
+```
+
+2. Barcha formatlash teglarini sinab ko'ring:
+   - `<strong>`, `<em>`, `<mark>`
+   - `<sub>`, `<sup>`
+   - `<code>`, `<pre>`
+
+3. Maxsus belgilar bilan jumla tuzing:
+   - Copyright belgisi
+   - < va > belgilari
+   - &nbsp; dan foydalanib
+
+## Uyga vazifa
+
+1. **Maqola sahifasi** yarating:
+   - Sarlavha (`<h1>`)
+   - Muallif (`<address>`)
+   - Kirish paragraf
+   - 3 ta bo'lim (`<h2>`)
+   - Har bir bo'limda 2-3 paragraf
+   - Iqtibos (`<blockquote>`)
+   - Qisqartma (`<abbr>`)
+   - Bo'limlar orasida `<hr>`
+
+2. **Matematika sahifasi**:
+   - Formulalar: H₂O, x², aⁿ
+   - Subscript va Superscript ishlatib
+   - Kamida 5 ta misol
+
+3. **Kod namuna sahifasi**:
+   - `<pre>` va `<code>` ishlatib
+   - 3 ta kod namunasi (Python, HTML, CSS)
+   - To'g'ri formatlangan
+
+4. Quyidagi matnni HTML ga o'giring:
+
+```
+Frontend Development
+
+Frontend development - veb-saytning foydalanuvchi ko'radigan qismini yaratish. Bu HTML, CSS va JavaScript texnologiyalaridan foydalanadi.
+
+Asosiy texnologiyalar:
+- HTML - tuzilma
+- CSS - dizayn  
+- JavaScript - interaktivlik
+
+"Yaxshi frontend developer bo'lish uchun asos mustahkam bo'lishi kerak" - Experienced Developer
+
+© 2026 IT Academy
+```
+
+5. `<b>` va `<strong>` ning farqini tushuntiring. Qachon qaysi birini ishlatish kerak?
+
+6. Semantic HTML ning afzalliklarini 5 ta bandda yozing

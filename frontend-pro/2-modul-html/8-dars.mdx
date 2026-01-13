@@ -1,0 +1,526 @@
+---
+title: "HTML Semantic elementlar"
+description: "Semantic HTML va modern veb-sahifa tuzilmasi"
+---
+
+## TODO
+- Semantic HTML ni tushunish
+- Asosiy semantic elementlarni bilish
+- Zamonaviy sahifa strukturasini o'rganish
+
+## Dars mazmuni
+
+### Semantic HTML nima?
+
+**Semantic (Ma'noli)** - element nomi uning maqsadini bildiradi.
+
+**Non-semantic** (Ma'nosiz):
+```html
+<div>Navigation</div>
+<div>Article</div>
+<div>Footer</div>
+```
+
+**Semantic** (Ma'noli):
+```html
+<nav>Navigation</nav>
+<article>Article</article>
+<footer>Footer</footer>
+```
+
+**Nima uchun muhim?**
+- SEO yaxshilanadi
+- Accessibility (nogironlar uchun)
+- Kod tushunarli
+- Maintenance oson
+
+### Asosiy Semantic elementlar
+
+#### `<header>` - Sarlavha
+
+**Sahifa yoki bo'lim sarlavhasi**:
+
+```html
+<header>
+    <h1>Website nomi</h1>
+    <nav>
+        <a href="/">Bosh sahifa</a>
+        <a href="/about">Biz haqimizda</a>
+    </nav>
+</header>
+```
+
+#### `<nav>` - Navigatsiya
+
+**Asosiy navigatsiya havolalari**:
+
+```html
+<nav>
+    <ul>
+        <li><a href="/">Bosh sahifa</a></li>
+        <li><a href="/about">Biz haqimizda</a></li>
+        <li><a href="/contact">Aloqa</a></li>
+    </ul>
+</nav>
+```
+
+#### `<main>` - Asosiy kontent
+
+**Sahifaning asosiy mazmuni**:
+
+```html
+<main>
+    <h1>Sahifa sarlavhasi</h1>
+    <p>Asosiy kontent...</p>
+</main>
+```
+
+**Qoida**: Sahifada faqat **bitta** `<main>` bo'lishi kerak!
+
+#### `<section>` - Bo'lim
+
+**Ma'noli bo'lim**:
+
+```html
+<section>
+    <h2>Xizmatlar</h2>
+    <p>Bizning xizmatlarimiz...</p>
+</section>
+
+<section>
+    <h2>Portfolio</h2>
+    <p>Bizning ishlar...</p>
+</section>
+```
+
+#### `<article>` - Mustaqil kontent
+
+**O'z-o'zidan ma'noga ega kontent**:
+
+```html
+<article>
+    <h2>Maqola sarlavhasi</h2>
+    <p>Muallif: Ali Valiyev</p>
+    <p>Maqola matni...</p>
+</article>
+```
+
+**Misol**: Blog posti, yangilik, sharh
+
+#### `<aside>` - Yon kontent
+
+**Qo'shimcha ma'lumot**:
+
+```html
+<aside>
+    <h3>Teglar</h3>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ul>
+</aside>
+```
+
+**Misol**: Sidebar, reklama, teglar
+
+#### `<footer>` - Pastki qism
+
+**Sahifa pastki qismi**:
+
+```html
+<footer>
+    <p>&copy; 2026 Kompaniya nomi</p>
+    <nav>
+        <a href="/privacy">Maxfiylik</a>
+        <a href="/terms">Shartlar</a>
+    </nav>
+</footer>
+```
+
+### Qo'shimcha semantic elementlar
+
+#### `<figure>` va `<figcaption>`
+
+**Rasm va tavsifi**:
+
+```html
+<figure>
+    <img src="chart.png" alt="Sotish statistikasi">
+    <figcaption>2024-yil sotish statistikasi</figcaption>
+</figure>
+```
+
+#### `<time>` - Vaqt
+
+```html
+<article>
+    <h2>Yangilik sarlavhasi</h2>
+    <time datetime="2026-01-13">13-yanvar, 2026</time>
+    <p>Yangilik matni...</p>
+</article>
+```
+
+#### `<mark>` - Belgilangan matn
+
+```html
+<p>Bu <mark>muhim</mark> ma'lumot</p>
+```
+
+#### `<details>` va `<summary>`
+
+**Ochiluvchi kontent**:
+
+```html
+<details>
+    <summary>Ko'proq ma'lumot</summary>
+    <p>Bu yashirin kontent. Bosing va ochiladi.</p>
+</details>
+```
+
+### Zamonaviy sahifa strukturasi
+
+**To'liq misol**:
+
+```html
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening sayit</title>
+</head>
+<body>
+    <header>
+        <h1>Website Logo</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Bosh sahifa</a></li>
+                <li><a href="/about">Biz haqimizda</a></li>
+                <li><a href="/services">Xizmatlar</a></li>
+                <li><a href="/contact">Aloqa</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero">
+            <h2>Xush kelibsiz!</h2>
+            <p>Bizning professional xizmatlarimiz bilan tanishing</p>
+        </section>
+
+        <section id="services">
+            <h2>Xizmatlarimiz</h2>
+            <article>
+                <h3>Veb dizayn</h3>
+                <p>Zamonaviy va responsive veb-saytlar</p>
+            </article>
+            <article>
+                <h3>Veb dasturlash</h3>
+                <p>Kuchli va tez veb ilovalar</p>
+            </article>
+        </section>
+
+        <section id="about">
+            <h2>Biz haqimizda</h2>
+            <p>Biz professional jamoamiz...</p>
+            <aside>
+                <h3>Fun Fact</h3>
+                <p>5 yildan ortiq tajriba</p>
+            </aside>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Mening sayit. Barcha huquqlar himoyalangan.</p>
+        <nav>
+            <a href="/privacy">Maxfiylik siyosati</a>
+            <a href="/terms">Foydalanish shartlari</a>
+        </nav>
+    </footer>
+</body>
+</html>
+```
+
+### Blog sahifasi strukturasi
+
+```html
+<main>
+    <article>
+        <header>
+            <h1>Blog post sarlavhasi</h1>
+            <p>
+                Muallif: <strong>Ali Valiyev</strong> | 
+                <time datetime="2026-01-13">13-yanvar, 2026</time>
+            </p>
+        </header>
+
+        <section>
+            <h2>Kirish</h2>
+            <p>Blog post kirish qismi...</p>
+        </section>
+
+        <section>
+            <h2>Asosiy qism</h2>
+            <p>Blog post asosiy matni...</p>
+            
+            <figure>
+                <img src="example.jpg" alt="Misol rasm">
+                <figcaption>Rasm tavsifi</figcaption>
+            </figure>
+        </section>
+
+        <footer>
+            <p>Teglar: <a href="/tag/html">HTML</a>, <a href="/tag/css">CSS</a></p>
+        </footer>
+    </article>
+
+    <aside>
+        <section>
+            <h3>Oxirgi postlar</h3>
+            <ul>
+                <li><a href="/post1">Post 1</a></li>
+                <li><a href="/post2">Post 2</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Kategoriyalar</h3>
+            <ul>
+                <li><a href="/category/web">Veb dasturlash</a></li>
+                <li><a href="/category/design">Dizayn</a></li>
+            </ul>
+        </section>
+    </aside>
+</main>
+```
+
+### Section vs Article vs Div
+
+**`<section>`**:
+- Tematik guruhlash
+- Odatda sarlavhali
+- Umumiy bo'lim
+
+**`<article>`**:
+- Mustaqil kontent
+- O'z-o'zida ma'noga ega
+- Qayta foydalanish mumkin
+
+**`<div>`**:
+- Ma'nosiz konteyner
+- Faqat styling uchun
+- Oxirgi chora
+
+**Qachon nima ishlatish**:
+
+```html
+<!-- Section - Tematik bo'lim -->
+<section id="news">
+    <h2>Yangiliklar</h2>
+    <!-- Yangiliklar -->
+</section>
+
+<!-- Article - Mustaqil kontent -->
+<article>
+    <h2>Yangilik sarlavhasi</h2>
+    <p>Yangilik matni...</p>
+</article>
+
+<!-- Div - Faqat styling -->
+<div class="container">
+    <div class="row">
+        <div class="col">Kontent</div>
+    </div>
+</div>
+```
+
+### Header vs h1-h6
+
+**`<header>` element** - konteyner:
+```html
+<header>
+    <h1>Sarlavha</h1>
+    <nav>...</nav>
+</header>
+```
+
+**`<h1>` - `<h6>` teglar** - sarlavha matnlari:
+```html
+<h1>Eng katta sarlavha</h1>
+<h2>2-darajali sarlavha</h2>
+```
+
+### Accessibility (Kirish imkoniyati)
+
+**ARIA landmarks**:
+
+```html
+<header role="banner">
+    <h1>Website</h1>
+</header>
+
+<nav role="navigation">
+    <ul>...</ul>
+</nav>
+
+<main role="main">
+    <article>...</article>
+</main>
+
+<aside role="complementary">
+    <section>...</section>
+</aside>
+
+<footer role="contentinfo">
+    <p>&copy; 2026</p>
+</footer>
+```
+
+### Skip Navigation
+
+**Klaviatura foydalanuvchilari uchun**:
+
+```html
+<body>
+    <a href="#main" class="skip-link">O'tib ketish</a>
+    
+    <header>
+        <nav>...</nav>
+    </header>
+    
+    <main id="main">
+        <h1>Asosiy kontent</h1>
+    </main>
+</body>
+```
+
+```css
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: white;
+    padding: 8px;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+```
+
+### Best Practices
+
+**1. To'g'ri tartib**:
+```html
+<body>
+    <header>...</header>
+    <nav>...</nav>
+    <main>...</main>
+    <footer>...</footer>
+</body>
+```
+
+**2. Bitta main**:
+```html
+<!-- To'g'ri -->
+<main>Asosiy kontent</main>
+
+<!-- Noto'g'ri -->
+<main>Kontent 1</main>
+<main>Kontent 2</main>
+```
+
+**3. Semantic uyashanish**:
+```html
+<article>
+    <header>
+        <h2>Sarlavha</h2>
+    </header>
+    <section>
+        <p>Kontent</p>
+    </section>
+    <footer>
+        <p>Metadata</p>
+    </footer>
+</article>
+```
+
+## Dars uchun vazifa
+
+1. Oddiy sahifa strukturasi yarating:
+   - header (logo va nav)
+   - main (2 ta section)
+   - footer
+
+2. Blog post yarating:
+   - article element
+   - header, section, footer ichida
+   - time va figure elementlari bilan
+
+3. Sidebar yarating:
+   - aside element
+   - 3 ta section ichida
+   - Har birida ro'yxat
+
+## Uyga vazifa
+
+1. **To'liq landing page** yarating:
+   - Semantic elementlar ishlatib
+   - header (nav bilan)
+   - main (4-5 ta section)
+   - aside (sidebar)
+   - footer (links bilan)
+   - figure, time, details ishlatib
+
+2. **Blog sahifa** yarating:
+   - 3 ta article (blog post)
+   - Har birida header, content, footer
+   - Sidebar (aside) da:
+     * Oxirgi postlar
+     * Kategoriyalar
+     * Teglar buluti
+
+3. **Portfolio sahifa**:
+   - header (ism va nav)
+   - section "About me"
+   - section "Projects" (3 ta article ichida)
+   - section "Skills"
+   - aside "Contact info"
+   - footer
+
+4. Quyidagi elementlarni taqqoslang:
+   - section vs article vs div
+   - header element vs h1 teg
+   - nav vs ul/li
+   - aside vs div
+
+5. Real veb-saytlarni tahlil qiling:
+   - 3 ta mashhur sayt oching
+   - DevTools (F12) da HTML ni ko'ring
+   - Qanday semantic elementlar ishlatilgan?
+   - To'g'ri ishlatilganmi?
+
+6. Non-semantic dan Semantic ga o'giring:
+```html
+<!-- Bu kodniسemantic qiling -->
+<div class="header">
+    <div class="logo">Website</div>
+    <div class="menu">
+        <div><a href="/">Home</a></div>
+        <div><a href="/about">About</a></div>
+    </div>
+</div>
+<div class="content">
+    <div class="post">
+        <div class="title">Post Title</div>
+        <div class="text">Post content...</div>
+    </div>
+</div>
+<div class="footer">
+    <div>Copyright 2026</div>
+</div>
+```
+
+7. Semantic HTML ning 7 ta afzalligini yozing va har biriga misol keltiring

@@ -1,0 +1,627 @@
+---
+title: "CSS Grid va Positioning"
+description: "Grid Layout va Element joylashuvi"
+---
+
+## TODO
+- CSS Grid asoslarini o'rganish
+- Positioning xususiyatlarini bilish
+- Murakkab layout'lar yaratish
+
+## Dars mazmuni
+
+### CSS Grid
+
+**Grid** - 2D layout tizimi (qator va ustun).
+
+**Grid yaratish**:
+
+```css
+.container {
+    display: grid;
+}
+```
+
+#### Grid Template
+
+**Ustunlar**:
+
+```css
+.container {
+    display: grid;
+    grid-template-columns: 200px 200px 200px;
+}
+```
+
+**Qatorlar**:
+
+```css
+.container {
+    display: grid;
+    grid-template-rows: 100px 200px;
+}
+```
+
+#### fr (fraction) birligi
+
+**Bo'sh joyni taqsimlash**:
+
+```css
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+}
+/* 1:2:1 nisbatda */
+```
+
+**Aralash**:
+```css
+grid-template-columns: 200px 1fr 200px;
+/* 200px - qolgan joy - 200px */
+```
+
+#### repeat()
+
+**Takrorlash**:
+
+```css
+/* 3 ta 200px ustun */
+grid-template-columns: repeat(3, 200px);
+
+/* 4 ta 1fr */
+grid-template-columns: repeat(4, 1fr);
+
+/* Naqsh */
+grid-template-columns: repeat(2, 1fr 2fr);
+/* 1fr 2fr 1fr 2fr */
+```
+
+#### auto-fit va auto-fill
+
+**Responsive grid**:
+
+```css
+/* Auto-fit - bo'sh joy cho'ziladi */
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+/* Auto-fill - bo'sh joy qoladi */
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+```
+
+**minmax()**:
+```css
+/* 200px dan 300px gacha */
+grid-template-columns: repeat(3, minmax(200px, 300px));
+
+/* Minimal 150px, maksimal to'liq */
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+```
+
+#### gap
+
+**Oraliq**:
+
+```css
+.container {
+    display: grid;
+    gap: 20px;
+}
+```
+
+**Alohida**:
+```css
+row-gap: 20px;     /* Qatorlar */
+column-gap: 10px;  /* Ustunlar */
+```
+
+#### Grid Lines
+
+**Chiziqlar bilan joylash**:
+
+```css
+.item {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+```
+
+**Qisqa yozuv**:
+```css
+.item {
+    grid-column: 1 / 3;  /* 1-chiziqdan 3-chiziqgacha */
+    grid-row: 1 / 2;
+}
+```
+
+**span**:
+```css
+.item {
+    grid-column: span 2;  /* 2 ta ustun egalla */
+    grid-row: span 3;     /* 3 ta qator egalla */
+}
+```
+
+**Misol**:
+```css
+.header {
+    grid-column: 1 / -1;  /* Hammasi */
+}
+
+.sidebar {
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+}
+
+.content {
+    grid-column: 2 / -1;
+    grid-row: 2 / 3;
+}
+
+.footer {
+    grid-column: 1 / -1;
+}
+```
+
+#### Grid Areas
+
+**Nom bilan joylash**:
+
+```css
+.container {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "sidebar content content"
+        "footer footer footer";
+    grid-template-columns: 200px 1fr 1fr;
+}
+
+.header { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.content { grid-area: content; }
+.footer { grid-area: footer; }
+```
+
+**Bo'sh joy**:
+```css
+grid-template-areas:
+    "header header ."
+    "sidebar content content"
+    "footer footer footer";
+```
+
+#### Hizalash
+
+**justify-items** (gorizontal):
+```css
+.container {
+    justify-items: center;  /* start, end, center, stretch */
+}
+```
+
+**align-items** (vertikal):
+```css
+.container {
+    align-items: center;
+}
+```
+
+**justify-content** (to'liq grid gorizontal):
+```css
+.container {
+    justify-content: center;
+}
+```
+
+**align-content** (to'liq grid vertikal):
+```css
+.container {
+    align-content: center;
+}
+```
+
+**Bitta item**:
+```css
+.item {
+    justify-self: center;
+    align-self: end;
+}
+```
+
+#### Grid misollar
+
+**Equal Columns**:
+```css
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+```
+
+**Responsive Grid**:
+```css
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+```
+
+**12-Column Grid**:
+```css
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.item-6 { grid-column: span 6; }
+.item-4 { grid-column: span 4; }
+.item-3 { grid-column: span 3; }
+```
+
+**Holy Grail Layout**:
+```css
+.container {
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "nav content aside"
+        "footer footer footer";
+    grid-template-columns: 200px 1fr 200px;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+```
+
+**Masonry Layout**:
+```css
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 10px;  /* Kichik qatorlar */
+}
+
+.item-tall { grid-row: span 20; }
+.item-short { grid-row: span 10; }
+```
+
+### CSS Positioning
+
+**5 ta position qiymati**:
+1. `static` - default
+2. `relative` - o'z joyiga nisbatan
+3. `absolute` - container ga nisbatan
+4. `fixed` - viewport ga nisbatan
+5. `sticky` - scroll ga bog'liq
+
+#### static (default)
+
+**Oddiy oqim**:
+
+```css
+.element {
+    position: static;  /* Default */
+}
+```
+
+#### relative
+
+**O'z joyidan siljitish**:
+
+```css
+.element {
+    position: relative;
+    top: 20px;    /* Yuqoridan 20px */
+    left: 30px;   /* Chapdan 30px */
+}
+```
+
+**Xususiyatlari**:
+- Asl joyni egallab turadi
+- Boshqa elementlar harakat qilmaydi
+- top, right, bottom, left ishlatsa bo'ladi
+
+#### absolute
+
+**Container ga nisbatan**:
+
+```css
+.parent {
+    position: relative;  /* Container */
+}
+
+.child {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+```
+
+**Xususiyatlari**:
+- Asl joydan chiqadi
+- Eng yaqin positioned container ga nisbatan
+- Agar yo'q bo'lsa, body ga nisbatan
+
+**Misol - Badge**:
+```css
+.card {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+```
+
+#### fixed
+
+**Viewport ga nisbatan**:
+
+```css
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+```
+
+**Xususiyatlari**:
+- Scroll qilganda ham o'rnida
+- Viewport ga nisbatan
+- Asl joydan chiqadi
+
+**Misol - Sticky Header**:
+```css
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Body ga padding qo'shish */
+body {
+    padding-top: 60px;  /* navbar balandligi */
+}
+```
+
+#### sticky
+
+**Scroll ga bog'liq**:
+
+```css
+.sidebar {
+    position: sticky;
+    top: 20px;
+}
+```
+
+**Xususiyatlari**:
+- Relative + fixed kombinatsiya
+- Scroll qilguncha relative
+- Scroll qilsa fixed
+
+**Misol - Sticky Navigation**:
+```css
+.nav {
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+```
+
+#### z-index
+
+**Ustma-ust kelganda qaysi biri tepada**:
+
+```css
+.element1 {
+    position: relative;
+    z-index: 1;
+}
+
+.element2 {
+    position: relative;
+    z-index: 2;  /* Tepada */
+}
+```
+
+**Qoidalar**:
+- Faqat positioned elementlarda ishlaydi
+- Katta son tepada
+- Default: `z-index: auto` (0 ga teng)
+
+**Misol - Modal**:
+```css
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    z-index: 101;
+}
+```
+
+### Amaliy misollar
+
+#### Centered Modal
+
+```css
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+```
+
+#### Sticky Sidebar
+
+```css
+.layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+}
+
+.sidebar {
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+```
+
+#### Corner Badge
+
+```css
+.card {
+    position: relative;
+}
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: red;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+```
+
+#### Full Screen Overlay
+
+```css
+.overlay {
+    position: fixed;
+    inset: 0;  /* top: 0; right: 0; bottom: 0; left: 0; */
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+```
+
+## Dars uchun vazifa
+
+1. Grid Layout yarating:
+   - 3x3 grid
+   - gap: 20px
+   - Birinchi item: span 2 ustun
+
+2. Responsive Grid:
+   - auto-fit
+   - minmax(200px, 1fr)
+   - 5 ta card
+
+3. Positioning:
+   - Card yarating
+   - Badge absolute position
+   - Hover effect
+
+4. Sticky Header:
+   - Fixed navbar
+   - Body padding
+   - Logo va menu
+
+## Uyga vazifa
+
+1. **Dashboard Layout**:
+   - Grid Areas ishlatib
+   - Header (to'liq kenglik)
+   - Sidebar (200px)
+   - Main content
+   - Footer (to'liq kenglik)
+
+2. **Photo Gallery**:
+   - repeat(auto-fit, minmax(250px, 1fr))
+   - gap: 15px
+   - Hover effect (scale)
+
+3. **Product Card**:
+   - Relative position
+   - Badge absolute (top-right)
+   - "Sale" yoki "New"
+   - Hover shadow
+
+4. **Modal Window**:
+   - Fixed overlay (rgba background)
+   - Centered modal
+   - Close button (absolute top-right)
+   - z-index to'g'ri
+
+5. **Sticky Navigation**:
+   - sticky position
+   - top: 0
+   - Shadow scroll qilganda
+   - Logo va linklar
+
+6. **12-Column Grid System**:
+   - repeat(12, 1fr)
+   - Turli span'lar (.col-6, .col-4, .col-3)
+   - Responsive (1 ustun mobilda)
+
+7. **Masonry-style Layout**:
+   - grid-auto-rows: 10px
+   - Har xil balandlikdagi itemlar
+   - span ishlatib
+
+8. Quyidagi savolarga javob bering:
+   - Grid va Flexbox qachon ishlatiladi?
+   - absolute va fixed farqi?
+   - sticky qanday ishlaydi?
+   - z-index qachon kerak?
+
+9. **Pinterest-style Grid** yarating:
+   - auto-fit minmax
+   - Har xil balandlikdagi rasmlar
+   - Hover effect
+   - Gap
+
+10. Grid va Positioning yordamida to'liq web page yarating:
+    - Sticky header
+    - Hero section (2 ustun)
+    - Features grid (3 ustun)
+    - Testimonials (absolute badges)
+    - Footer (4 ustun)

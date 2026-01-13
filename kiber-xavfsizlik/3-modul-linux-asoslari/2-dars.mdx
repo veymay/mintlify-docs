@@ -1,0 +1,740 @@
+---
+title: "Linux Shell Scripting"
+description: "Bash skripting va avtomatlashtirish"
+---
+
+## TODO
+- Shell scripting asoslarini o'rganish
+- O'zgaruvchilar va shartli operatorlar
+- Avtomatlashtirish skriiptlari yozish
+
+## Dars mazmuni
+
+### Shell Scripting nima?
+
+**Shell Script** - buyruqlar ketma-ketligini fayl sifatida saqlash va bajarish.
+
+**Afzalliklari**:
+- Takrorlanadigan vazifalarni avtomatlashtirish
+- Tizim administratsiyasi
+- Batch operatsiyalar
+- DevOps vazifalar
+
+### Birinchi skript
+
+**hello.sh** yaratish:
+
+```bash
+#!/bin/bash
+# Bu birinchi skriptimiz
+
+echo "Salom, Dunyo!"
+echo "Bugun: $(date)"
+echo "Foydalanuvchi: $USER"
+```
+
+**Ishga tushirish**:
+
+```bash
+# 1. Ruxsat berish
+chmod +x hello.sh
+
+# 2. Ishga tushirish
+./hello.sh
+```
+
+### Shebang (#!)
+
+**Birinchi qator** - qaysi interpreter ishlatish:
+
+```bash
+#!/bin/bash           # Bash
+#!/bin/sh             # POSIX shell
+#!/usr/bin/env python3  # Python
+#!/usr/bin/env node   # Node.js
+```
+
+### O'zgaruvchilar
+
+**E'lon qilish**:
+
+```bash
+#!/bin/bash
+
+# O'zgaruvchilar
+name="Ali"
+age=25
+city="Toshkent"
+
+# Chiqarish
+echo "Ism: $name"
+echo "Yosh: $age"
+echo "Shahar: $city"
+```
+
+**Qoidalar**:
+- Bo'sh joy yo'q: `name="Ali"` ✅ `name = "Ali"` ❌
+- Katta-kichik harf farqi bor
+- Raqam bilan boshlanmaydi
+- Faqat harf, raqam, _ ishlatiladi
+
+#### O'zgaruvchi turlari
+
+**Oddiy string**:
+```bash
+name="Ali"
+echo $name        # Ali
+echo "$name"      # Ali (tavsiya etiladi)
+echo '$name'      # $name (literal)
+```
+
+**Command substitution**:
+```bash
+current_date=$(date)
+user=$(whoami)
+files=$(ls | wc -l)
+
+echo "Bugun: $current_date"
+echo "Foydalanuvchi: $user"
+echo "Fayllar soni: $files"
+```
+
+**Read-only**:
+```bash
+readonly PI=3.14159
+PI=3.14    # Xato!
+```
+
+#### Foydalanuvchidan kiritish
+
+**read** buyrug'i:
+
+```bash
+#!/bin/bash
+
+echo "Ismingizni kiriting:"
+read name
+
+echo "Yoshingizni kiriting:"
+read age
+
+echo "Salom, $name! Siz $age yoshdasiz."
+```
+
+**Bir qatorda**:
+```bash
+read -p "Ismingiz: " name
+echo "Salom, $name!"
+```
+
+**Parol** (yashirin):
+```bash
+read -sp "Parol: " password
+echo
+echo "Parol uzunligi: ${#password}"
+```
+
+### Parametrlar
+
+**Script parametrlari**:
+
+```bash
+#!/bin/bash
+# ./script.sh arg1 arg2 arg3
+
+echo "Script nomi: $0"
+echo "Birinchi parametr: $1"
+echo "Ikkinchi parametr: $2"
+echo "Uchunchi parametr: $3"
+echo "Barcha parametrlar: $@"
+echo "Parametrlar soni: $#"
+```
+
+**Ishlatish**:
+```bash
+./script.sh Hello World 123
+# $0 = ./script.sh
+# $1 = Hello
+# $2 = World
+# $3 = 123
+```
+
+**Default qiymat**:
+```bash
+name=${1:-"Guest"}      # Agar $1 bo'sh bo'lsa, "Guest"
+age=${2:-18}
+
+echo "Salom, $name! Yoshingiz: $age"
+```
+
+### Arifmetik
+
+**Hisoblash**:
+
+```bash
+#!/bin/bash
+
+# Method 1: $(( ))
+a=10
+b=5
+
+sum=$((a + b))
+diff=$((a - b))
+prod=$((a * b))
+quot=$((a / b))
+mod=$((a % b))
+
+echo "Yig'indi: $sum"
+echo "Ayirma: $diff"
+echo "Ko'paytma: $prod"
+echo "Bo'linma: $quot"
+echo "Qoldiq: $mod"
+```
+
+**let buyrug'i**:
+```bash
+let sum=10+5
+let "sum = 10 + 5"
+echo $sum    # 15
+```
+
+**expr buyrug'i** (eski):
+```bash
+sum=$(expr 10 + 5)
+echo $sum    # 15
+```
+
+**bc - floating point**:
+```bash
+result=$(echo "scale=2; 10 / 3" | bc)
+echo $result    # 3.33
+```
+
+### Shartli operatorlar
+
+#### if statement
+
+**Asosiy sintaksis**:
+
+```bash
+#!/bin/bash
+
+age=20
+
+if [ $age -ge 18 ]; then
+    echo "Voyaga yetgan"
+fi
+```
+
+**if-else**:
+
+```bash
+#!/bin/bash
+
+age=16
+
+if [ $age -ge 18 ]; then
+    echo "Voyaga yetgan"
+else
+    echo "Voyaga yetmagan"
+fi
+```
+
+**if-elif-else**:
+
+```bash
+#!/bin/bash
+
+ball=85
+
+if [ $ball -ge 90 ]; then
+    echo "A"
+elif [ $ball -ge 80 ]; then
+    echo "B"
+elif [ $ball -ge 70 ]; then
+    echo "C"
+else
+    echo "F"
+fi
+```
+
+#### Test operatorlari
+
+**Raqamlarni taqqoslash**:
+```bash
+[ $a -eq $b ]    # Equal (teng)
+[ $a -ne $b ]    # Not equal (teng emas)
+[ $a -gt $b ]    # Greater than (katta)
+[ $a -lt $b ]    # Less than (kichik)
+[ $a -ge $b ]    # Greater or equal (katta yoki teng)
+[ $a -le $b ]    # Less or equal (kichik yoki teng)
+```
+
+**String taqqoslash**:
+```bash
+[ "$a" = "$b" ]    # Teng
+[ "$a" != "$b" ]   # Teng emas
+[ -z "$a" ]        # Bo'sh (zero length)
+[ -n "$a" ]        # Bo'sh emas (non-zero)
+```
+
+**Fayl tekshirish**:
+```bash
+[ -f file.txt ]    # Fayl mavjud
+[ -d folder ]      # Papka mavjud
+[ -e file ]        # Mavjud (fayl yoki papka)
+[ -r file ]        # O'qish mumkin
+[ -w file ]        # Yozish mumkin
+[ -x file ]        # Bajarish mumkin
+[ -s file ]        # Bo'sh emas (size > 0)
+```
+
+**Mantiqiy operatorlar**:
+```bash
+[ $a -gt 0 ] && [ $a -lt 10 ]    # AND
+[ $a -lt 0 ] || [ $a -gt 10 ]    # OR
+[ ! -f file.txt ]                 # NOT
+```
+
+**[[ ]] - yaxshiroq**:
+```bash
+[[ $age -ge 18 && $age -le 65 ]]
+[[ $name == "Ali" || $name == "Vali" ]]
+[[ $file == *.txt ]]    # Pattern matching
+```
+
+### case statement
+
+**Switch kabi**:
+
+```bash
+#!/bin/bash
+
+read -p "Tanlang (1-4): " choice
+
+case $choice in
+    1)
+        echo "Birinchi variant"
+        ;;
+    2)
+        echo "Ikkinchi variant"
+        ;;
+    3|4)
+        echo "Uchinchi yoki To'rtinchi"
+        ;;
+    *)
+        echo "Noto'g'ri tanlov"
+        ;;
+esac
+```
+
+**Pattern matching**:
+```bash
+case $file in
+    *.txt)
+        echo "Text fayl"
+        ;;
+    *.jpg|*.png)
+        echo "Rasm fayl"
+        ;;
+    *.sh)
+        echo "Shell skript"
+        ;;
+    *)
+        echo "Noma'lum"
+        ;;
+esac
+```
+
+### Sikllar (Loops)
+
+#### for loop
+
+**Range**:
+```bash
+#!/bin/bash
+
+for i in 1 2 3 4 5
+do
+    echo "Raqam: $i"
+done
+```
+
+**{} sintaksisi**:
+```bash
+for i in {1..10}
+do
+    echo $i
+done
+
+# 2 qadam
+for i in {0..20..2}
+do
+    echo $i
+done
+```
+
+**C-style**:
+```bash
+for ((i=1; i<=10; i++))
+do
+    echo $i
+done
+```
+
+**Fayllar ustida**:
+```bash
+for file in *.txt
+do
+    echo "Fayl: $file"
+done
+```
+
+**Parametrlar ustida**:
+```bash
+#!/bin/bash
+# ./script.sh arg1 arg2 arg3
+
+for arg in "$@"
+do
+    echo "Argument: $arg"
+done
+```
+
+#### while loop
+
+```bash
+#!/bin/bash
+
+i=1
+while [ $i -le 5 ]
+do
+    echo $i
+    ((i++))
+done
+```
+
+**Cheksiz loop**:
+```bash
+while true
+do
+    echo "Ishlayapman..."
+    sleep 1
+done
+```
+
+**Fayl o'qish**:
+```bash
+while read line
+do
+    echo "Qator: $line"
+done < file.txt
+```
+
+#### until loop
+
+**while ning teskarisi**:
+
+```bash
+#!/bin/bash
+
+i=1
+until [ $i -gt 5 ]
+do
+    echo $i
+    ((i++))
+done
+```
+
+### Funksiyalar
+
+**Oddiy funksiya**:
+
+```bash
+#!/bin/bash
+
+greet() {
+    echo "Salom, Dunyo!"
+}
+
+# Chaqirish
+greet
+```
+
+**Parametrlar bilan**:
+
+```bash
+#!/bin/bash
+
+greet() {
+    echo "Salom, $1!"
+}
+
+greet "Ali"
+greet "Vali"
+```
+
+**Return value**:
+
+```bash
+#!/bin/bash
+
+add() {
+    local sum=$(($1 + $2))
+    echo $sum
+}
+
+result=$(add 10 20)
+echo "Natija: $result"
+```
+
+**Local o'zgaruvchilar**:
+
+```bash
+#!/bin/bash
+
+my_function() {
+    local var="Local"
+    echo "Funktsiya ichida: $var"
+}
+
+var="Global"
+my_function
+echo "Funktsiya tashqarida: $var"
+```
+
+### Array (Massiv)
+
+**Yaratish**:
+
+```bash
+#!/bin/bash
+
+# Method 1
+fruits=("Olma" "Nok" "Uzum")
+
+# Method 2
+fruits[0]="Olma"
+fruits[1]="Nok"
+fruits[2]="Uzum"
+
+# Chiqarish
+echo ${fruits[0]}      # Birinchi element
+echo ${fruits[@]}      # Barcha elementlar
+echo ${#fruits[@]}     # Uzunlik
+```
+
+**Iteratsiya**:
+
+```bash
+for fruit in "${fruits[@]}"
+do
+    echo "Meva: $fruit"
+done
+```
+
+**Qo'shish**:
+
+```bash
+fruits+=("Banan")
+```
+
+### Amaliy misollar
+
+#### Backup skript
+
+```bash
+#!/bin/bash
+
+# Backup papka yaratish
+backup_dir="$HOME/backups"
+mkdir -p "$backup_dir"
+
+# Bugungi sana
+date=$(date +%Y-%m-%d)
+
+# Backup fayli
+backup_file="$backup_dir/backup-$date.tar.gz"
+
+# Fayllarni siqish
+tar -czf "$backup_file" $HOME/documents
+
+echo "Backup yaratildi: $backup_file"
+```
+
+#### Tizim monitoring
+
+```bash
+#!/bin/bash
+
+echo "=== Tizim Monitoring ==="
+echo "Sana: $(date)"
+echo ""
+
+echo "=== CPU ==="
+top -bn1 | grep "Cpu(s)" | awk '{print "CPU Load: " $2 + $4 "%"}'
+echo ""
+
+echo "=== Xotira ==="
+free -h | awk 'NR==2{printf "Memory Usage: %s/%s (%.2f%%)\n", $3, $2, $3*100/$2}'
+echo ""
+
+echo "=== Disk ==="
+df -h / | awk 'NR==2{printf "Disk Usage: %s/%s (%s)\n", $3, $2, $5}'
+echo ""
+```
+
+#### Fayl konverter
+
+```bash
+#!/bin/bash
+
+# PNG -> JPG konverter
+
+if [ $# -eq 0 ]; then
+    echo "Foydalanish: $0 file.png"
+    exit 1
+fi
+
+for file in "$@"
+do
+    if [[ $file == *.png ]]; then
+        output="${file%.png}.jpg"
+        convert "$file" "$output"
+        echo "Konvert qilindi: $file -> $output"
+    else
+        echo "Xato: $file PNG emas"
+    fi
+done
+```
+
+#### Foydalanuvchi boshqarish
+
+```bash
+#!/bin/bash
+
+menu() {
+    echo "=== Foydalanuvchi Boshqaruvi ==="
+    echo "1. Foydalanuvchi qo'shish"
+    echo "2. Foydalanuvchi o'chirish"
+    echo "3. Ro'yxat"
+    echo "4. Chiqish"
+    read -p "Tanlang: " choice
+}
+
+add_user() {
+    read -p "Foydalanuvchi nomi: " username
+    sudo useradd -m -s /bin/bash "$username"
+    sudo passwd "$username"
+    echo "Foydalanuvchi qo'shildi: $username"
+}
+
+delete_user() {
+    read -p "Foydalanuvchi nomi: " username
+    sudo userdel -r "$username"
+    echo "Foydalanuvchi o'chirildi: $username"
+}
+
+list_users() {
+    echo "=== Foydalanuvchilar ==="
+    cat /etc/passwd | grep "/home" | cut -d: -f1
+}
+
+while true
+do
+    menu
+    case $choice in
+        1) add_user ;;
+        2) delete_user ;;
+        3) list_users ;;
+        4) exit 0 ;;
+        *) echo "Noto'g'ri tanlov" ;;
+    esac
+    echo ""
+    read -p "Davom ettirish uchun Enter..." 
+done
+```
+
+## Dars uchun vazifa
+
+1. Oddiy skript:
+   - Salom, ismingiz
+   - Bugungi sana
+   - chmod +x qiling
+   - Ishga tushiring
+
+2. Parametrlar bilan:
+   - 2 ta parametr
+   - Qo'shib natija
+   - ./script.sh 10 20
+
+3. If-else:
+   - Yosh so'rash
+   - 18 dan katta/kichik
+   - Natija chiqarish
+
+4. Loop:
+   - 1 dan 10 gacha
+   - Faqat juft sonlar
+   - for loop
+
+## Uyga vazifa
+
+1. **Calculator skript**:
+   - 2 ta son va operator (+,-,*,/)
+   - case statement
+   - Natija chiqarish
+
+2. **File Organizer**:
+   - Fayllarni extension bo'yicha saralash
+   - .txt -> text/
+   - .jpg -> images/
+   - .sh -> scripts/
+
+3. **System Report**:
+   - CPU, RAM, Disk
+   - Faylga yozish
+   - Har kuni avtomatik
+
+4. **Backup skript**:
+   - Papkani ziplash
+   - Sana bilan
+   - ~/backups/ ga saqlash
+
+5. Quyidagi savolarga javob bering:
+   - Shebang nima?
+   - [ ] va [[ ]] farqi?
+   - local o'zgaruvchi nima?
+   - $@ va $* farqi?
+
+6. **User Management skript**:
+   - Menu (add, delete, list)
+   - case statement
+   - sudo bilan
+
+7. **Log Analyzer**:
+   - /var/log/syslog
+   - "error" qidirish
+   - Soni va ro'yxati
+   - Faylga yozish
+
+8. **Disk Cleaner**:
+   - /tmp papka tozalash
+   - 7 kundan eski fayllar
+   - find buyrug'i
+
+9. **Password Generator**:
+   - Uzunlik parametr
+   - Random parol
+   - /dev/urandom ishlatib
+
+10. **Complete System Admin Tool**:
+    - Menu:
+      * Tizim ma'lumoti
+      * Disk holati
+      * Tarmoq holati
+      * Backup yaratish
+      * Log tahlil
+      * Chiqish
+    - Funksiyalar
+    - Formatlangan chiqarish

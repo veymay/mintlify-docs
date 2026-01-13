@@ -1,0 +1,367 @@
+---
+title: "Microsoft Office - Excel"
+description: "Excel jadvali bilan ishlash"
+---
+
+## TODO
+- Excel interfeysini o'rganish
+- Jadval yaratish va formatlash
+- Oddiy formulalar bilan ishlash
+
+## Dars mazmuni
+
+### Microsoft Excel nima?
+
+**Microsoft Excel** - elektron jadvallar (spreadsheet) bilan ishlash, hisob-kitob qilish va ma'lumotlarni tahlil qilish dasturi.
+
+**Ishlatiladi**:
+- Hisob-kitoblar
+- Byudjet rejalashtirish
+- Ma'lumotlarni saqlash va tartibga solish
+- Grafik va diagrammalar
+- Statistika va tahlil
+
+### Excel interfeysi
+
+#### Asosiy elementlar:
+
+**Cell (Hujayra)** - ma'lumot kiritiluvchi eng kichik element
+- Ustun (Column) va Qator (Row) kesishgan joy
+- Masalan: A1, B5, C10
+
+**Row (Qator)** - gorizontal, raqamlar bilan (1, 2, 3...)
+**Column (Ustun)** - vertikal, harflar bilan (A, B, C... Z, AA, AB...)
+
+**Worksheet (Ish varag'i)** - bitta varaq
+**Workbook (Ish kitobi)** - bir nechta varaqdagi fayl (.xlsx)
+
+#### Ribbon (Lenta) tablari:
+- **Home** - formatlash, qo'shish, o'chirish
+- **Insert** - jadval, grafik, rasm
+- **Page Layout** - sahifa sozlamalari
+- **Formulas** - formulalar
+- **Data** - ma'lumotlar bilan ishlash
+- **Review** - tekshirish va izoh
+- **View** - ko'rinish
+
+### Hujayralarga ma'lumot kiritish
+
+#### Ma'lumot turlari:
+
+**1. Matn (Text)**:
+```
+Ism
+Manzil
+Mahsulot nomi
+```
+
+**2. Raqam (Number)**:
+```
+100
+250.50
+-45
+```
+
+**3. Sana (Date)**:
+```
+13/01/2026
+01-Jan-2026
+```
+
+**4. Vaqt (Time)**:
+```
+14:30
+2:30 PM
+```
+
+**5. Formula**:
+```
+=A1+B1
+=SUM(A1:A10)
+```
+
+### Navigatsiya va tanlash
+
+**Harakatlanish**:
+- **O'q tugmalari** - hujayra bo'yicha
+- **Tab** - o'ngga
+- **Enter** - pastga
+- **Ctrl + Home** - A1 ga
+- **Ctrl + End** - oxirgi hujayra
+
+**Tanlash**:
+- **Bitta hujayra** - bosish
+- **Diapazon (Range)** - sudrab tanlash
+- **Ustun** - ustun harfini bosish (A, B, C)
+- **Qator** - qator raqamini bosish (1, 2, 3)
+- **Hammasi** - Ctrl + A
+
+### Formulalar
+
+**Formula** - hisoblash uchun qoida. Doim `=` belgisi bilan boshlanadi.
+
+#### Asosiy operatorlar:
+
+```excel
++ (qo'shish)        =A1+B1
+- (ayirish)         =A1-B1
+* (ko'paytirish)    =A1*B1
+/ (bo'lish)         =A1/B1
+^ (darajaga)        =A1^2
+```
+
+#### Hujayra havolasi:
+
+**Relative (Nisbiy)**: `A1`
+- Formulani ko'chirganda o'zgaradi
+
+**Absolute (Mutlaq)**: `$A$1`
+- Formulani ko'chirganda o'zgarmaydi
+- F4 tugmasi bilan
+
+**Mixed (Aralash)**: `$A1` yoki `A$1`
+- Faqat ustun yoki qator qotib qoladi
+
+#### Misollar:
+
+```excel
+=A1+B1+C1          (Uchta sonni qo'shish)
+=A1*B1             (Ikki sonni ko'paytirish)
+=(A1+B1)/2         (O'rtacha qiymat)
+=A1*10/100         (10% ni hisoblash)
+```
+
+### Funksiyalar
+
+**Funksiya** - tayyor formula.
+
+#### Asosiy funksiyalar:
+
+**1. SUM (Yig'indi)**
+```excel
+=SUM(A1:A10)       (A1 dan A10 gacha yig'indisi)
+=SUM(A1:A5,C1:C5)  (Ikki diapazon yig'indisi)
+```
+
+**2. AVERAGE (O'rtacha)**
+```excel
+=AVERAGE(A1:A10)   (O'rtacha qiymat)
+```
+
+**3. MAX va MIN (Eng katta va kichik)**
+```excel
+=MAX(A1:A10)       (Eng katta qiymat)
+=MIN(A1:A10)       (Eng kichik qiymat)
+```
+
+**4. COUNT (Sanash)**
+```excel
+=COUNT(A1:A10)     (Raqamlar sonini sanash)
+=COUNTA(A1:A10)    (Bo'sh bo'lmagan hujayralar)
+```
+
+**5. IF (Agar)**
+```excel
+=IF(A1>50,"O'tdi","Yiqildi")
+=IF(A1>=90,"A'lo",IF(A1>=70,"Yaxshi","Qoniqarsiz"))
+```
+
+**6. VLOOKUP (Vertikal qidirish)**
+```excel
+=VLOOKUP(A1, B1:D10, 2, FALSE)
+```
+
+**7. Sana funksiyalari**
+```excel
+=TODAY()           (Bugungi sana)
+=NOW()             (Hozirgi vaqt)
+=YEAR(A1)          (Yil)
+=MONTH(A1)         (Oy)
+=DAY(A1)           (Kun)
+```
+
+### Formatlash
+
+#### Raqam formatlari:
+
+**Home > Number**:
+- **General** - oddiy
+- **Number** - raqam (10, 100.50)
+- **Currency** - pul birligi ($100, so'm 1000)
+- **Accounting** - buxgalteriya
+- **Percentage** - foiz (50%)
+- **Date** - sana
+- **Time** - vaqt
+- **Text** - matn
+
+#### Hujayra formatlash:
+
+**Font**:
+- Shrift, o'lcham, rang
+- Bold, Italic, Underline
+
+**Alignment (Hizalash)**:
+- Gorizontal: Left, Center, Right
+- Vertikal: Top, Middle, Bottom
+- Merge Cells - birlashtirish
+
+**Borders (Chegaralar)**:
+- All Borders - barcha chegaralar
+- Outside Borders - tashqi
+- Top/Bottom Border
+
+**Fill Color (To'ldirish rangi)**:
+- Hujayra fon rangi
+
+### Qator va ustunlar bilan ishlash
+
+#### Qo'shish:
+- **Insert Row** - qator qo'shish
+- **Insert Column** - ustun qo'shish
+- O'ng tugma > Insert
+
+#### O'chirish:
+- **Delete Row** - qator o'chirish
+- **Delete Column** - ustun o'chirish
+- O'ng tugma > Delete
+
+#### O'lcham o'zgartirish:
+- **Row Height** - qator balandligi
+- **Column Width** - ustun kengligi
+- Ikki marta bosish - auto fit
+
+#### Yashirish:
+- **Hide** - yashirish
+- **Unhide** - ko'rsatish
+
+### AutoFill (Avtomatik to'ldirish)
+
+**Drag Fill Handle** - hujayra burchagidagi nuqtani sudrab to'ldirish
+
+**Misol**:
+```
+1 → 2, 3, 4, 5...
+Dushanba → Seshanba, Chorshanba...
+Yanvar → Fevral, Mart...
+```
+
+**Fill Options**:
+- Copy Cells - nusxa
+- Fill Series - ketma-ketlik
+- Fill Without Formatting - formatsiz
+
+### Saralash (Sorting)
+
+**Data > Sort**:
+
+**Ascending (A→Z)** - o'sish tartibida
+**Descending (Z→A)** - kamayish tartibida
+
+**Custom Sort** - maxsus saralash:
+- Bir nechta ustun bo'yicha
+- O'zingiz tartib berish
+
+### Filtrlash (Filtering)
+
+**Data > Filter**:
+- Avtomatik pastga tushadigan menyular paydo bo'ladi
+- Shart bo'yicha ko'rsatish yoki yashirish
+
+**Misol**:
+- Faqat 100 dan katta raqamlar
+- Faqat "Toshkent" degan qatorlar
+- Faqat 2024 yildagi sanalar
+
+### Grafik va diagrammalar
+
+**Insert > Charts**:
+
+**Turlar**:
+- **Column Chart** - ustunli
+- **Bar Chart** - gorizontal ustunli
+- **Line Chart** - chiziqli
+- **Pie Chart** - doira diagramma
+- **Area Chart** - maydonli
+
+**Yaratish**:
+1. Ma'lumotlarni tanlang
+2. Insert > Chart turini tanlang
+3. Customize - sozlash
+
+### Print (Chop etish)
+
+**File > Print** (`Ctrl + P`):
+
+**Sozlamalar**:
+- **Print Area** - chop etiladigan soha
+- **Page Break** - sahifa uzilishi
+- **Print Titles** - har sahifada takrorlanuvchi sarlavhalar
+- **Scaling** - masshtab
+
+**Page Setup**:
+- Orientation - yo'nalish
+- Margins - chetlar
+- Header/Footer
+
+## Dars uchun vazifa
+
+1. Yangi Excel fayl yaratib, quyidagi jadvalni tuzing:
+
+| Oy | Daromad | Xarajat | Foyda |
+|----|---------|---------|-------|
+| Yanvar | 5000000 | 3000000 | ? |
+| Fevral | 6000000 | 3500000 | ? |
+| Mart | 5500000 | 3200000 | ? |
+
+- Foyda ustunida formula yozing: =Daromad-Xarajat
+- Jami qatorini qo'shing va SUM funksiyasini ishlating
+
+2. Quyidagi formulalarni amalda bajaring:
+   - Ikki sonni qo'shish
+   - O'rtacha qiymatni topish
+   - Eng katta raqamni topish
+
+3. AutoFill bilan:
+   - 1 dan 20 gacha raqamlar
+   - Dushanba dan Yakshanba gacha kunlar
+   - Yanvar dan Dekabr gacha oylar
+
+## Uyga vazifa
+
+1. **Oilaviy byudjet** yarating (bir oylik):
+   - Daromadlar (ish haqi, boshqa)
+   - Xarajatlar (ovqat, transport, uy-joy, kommunal, aloqa, kiyim-kechak, o'yin-kulgi, boshqa)
+   - Jami daromad va xarajatlar
+   - Qolgan pul
+   - Formulalar va formatlash ishlating
+
+2. **Talabalar balli jadvali**:
+   - 10 ta talaba
+   - 5 ta fan
+   - O'rtacha ball ustuni (AVERAGE)
+   - Eng yuqori ball (MAX)
+   - Eng past ball (MIN)
+   - IF funksiyasi: 70 dan yuqori - "O'tdi", aks holda - "Yiqildi"
+
+3. **Do'kon mahsulotlari**:
+   - Mahsulot nomi
+   - Narxi
+   - Soni
+   - Jami summa (Narx * Son)
+   - Chegirma 10% (IF: 100000 dan ko'p bo'lsa)
+   - Yakuniy narx
+   - Umumiy jami (SUM)
+
+4. Diagramma yarating:
+   - 5 ta oyning savdo ma'lumotlari
+   - Column chart
+   - Pie chart
+   - Dizayn va ranglar qo'shing
+
+5. 15 ta klaviatura yorlig'ini sinab ko'ring va vazifalarini yozib boring
+
+6. Excel quyidagi vazifalar uchun qanday foydali?
+   - Biznes
+   - Talabalar
+   - Uy xo'jaligi
+   - Tadbirkorlik

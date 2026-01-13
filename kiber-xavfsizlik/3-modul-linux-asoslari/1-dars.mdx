@@ -1,0 +1,644 @@
+---
+title: "Linux asoslari va buyruqlar"
+description: "Linux operatsion tizimi va terminal bilan ishlash"
+---
+
+## TODO
+- Linux tizimini tushunish
+- Terminal buyruqlarini o'rganish
+- Fayl tizimi bilan ishlash
+
+## Dars mazmuni
+
+### Linux nima?
+
+**Linux** - ochiq kodli Unix-tipidagi operatsion tizim.
+
+**Afzalliklari**:
+- Bepul va ochiq kod
+- Xavfsiz
+- Barqaror
+- Server uchun eng yaxshi
+- Kustomizatsiya
+
+**Mashhur distributivlar**:
+- **Ubuntu** - boshlovchilar uchun
+- **Debian** - barqaror
+- **CentOS/RHEL** - korporativ
+- **Kali Linux** - penetration testing
+- **Arch Linux** - ilg'or foydalanuvchilar
+- **Fedora** - yangi texnologiyalar
+
+### Linux arxitekturasi
+
+```
+┌────────────────────────┐
+│   Applications         │  (Browser, Office, etc.)
+├────────────────────────┤
+│   Shell/Terminal       │  (bash, zsh, fish)
+├────────────────────────┤
+│   System Libraries     │  (glibc, etc.)
+├────────────────────────┤
+│   Kernel               │  (Core)
+├────────────────────────┤
+│   Hardware             │  (CPU, RAM, Disk)
+└────────────────────────┘
+```
+
+### Fayl tizimi
+
+**Root** `/` - barcha fayllar bu yerdan boshlanadi.
+
+```
+/
+├── bin        # Asosiy buyruqlar (ls, cat, cp)
+├── boot       # Boot loader fayllari
+├── dev        # Device fayllari
+├── etc        # Konfiguratsiya fayllari
+├── home       # Foydalanuvchilar papkalari
+│   ├── user1
+│   └── user2
+├── lib        # System libraries
+├── media      # Съёмные устройства
+├── mnt        # O'rnatish uchun
+├── opt        # Qo'shimcha dasturlar
+├── proc       # Jarayon ma'lumotlari
+├── root       # Root foydalanuvchi home
+├── sbin       # System buyruqlar
+├── tmp        # Vaqtinchalik fayllar
+├── usr        # Foydalanuvchi dasturlari
+└── var        # O'zgaruvchan fayllar (logs)
+```
+
+**Muhim papkalar**:
+- `/home/username` - foydalanuvchi fayllari
+- `/etc` - konfiguratsiya
+- `/var/log` - log fayllar
+- `/tmp` - vaqtinchalik
+- `/usr/bin` - dasturlar
+
+### Terminal asoslari
+
+#### Navigatsiya
+
+**pwd** - hozirgi papka (Print Working Directory):
+```bash
+pwd
+# /home/user
+```
+
+**ls** - fayllarni ko'rish (List):
+```bash
+ls                 # Oddiy
+ls -l              # Batafsil (long format)
+ls -la             # Yashirin fayllar bilan (all)
+ls -lh             # Human-readable size
+ls -ltr            # Vaqt bo'yicha (reverse)
+```
+
+**ls -l** output:
+```
+-rw-r--r-- 1 user group 1234 Jan 15 10:30 file.txt
+│││││││││  │  │    │    │    │         │       └─ File nomi
+│││││││││  │  │    │    │    │         └───────── Vaqt
+│││││││││  │  │    │    │    └─────────────────── O'lcham
+│││││││││  │  │    │    └──────────────────────── Guruh
+│││││││││  │  │    └───────────────────────────── Ega
+│││││││││  │  └────────────────────────────────── Linklar soni
+│││││││││  └───────────────────────────────────── Fayl turi
+││││││└└────────────────────────────────────────── Ruxsatlar
+```
+
+**cd** - papka o'zgartirish (Change Directory):
+```bash
+cd /home/user      # Aniq yo'l
+cd documents       # Nisbiy yo'l
+cd ..              # Yuqoriga
+cd ../..           # 2 ta yuqoriga
+cd ~               # Home papka
+cd -               # Oldingi papka
+```
+
+#### Fayl operatsiyalari
+
+**touch** - bo'sh fayl yaratish:
+```bash
+touch file.txt
+touch file1.txt file2.txt file3.txt
+```
+
+**mkdir** - papka yaratish (Make Directory):
+```bash
+mkdir newfolder
+mkdir -p dir1/dir2/dir3   # Ota-papkalar bilan
+mkdir folder1 folder2 folder3
+```
+
+**cp** - nusxalash (Copy):
+```bash
+cp file.txt copy.txt           # Fayl
+cp -r folder1 folder2          # Papka (recursive)
+cp file.txt /home/user/        # Boshqa joyga
+cp *.txt backup/               # Ko'p fayllar
+```
+
+**mv** - ko'chirish yoki nom o'zgartirish (Move):
+```bash
+mv oldname.txt newname.txt     # Nom o'zgartirish
+mv file.txt /home/user/        # Ko'chirish
+mv *.txt documents/            # Ko'p fayllar
+```
+
+**rm** - o'chirish (Remove):
+```bash
+rm file.txt                    # Fayl
+rm -r folder                   # Papka (recursive)
+rm -rf folder                  # Majburiy (force)
+rm *.txt                       # Pattern
+```
+
+**Ehtiyot bo'ling!** `rm -rf /` - butun tizimni o'chiradi!
+
+#### Fayl ko'rish
+
+**cat** - fayl ko'rish (Concatenate):
+```bash
+cat file.txt
+cat file1.txt file2.txt        # Bir necha fayl
+```
+
+**head** - boshini ko'rish:
+```bash
+head file.txt                  # Birinchi 10 qator
+head -n 20 file.txt            # Birinchi 20 qator
+```
+
+**tail** - oxirini ko'rish:
+```bash
+tail file.txt                  # Oxirgi 10 qator
+tail -n 20 file.txt            # Oxirgi 20 qator
+tail -f /var/log/syslog        # Real-time (follow)
+```
+
+**less** - sahifama-sahifa:
+```bash
+less file.txt
+# Space - keyingi sahifa
+# b - oldingi sahifa
+# / - qidirish
+# q - chiqish
+```
+
+**more** - less ga o'xshash:
+```bash
+more file.txt
+```
+
+#### Qidirish
+
+**find** - fayl qidirish:
+```bash
+find /home -name "*.txt"       # Nom bo'yicha
+find . -type f                 # Faqat fayllar
+find . -type d                 # Faqat papkalar
+find . -size +1M               # 1MB dan katta
+find . -mtime -7               # 7 kun ichida o'zgargan
+```
+
+**grep** - matn ichida qidirish:
+```bash
+grep "search" file.txt         # Oddiy qidirish
+grep -i "search" file.txt      # Case-insensitive
+grep -r "search" /path         # Recursive
+grep -n "search" file.txt      # Qator raqami bilan
+grep -v "search" file.txt      # Teskari (exclude)
+grep -c "search" file.txt      # Soni
+```
+
+**which** - buyruq joylashuvini topish:
+```bash
+which python
+which ls
+```
+
+**whereis** - dastur fayllarini topish:
+```bash
+whereis ls
+```
+
+#### Fayllar bilan ishlash
+
+**wc** - hisoblash (Word Count):
+```bash
+wc file.txt                    # Qatorlar, so'zlar, baytlar
+wc -l file.txt                 # Faqat qatorlar
+wc -w file.txt                 # Faqat so'zlar
+wc -c file.txt                 # Faqat baytlar
+```
+
+**sort** - saralash:
+```bash
+sort file.txt                  # Alifbo tartibida
+sort -r file.txt               # Teskari
+sort -n file.txt               # Raqamli
+sort -u file.txt               # Unique
+```
+
+**uniq** - unique qatorlar:
+```bash
+uniq file.txt                  # Duplicate ni o'chirish
+uniq -c file.txt               # Soni bilan
+uniq -d file.txt               # Faqat duplicate
+```
+
+**diff** - farqni ko'rsatish:
+```bash
+diff file1.txt file2.txt
+```
+
+### Ruxsatlar (Permissions)
+
+**3 ta tur**:
+- **r** (read) - o'qish (4)
+- **w** (write) - yozish (2)
+- **x** (execute) - bajarish (1)
+
+**3 ta guruh**:
+- **u** (user) - ega
+- **g** (group) - guruh
+- **o** (others) - boshqalar
+
+**Misol**:
+```
+-rw-r--r--
+│││ │ │ │
+│││ │ │ └── Others: r-- (read only)
+│││ │ └──── Group: r-- (read only)
+│││ └────── User: rw- (read, write)
+││└──────── Guruh birikma
+│└───────── Fayl turi (- = file, d = directory)
+└────────── Special bits
+```
+
+**chmod** - ruxsat o'zgartirish:
+
+**Symbolic**:
+```bash
+chmod u+x file.sh              # User ga execute
+chmod g-w file.txt             # Group dan write olib tashlash
+chmod o+r file.txt             # Others ga read
+chmod a+x file.sh              # All ga execute
+chmod u+rwx,g+rx,o+r file.txt  # Kombinatsiya
+```
+
+**Numeric** (Octal):
+```bash
+chmod 755 file.sh              # rwxr-xr-x
+chmod 644 file.txt             # rw-r--r--
+chmod 777 file.txt             # rwxrwxrwx (hammaga hamma narsa)
+chmod 600 private.txt          # rw------- (faqat ega)
+```
+
+**Hisoblash**:
+- r = 4
+- w = 2
+- x = 1
+
+**Misol**: `755` = `rwxr-xr-x`
+- 7 = 4+2+1 = rwx (user)
+- 5 = 4+0+1 = r-x (group)
+- 5 = 4+0+1 = r-x (others)
+
+**chown** - ega o'zgartirish:
+```bash
+chown user file.txt            # Ega
+chown user:group file.txt      # Ega va guruh
+chown -R user folder           # Recursive
+```
+
+### Jarayonlar (Processes)
+
+**ps** - jarayonlar ro'yxati:
+```bash
+ps                             # Hozirgi terminal
+ps aux                         # Barchasi (batafsil)
+ps -ef                         # Full format
+```
+
+**top** - real-time jarayonlar:
+```bash
+top
+# q - chiqish
+# k - kill process
+# h - help
+```
+
+**htop** - yaxshilangan top (o'rnatish kerak):
+```bash
+sudo apt install htop
+htop
+```
+
+**kill** - jarayonni to'xtatish:
+```bash
+kill 1234                      # PID bilan
+kill -9 1234                   # Majburiy
+killall firefox                # Nom bilan
+```
+
+**bg/fg** - background/foreground:
+```bash
+command &                      # Background da ishga tushirish
+Ctrl+Z                         # To'xtatish (suspend)
+bg                             # Background da davom etish
+fg                             # Foreground ga qaytarish
+jobs                           # Background jarayonlar
+```
+
+### Disk va tizim
+
+**df** - disk joy (Disk Free):
+```bash
+df                             # Barcha disklar
+df -h                          # Human-readable
+df -T                          # Fayl tizimi turi
+```
+
+**du** - papka o'lchami (Disk Usage):
+```bash
+du                             # Hozirgi papka
+du -h                          # Human-readable
+du -sh folder                  # Summary
+du -h --max-depth=1            # 1 daraja
+```
+
+**free** - xotira:
+```bash
+free                           # Bayt
+free -h                        # Human-readable
+free -m                        # MB
+```
+
+**uname** - tizim ma'lumoti:
+```bash
+uname -a                       # Hammasi
+uname -r                       # Kernel versiya
+uname -m                       # Arxitektura
+```
+
+**uptime** - qancha vaqt ishlayapti:
+```bash
+uptime
+```
+
+### Tarmoq buyruqlari
+
+**ifconfig** - tarmoq interfeyslari:
+```bash
+ifconfig
+ifconfig eth0
+```
+
+**ip** - zamonaviy variant:
+```bash
+ip addr show
+ip link show
+ip route show
+```
+
+**ping** - ulanish tekshirish:
+```bash
+ping google.com
+ping -c 4 google.com           # 4 ta paket
+```
+
+**curl** - HTTP so'rov:
+```bash
+curl https://example.com
+curl -o file.html https://example.com
+curl -I https://example.com    # Faqat headers
+```
+
+**wget** - fayl yuklab olish:
+```bash
+wget https://example.com/file.zip
+wget -c https://...            # Davom etish (resume)
+```
+
+**netstat** - tarmoq statistika:
+```bash
+netstat -tuln                  # Ochiq portlar
+netstat -r                     # Routing table
+```
+
+**ss** - zamonaviy netstat:
+```bash
+ss -tuln
+```
+
+### Paket menejerlari
+
+#### Debian/Ubuntu (APT)
+
+**apt** yoki **apt-get**:
+
+```bash
+# Yangilash
+sudo apt update
+
+# Upgrade
+sudo apt upgrade
+
+# O'rnatish
+sudo apt install package_name
+
+# O'chirish
+sudo apt remove package_name
+sudo apt purge package_name    # Konfiguratsiya bilan
+
+# Qidirish
+apt search keyword
+
+# Ma'lumot
+apt show package_name
+
+# Tizimni yangilash
+sudo apt dist-upgrade
+```
+
+#### Red Hat/CentOS (YUM/DNF)
+
+```bash
+# Yangilash
+sudo yum update
+
+# O'rnatish
+sudo yum install package_name
+
+# O'chirish
+sudo yum remove package_name
+
+# Qidirish
+yum search keyword
+```
+
+### Foydalanuvchilar
+
+**whoami** - hozirgi foydalanuvchi:
+```bash
+whoami
+```
+
+**id** - foydalanuvchi ma'lumoti:
+```bash
+id
+id username
+```
+
+**su** - foydalanuvchi almashtirish:
+```bash
+su username
+su -                           # Root ga
+```
+
+**sudo** - root sifatida bajarish:
+```bash
+sudo command
+sudo -i                        # Root shell
+```
+
+**useradd** - foydalanuvchi qo'shish:
+```bash
+sudo useradd newuser
+sudo useradd -m -s /bin/bash newuser
+```
+
+**passwd** - parol o'zgartirish:
+```bash
+passwd                         # O'zingizni
+sudo passwd username           # Boshqani
+```
+
+### Pipe va Redirection
+
+**Pipe `|`** - output ni input ga:
+```bash
+ls -l | grep ".txt"
+cat file.txt | wc -l
+ps aux | grep firefox
+```
+
+**Redirection**:
+
+**`>`** - yozish (overwrite):
+```bash
+ls > file.txt
+echo "Hello" > file.txt
+```
+
+**`>>`** - qo'shish (append):
+```bash
+ls >> file.txt
+echo "World" >> file.txt
+```
+
+**`<`** - input sifatida:
+```bash
+wc -l < file.txt
+```
+
+**`2>`** - error ga:
+```bash
+command 2> error.log
+```
+
+**`&>`** - hammasi (output va error):
+```bash
+command &> all.log
+```
+
+## Dars uchun vazifa
+
+1. Virtual Machine o'rnating:
+   - VirtualBox yoki VMware
+   - Ubuntu yoki Kali Linux
+   - Terminal ochib ishlang
+
+2. Navigatsiya:
+   - `pwd`, `ls`, `cd`
+   - Turli papkalarga o'ting
+   - Home papkaga qaytib keling
+
+3. Fayl operatsiyalari:
+   - Papka yarating
+   - Ichida 3 ta fayl yarating
+   - Nusxalang, ko'chiring
+   - O'chiring
+
+4. Ruxsatlar:
+   - Fayl yarating
+   - `ls -l` bilan ko'ring
+   - `chmod 755` qo'ying
+   - Tekshiring
+
+## Uyga vazifa
+
+1. **Linux o'rnatish**:
+   - Virtual Machine (VirtualBox)
+   - Ubuntu Desktop
+   - Screenshot
+
+2. **Terminal mashqlari**:
+   - 20 ta buyruqni bajaring
+   - Screenshot
+   - Har birini tushuntiring
+
+3. **Fayl tizimi eksploratsiya**:
+   - `/` dan boshlang
+   - `etc`, `home`, `var` ga kiring
+   - Har birida nimalar borligini yozing
+
+4. **Script yozing** (`script.sh`):
+   ```bash
+   #!/bin/bash
+   echo "Salom, $USER!"
+   echo "Siz $HOME da turibsiz"
+   ls -lah
+   ```
+   - chmod +x qiling
+   - Ishga tushiring
+
+5. Quyidagi savolarga javob bering:
+   - Linux ning Windows dan farqi?
+   - `/home` va `/root` farqi?
+   - `chmod 755` nima?
+   - Pipe `|` nima uchun kerak?
+
+6. **Log tahlil**:
+   - `/var/log/syslog` ni o'qing
+   - Oxirgi 50 qatorni ko'ring
+   - "error" so'zini qidiring
+   - Natijani faylga yozing
+
+7. **Tarmoq diagnostika**:
+   - `ifconfig` yoki `ip addr`
+   - IP manzil topish
+   - `ping 8.8.8.8`
+   - Screenshot
+
+8. **Paket menejeri**:
+   - `neofetch` o'rnating
+   - Ishga tushiring
+   - Screenshot
+   - O'chiring
+
+9. **Jarayon boshqaruv**:
+   - `firefox &` (background)
+   - `ps aux | grep firefox`
+   - PID ni toping
+   - `kill` qiling
+
+10. **Cheat Sheet yarating**:
+    - 30 ta eng muhim buyruq
+    - Har biri uchun misol
+    - Markdown formatda

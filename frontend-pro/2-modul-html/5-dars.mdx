@@ -1,0 +1,451 @@
+---
+title: "HTML Ro'yxatlar (Lists)"
+description: "Tartibli va tartizsiz ro'yxatlar"
+---
+
+## TODO
+- Ro'yxat turlarini o'rganish
+- Ichma-ich ro'yxatlar yaratish
+- Ro'yxat uslublarini bilish
+
+## Dars mazmuni
+
+### Ro'yxat turlari
+
+HTML da 3 xil ro'yxat bor:
+1. **Unordered List** - Tartizsiz ro'yxat
+2. **Ordered List** - Tartibli ro'yxat
+3. **Description List** - Tavsif ro'yxati
+
+### Tartizsiz ro'yxat (Unordered List)
+
+**`<ul>` va `<li>` teglari**:
+
+```html
+<ul>
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>JavaScript</li>
+</ul>
+```
+
+**Natija**:
+- HTML
+- CSS
+- JavaScript
+
+**Standart belgisi**: Qora doira (bullet point)
+
+### Tartibli ro'yxat (Ordered List)
+
+**`<ol>` va `<li>` teglari**:
+
+```html
+<ol>
+    <li>HTML o'rganish</li>
+    <li>CSS o'rganish</li>
+    <li>JavaScript o'rganish</li>
+</ol>
+```
+
+**Natija**:
+1. HTML o'rganish
+2. CSS o'rganish
+3. JavaScript o'rganish
+
+### List item - `<li>`
+
+**List item** - ro'yxat elementi
+
+```html
+<ul>
+    <li>Birinchi element</li>
+    <li>Ikkinchi element</li>
+    <li>Uchinchi element</li>
+</ul>
+```
+
+### Ordered List atributlari
+
+#### type atributi
+
+**Raqam turi**:
+
+```html
+<!-- Raqamlar (standart) -->
+<ol type="1">
+    <li>Birinchi</li>
+    <li>Ikkinchi</li>
+</ol>
+
+<!-- Katta harflar -->
+<ol type="A">
+    <li>Birinchi</li>
+    <li>Ikkinchi</li>
+</ol>
+
+<!-- Kichik harflar -->
+<ol type="a">
+    <li>Birinchi</li>
+    <li>Ikkinchi</li>
+</ol>
+
+<!-- Rim raqamlari (katta) -->
+<ol type="I">
+    <li>Birinchi</li>
+    <li>Ikkinchi</li>
+</ol>
+
+<!-- Rim raqamlari (kichik) -->
+<ol type="i">
+    <li>Birinchi</li>
+    <li>Ikkinchi</li>
+</ol>
+```
+
+#### start atributi
+
+**Boshlanish raqami**:
+
+```html
+<ol start="5">
+    <li>Beshinchi element</li>
+    <li>Oltinchi element</li>
+    <li>Yettinchi element</li>
+</ol>
+```
+
+**Natija**: 5, 6, 7
+
+#### reversed atributi
+
+**Teskari tartib**:
+
+```html
+<ol reversed>
+    <li>Birinchi</li>
+    <li>Ikkinchi</li>
+    <li>Uchinchi</li>
+</ol>
+```
+
+**Natija**: 3, 2, 1
+
+### Unordered List marker turlari
+
+**CSS bilan (keyinroq):**
+
+```html
+<ul style="list-style-type: disc;">
+    <li>Disc (standart)</li>
+</ul>
+
+<ul style="list-style-type: circle;">
+    <li>Circle</li>
+</ul>
+
+<ul style="list-style-type: square;">
+    <li>Square</li>
+</ul>
+
+<ul style="list-style-type: none;">
+    <li>Belgisiz</li>
+</ul>
+```
+
+### Ichma-ich ro'yxatlar (Nested Lists)
+
+**Ro'yxat ichida ro'yxat**:
+
+```html
+<ul>
+    <li>Frontend
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+        </ul>
+    </li>
+    <li>Backend
+        <ul>
+            <li>Python</li>
+            <li>Node.js</li>
+            <li>PHP</li>
+        </ul>
+    </li>
+</ul>
+```
+
+**Murakkab misol**:
+
+```html
+<ol>
+    <li>Frontend dasturlash
+        <ul>
+            <li>HTML asoslari
+                <ol>
+                    <li>Teglar</li>
+                    <li>Atributlar</li>
+                    <li>Elementlar</li>
+                </ol>
+            </li>
+            <li>CSS asoslari</li>
+            <li>JavaScript asoslari</li>
+        </ul>
+    </li>
+    <li>Backend dasturlash
+        <ul>
+            <li>Python</li>
+            <li>Databases</li>
+        </ul>
+    </li>
+</ol>
+```
+
+### Description List (Tavsif ro'yxati)
+
+**`<dl>`, `<dt>`, `<dd>` teglari**:
+
+```html
+<dl>
+    <dt>HTML</dt>
+    <dd>HyperText Markup Language - veb-sahifalar yaratish tili</dd>
+    
+    <dt>CSS</dt>
+    <dd>Cascading Style Sheets - sahifalarni bezash tili</dd>
+    
+    <dt>JavaScript</dt>
+    <dd>Dasturlash tili - interaktivlik qo'shadi</dd>
+</dl>
+```
+
+**Qismlar**:
+- **`<dl>`** - Description List
+- **`<dt>`** - Description Term (atama)
+- **`<dd>`** - Description Definition (ta'rif)
+
+**Misol - Lug'at**:
+
+```html
+<dl>
+    <dt>Internet</dt>
+    <dd>Global kompyuter tarmog'i</dd>
+    
+    <dt>Server</dt>
+    <dd>Ma'lumotlarni saqlaydigan kompyuter</dd>
+    
+    <dt>Browser</dt>
+    <dd>Veb-saytlarni ko'rish dasturi</dd>
+</dl>
+```
+
+### Ro'yxatlarda boshqa elementlar
+
+**Havola**:
+```html
+<ul>
+    <li><a href="html.html">HTML</a></li>
+    <li><a href="css.html">CSS</a></li>
+    <li><a href="js.html">JavaScript</a></li>
+</ul>
+```
+
+**Rasm**:
+```html
+<ul>
+    <li>
+        <img src="html-logo.png" alt="HTML" width="30">
+        HTML
+    </li>
+    <li>
+        <img src="css-logo.png" alt="CSS" width="30">
+        CSS
+    </li>
+</ul>
+```
+
+**Paragraf**:
+```html
+<ul>
+    <li>
+        <strong>HTML</strong>
+        <p>Veb-sahifalar tuzilmasini yaratadi</p>
+    </li>
+    <li>
+        <strong>CSS</strong>
+        <p>Sahifalarni bezaydi</p>
+    </li>
+</ul>
+```
+
+### Navigation menyu
+
+**Ro'yxat bilan menyu**:
+
+```html
+<nav>
+    <ul>
+        <li><a href="index.html">Bosh sahifa</a></li>
+        <li><a href="about.html">Biz haqimizda</a></li>
+        <li><a href="services.html">Xizmatlar</a></li>
+        <li><a href="contact.html">Aloqa</a></li>
+    </ul>
+</nav>
+```
+
+**Dropdown menyu** (CSS bilan):
+```html
+<nav>
+    <ul>
+        <li><a href="index.html">Bosh sahifa</a></li>
+        <li>
+            <a href="courses.html">Kurslar</a>
+            <ul>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="js.html">JavaScript</a></li>
+            </ul>
+        </li>
+        <li><a href="contact.html">Aloqa</a></li>
+    </ul>
+</nav>
+```
+
+### Ro'yxat uslublari (CSS)
+
+**Belgini o'zgartirish**:
+```html
+<ul style="list-style-type: square;">
+    <li>Element 1</li>
+    <li>Element 2</li>
+</ul>
+```
+
+**Belgini olib tashlash**:
+```html
+<ul style="list-style-type: none;">
+    <li>Element 1</li>
+    <li>Element 2</li>
+</ul>
+```
+
+**Belgini ichida qilish**:
+```html
+<ul style="list-style-position: inside;">
+    <li>Element 1</li>
+    <li>Element 2</li>
+</ul>
+```
+
+**Maxsus rasm belgi**:
+```html
+<ul style="list-style-image: url('arrow.png');">
+    <li>Element 1</li>
+    <li>Element 2</li>
+</ul>
+```
+
+### Best Practices
+
+**1. Semantik foydalanish**:
+- Tartibli jarayon → `<ol>`
+- Oddiy ro'yxat → `<ul>`
+- Ta'rif → `<dl>`
+
+**2. Faqat `<li>` ichida**:
+```html
+<!-- To'g'ri -->
+<ul>
+    <li>Element</li>
+</ul>
+
+<!-- Noto'g'ri -->
+<ul>
+    <div>Element</div>
+</ul>
+```
+
+**3. Yopish**:
+```html
+<!-- To'g'ri -->
+<ul>
+    <li>Element 1</li>
+    <li>Element 2</li>
+</ul>
+
+<!-- Noto'g'ri (yopilmagan) -->
+<ul>
+    <li>Element 1
+    <li>Element 2
+</ul>
+```
+
+### Accessibility
+
+**ARIA role**:
+```html
+<ul role="list">
+    <li role="listitem">Element 1</li>
+    <li role="listitem">Element 2</li>
+</ul>
+```
+
+**Navigation uchun**:
+```html
+<nav aria-label="Asosiy menyu">
+    <ul>
+        <li><a href="/">Bosh sahifa</a></li>
+        <li><a href="/about">Biz haqimizda</a></li>
+    </ul>
+</nav>
+```
+
+## Dars uchun vazifa
+
+1. Uch xil ro'yxat yarating:
+   - Tartizsiz ro'yxat (5 ta element)
+   - Tartibli ro'yxat (5 ta element)
+   - Tavsif ro'yxati (3 ta atama)
+
+2. Ichma-ich ro'yxat:
+   - Asosiy 3 ta element
+   - Har birida 2-3 ta ichki element
+
+3. Navigation menyu:
+   - 4 ta asosiy havola
+   - Bitta dropdown (3 ta ichki havola)
+
+## Uyga vazifa
+
+1. **Dasturlash tillari ro'yxati**:
+   - Kategoriyalar: Frontend, Backend, Mobile
+   - Har bir kategoriyada kamida 3 ta til
+   - Ichma-ich ro'yxat ishlatib
+
+2. **Retsept sahifa**:
+   - Ingredient lar (tartizsiz ro'yxat)
+   - Tayyorlash bosqichlari (tartibli ro'yxat)
+   - Nutritional facts (tavsif ro'yxati)
+
+3. **To-Do List**:
+   - Kategoriyalar bo'yicha (Ish, Uy, Shaxsiy)
+   - Tartibli va tartizsiz aralash
+   - Checkbox emoji ishlatib ☑️ ☐
+
+4. **Multi-level menyu**:
+   - 3 darajali menyu
+   - Services > Web Development > Frontend/Backend
+   - To'liq havola qilingan
+
+5. **Glossary (Lug'at)**:
+   - 10 ta texnik atama
+   - Description list ishlatib
+   - Har biriga to'liq ta'rif
+
+6. Quyidagi savolarga javob bering:
+   - `<ul>` va `<ol>` ning farqi nima?
+   - Qachon `<dl>` ishlatiladi?
+   - Navigation uchun qaysi ro'yxat yaxshi?
+   - Ichma-ich ro'yxatlarda qanday ehtiyot chorasi ko'rish kerak?
+
+7. Ro'yxatlarning 5 ta real qo'llanish joyini misol bilan ko'rsating

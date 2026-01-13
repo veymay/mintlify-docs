@@ -1,0 +1,489 @@
+---
+title: "HTML Jadvallar (Tables)"
+description: "Jadvallar yaratish va formatlash"
+---
+
+## TODO
+- Jadval yaratishni o'rganish
+- Jadval strukturasini bilish
+- Jadval atributlarini o'rganish
+
+## Dars mazmuni
+
+### Jadval nima?
+
+**Jadval (Table)** - ma'lumotlarni qator va ustunlarda ko'rsatish uchun ishlatiladi.
+
+**Asosiy teglar**:
+- `<table>` - jadval
+- `<tr>` - qator (table row)
+- `<td>` - hujayra (table data)
+- `<th>` - sarlavha hujayra (table header)
+
+### Oddiy jadval
+
+```html
+<table>
+    <tr>
+        <th>Ism</th>
+        <th>Yosh</th>
+        <th>Shahar</th>
+    </tr>
+    <tr>
+        <td>Ali</td>
+        <td>25</td>
+        <td>Toshkent</td>
+    </tr>
+    <tr>
+        <td>Vali</td>
+        <td>30</td>
+        <td>Samarqand</td>
+    </tr>
+</table>
+```
+
+### Jadval tuzilmasi
+
+**Asosiy qismlar**:
+
+```html
+<table>
+    <thead>  <!-- Sarlavha qismi -->
+        <tr>
+            <th>Ustun 1</th>
+            <th>Ustun 2</th>
+        </tr>
+    </thead>
+    <tbody>  <!-- Asosiy ma'lumotlar -->
+        <tr>
+            <td>Ma'lumot 1</td>
+            <td>Ma'lumot 2</td>
+        </tr>
+    </tbody>
+    <tfoot>  <!-- Pastki qism (jami va boshqalar) -->
+        <tr>
+            <td>Jami</td>
+            <td>100</td>
+        </tr>
+    </tfoot>
+</table>
+```
+
+### Table Header - `<th>`
+
+**Sarlavha hujayra** - qalin va markazda:
+
+```html
+<table>
+    <tr>
+        <th>Mahsulot</th>
+        <th>Narxi</th>
+        <th>Soni</th>
+    </tr>
+    <tr>
+        <td>Olma</td>
+        <td>5000</td>
+        <td>10</td>
+    </tr>
+</table>
+```
+
+**scope atributi**:
+```html
+<th scope="col">Ustun sarlavhasi</th>
+<th scope="row">Qator sarlavhasi</th>
+```
+
+### Jadval chegaralari (Border)
+
+**CSS bilan**:
+```html
+<table style="border: 1px solid black;">
+    <tr>
+        <th style="border: 1px solid black;">Ism</th>
+        <th style="border: 1px solid black;">Yosh</th>
+    </tr>
+    <tr>
+        <td style="border: 1px solid black;">Ali</td>
+        <td style="border: 1px solid black;">25</td>
+    </tr>
+</table>
+```
+
+**Yaxshiroq usul** - CSS faylida:
+```html
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>Ism</th>
+        <th>Yosh</th>
+    </tr>
+    <tr>
+        <td>Ali</td>
+        <td>25</td>
+    </tr>
+</table>
+```
+
+### Hujayralarni birlashtirish
+
+#### colspan - ustunlarni birlashtirish
+
+**Gorizontal birlashtirish**:
+
+```html
+<table border="1">
+    <tr>
+        <th>Ism</th>
+        <th colspan="2">Telefon</th>
+    </tr>
+    <tr>
+        <td>Ali</td>
+        <td>+998901234567</td>
+        <td>+998901234568</td>
+    </tr>
+</table>
+```
+
+#### rowspan - qatorlarni birlashtirish
+
+**Vertikal birlashtirish**:
+
+```html
+<table border="1">
+    <tr>
+        <th>Ism</th>
+        <td>Ali</td>
+    </tr>
+    <tr>
+        <th rowspan="2">Telefon</th>
+        <td>+998901234567</td>
+    </tr>
+    <tr>
+        <td>+998901234568</td>
+    </tr>
+</table>
+```
+
+### Caption - jadval sarlavhasi
+
+```html
+<table>
+    <caption>Talabalar ro'yxati</caption>
+    <tr>
+        <th>Ism</th>
+        <th>Yosh</th>
+    </tr>
+    <tr>
+        <td>Ali</td>
+        <td>20</td>
+    </tr>
+</table>
+```
+
+### Jadval kengligi va balandligi
+
+```html
+<table style="width: 100%;">
+    <tr>
+        <th style="width: 30%;">Ism</th>
+        <th style="width: 70%;">Ma'lumot</th>
+    </tr>
+    <tr>
+        <td>Ali</td>
+        <td>Frontend developer</td>
+    </tr>
+</table>
+```
+
+### Hujayra hizalanishi
+
+```html
+<table>
+    <tr>
+        <!-- Gorizontal hizalash -->
+        <td style="text-align: left;">Chapda</td>
+        <td style="text-align: center;">O'rtada</td>
+        <td style="text-align: right;">O'ngda</td>
+    </tr>
+    <tr>
+        <!-- Vertikal hizalash -->
+        <td style="vertical-align: top; height: 100px;">Yuqorida</td>
+        <td style="vertical-align: middle;">O'rtada</td>
+        <td style="vertical-align: bottom;">Pastda</td>
+    </tr>
+</table>
+```
+
+### Jadval uslublari
+
+**Zebra jadval** (o'zgaruvchan rang):
+```html
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    td {
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+</style>
+
+<table>
+    <tr>
+        <th>Ism</th>
+        <th>Yosh</th>
+    </tr>
+    <tr>
+        <td>Ali</td>
+        <td>25</td>
+    </tr>
+    <tr>
+        <td>Vali</td>
+        <td>30</td>
+    </tr>
+</table>
+```
+
+### Hover effekt
+
+```html
+<style>
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+```
+
+### Responsive jadval
+
+**Kichik ekranlarda scroll**:
+
+```html
+<div style="overflow-x: auto;">
+    <table>
+        <tr>
+            <th>Ustun 1</th>
+            <th>Ustun 2</th>
+            <th>Ustun 3</th>
+            <th>Ustun 4</th>
+            <th>Ustun 5</th>
+        </tr>
+        <tr>
+            <td>Ma'lumot 1</td>
+            <td>Ma'lumot 2</td>
+            <td>Ma'lumot 3</td>
+            <td>Ma'lumot 4</td>
+            <td>Ma'lumot 5</td>
+        </tr>
+    </table>
+</div>
+```
+
+### Ichma-ich jadvallar
+
+```html
+<table border="1">
+    <tr>
+        <th>Ism</th>
+        <th>Ma'lumot</th>
+    </tr>
+    <tr>
+        <td>Ali</td>
+        <td>
+            <table border="1">
+                <tr>
+                    <td>Email</td>
+                    <td>ali@example.com</td>
+                </tr>
+                <tr>
+                    <td>Telefon</td>
+                    <td>+998901234567</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+```
+
+### Murakkab misol - Oylik byudjet
+
+```html
+<table border="1" style="width: 100%; border-collapse: collapse;">
+    <caption><h2>Oylik Byudjet - Yanvar 2026</h2></caption>
+    <thead>
+        <tr style="background-color: #4CAF50; color: white;">
+            <th>Kategoriya</th>
+            <th>Reja</th>
+            <th>Haqiqiy</th>
+            <th>Farq</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Daromad</strong></td>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;Ish haqi</td>
+            <td>5,000,000</td>
+            <td>5,000,000</td>
+            <td style="color: green;">0</td>
+        </tr>
+        <tr>
+            <td><strong>Xarajatlar</strong></td>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;Uy-joy</td>
+            <td>1,500,000</td>
+            <td>1,500,000</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;Ovqat</td>
+            <td>1,000,000</td>
+            <td>1,200,000</td>
+            <td style="color: red;">-200,000</td>
+        </tr>
+        <tr>
+            <td>&nbsp;&nbsp;Transport</td>
+            <td>500,000</td>
+            <td>450,000</td>
+            <td style="color: green;">+50,000</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr style="background-color: #f2f2f2; font-weight: bold;">
+            <td>Jami qoldiq</td>
+            <td colspan="3">2,000,000 so'm</td>
+        </tr>
+    </tfoot>
+</table>
+```
+
+### Jadval qachon ishlatiladi?
+
+**Ishlatish kerak** ✅:
+- Statistik ma'lumotlar
+- Jadval formatdagi ma'lumotlar
+- Taqqoslash jadvallari
+- Byudjet va moliyaviy ma'lumotlar
+- Sport natijalari
+
+**Ishlatmaslik kerak** ❌:
+- Sahifa layouti uchun (CSS ishlatish kerak)
+- Navigation menyu
+- Faqat dizayn uchun
+
+### Accessibility
+
+**Yaxshi amaliyotlar**:
+
+```html
+<table>
+    <caption>Talabalar bahosi</caption>
+    <thead>
+        <tr>
+            <th scope="col">Ism</th>
+            <th scope="col">Fan</th>
+            <th scope="col">Baho</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">Ali Valiyev</th>
+            <td>Matematika</td>
+            <td>5</td>
+        </tr>
+    </tbody>
+</table>
+```
+
+### Jadval chop etish
+
+**Print uchun**:
+```html
+<style>
+    @media print {
+        table {
+            page-break-inside: avoid;
+        }
+        thead {
+            display: table-header-group;
+        }
+        tfoot {
+            display: table-footer-group;
+        }
+    }
+</style>
+```
+
+## Dars uchun vazifa
+
+1. Oddiy jadval yarating:
+   - 3 ta ustun (Ism, Yosh, Kasb)
+   - 5 ta qator ma'lumot
+   - Sarlavhalar `<th>` da
+
+2. colspan va rowspan ishlatib:
+   - 4x4 jadval
+   - Kamida 2 ta hujayrани birlashtiring
+
+3. Formatlangan jadval:
+   - Border qo'shing
+   - Sarlavhaga rang bering
+   - Zebra effect qo'shing
+
+## Uyga vazifa
+
+1. **Haftalik dars jadvali**:
+   - Dushanba dan Shanba gacha
+   - Har kun 6 ta dars
+   - 1-dars, 2-dars deb sarlavhalar
+   - Bo'sh vaqtlarni colspan bilan birlashtiring
+
+2. **Mahsulot taqqoslash jadvali**:
+   - 3 ta mahsulot (telefon, noutbuk, va hokazo)
+   - Xususiyatlar: narx, o'lcham, og'irlik, xotira
+   - Eng yaxshi variantni ranglab ko'rsating
+
+3. **Oylik byudjet jadvali**:
+   - thead, tbody, tfoot ishlatib
+   - Daromadlar va xarajatlar
+   - Har bir kategoriya bo'yicha
+   - Jami summa pastda
+
+4. **Sport turnir jadvali**:
+   - 6 ta jamoa
+   - Ustunlar: O'ynagan, Yutgan, Durang, Yutqazgan, Ochko
+   - Ochko bo'yicha tartibda
+
+5. **Price table** (narxlar jadvali):
+   - 3 ta plan: Basic, Pro, Premium
+   - Xususiyatlar ro'yxati
+   - Har birida check/cross belgisi (✓ ✗)
+   - "Buy Now" tugmasi (havola)
+
+6. Quyidagi savolarga javob bering:
+   - `<thead>`, `<tbody>`, `<tfoot>` ning farqi nima?
+   - colspan va rowspan qachon ishlatiladi?
+   - Jadvallar layout uchun nima uchun ishlatilmaydi?
+   - Responsive jadval qanday qilinadi?
+
+7. Real veb-saytlardan 3 ta jadval misoli toping va ularning qaysi maqsadda ishlatilganini tahlil qiling

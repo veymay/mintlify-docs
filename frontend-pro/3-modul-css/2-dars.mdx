@@ -1,0 +1,470 @@
+---
+title: "CSS Box Model"
+description: "Margin, Padding, Border va Box Model"
+---
+
+## TODO
+- Box Model tushunchasini bilish
+- Margin va Padding farqini o'rganish
+- Border bilan ishlash
+
+## Dars mazmuni
+
+### CSS Box Model nima?
+
+**Box Model** - HTML elementining tuzilmasi. Har bir element to'rtburchak (box) sifatida ko'riladi.
+
+**4 ta qism**:
+1. **Content** - asosiy kontent
+2. **Padding** - ichki bo'shliq
+3. **Border** - chegara
+4. **Margin** - tashqi bo'shliq
+
+```
+┌─────────────────────────────┐
+│      Margin (tashqi)        │
+│  ┌──────────────────────┐   │
+│  │   Border (chegara)   │   │
+│  │ ┌────────────────┐   │   │
+│  │ │ Padding (ichki)│   │   │
+│  │ │ ┌──────────┐   │   │   │
+│  │ │ │ Content  │   │   │   │
+│  │ │ └──────────┘   │   │   │
+│  │ └────────────────┘   │   │
+│  └──────────────────────┘   │
+└─────────────────────────────┘
+```
+
+### Content (Kontent)
+
+**Asosiy mazmun joylashadigan joy**:
+
+```css
+div {
+    width: 300px;
+    height: 200px;
+}
+```
+
+### Padding (Ichki bo'shliq)
+
+**Kontent bilan border orasidagi bo'shliq**:
+
+```css
+div {
+    padding: 20px;  /* Hammasi 20px */
+}
+```
+
+**Har bir tomon**:
+```css
+div {
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+}
+```
+
+**Qisqa yozuv**:
+```css
+/* Hammasi bir xil */
+padding: 20px;
+
+/* Yuqori/Pasti - Chap/O'ng */
+padding: 10px 20px;
+
+/* Yuqori - Chap/O'ng - Pasti */
+padding: 10px 20px 30px;
+
+/* Yuqori - O'ng - Pasti - Chap (soat yo'nalishi) */
+padding: 10px 20px 30px 40px;
+```
+
+### Border (Chegara)
+
+**Element atrofidagi chiziq**:
+
+```css
+div {
+    border: 2px solid black;
+}
+```
+
+**To'liq sintaksis**:
+```css
+border: width style color;
+```
+
+#### Border Width (Qalinlik)
+
+```css
+border-width: 1px;
+border-width: thin;    /* Yupqa */
+border-width: medium;  /* O'rtacha */
+border-width: thick;   /* Qalin */
+```
+
+**Har bir tomon**:
+```css
+border-top-width: 2px;
+border-right-width: 3px;
+border-bottom-width: 2px;
+border-left-width: 3px;
+```
+
+#### Border Style (Uslub)
+
+```css
+border-style: solid;   /* Oddiy chiziq */
+border-style: dotted;  /* Nuqtali */
+border-style: dashed;  /* Chiziqli */
+border-style: double;  /* Qo'sh chiziq */
+border-style: groove;  /* 3D botiq */
+border-style: ridge;   /* 3D chiqiq */
+border-style: inset;   /* 3D ichkariga */
+border-style: outset;  /* 3D tashqariga */
+border-style: none;    /* Yo'q */
+border-style: hidden;  /* Yashirin */
+```
+
+#### Border Color (Rang)
+
+```css
+border-color: red;
+border-color: #ff0000;
+border-color: rgb(255, 0, 0);
+```
+
+**Har bir tomon**:
+```css
+border-top-color: red;
+border-right-color: blue;
+border-bottom-color: green;
+border-left-color: yellow;
+```
+
+#### Qisqa yozuv
+
+```css
+/* Hammasi bir xil */
+border: 2px solid black;
+
+/* Har bir tomon */
+border-top: 2px solid red;
+border-right: 3px dashed blue;
+border-bottom: 2px solid green;
+border-left: 3px dashed yellow;
+```
+
+### Margin (Tashqi bo'shliq)
+
+**Elementlar orasidagi bo'shliq**:
+
+```css
+div {
+    margin: 20px;
+}
+```
+
+**Har bir tomon**:
+```css
+div {
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+```
+
+**Qisqa yozuv** (padding kabi):
+```css
+margin: 20px;            /* Hammasi */
+margin: 10px 20px;       /* Yuqori/Pasti - Chap/O'ng */
+margin: 10px 20px 30px;  /* Yuqori - Chap/O'ng - Pasti */
+margin: 10px 20px 30px 40px;  /* Soat yo'nalishi */
+```
+
+#### Markazlash
+
+**Block elementni markazga**:
+```css
+div {
+    width: 500px;
+    margin: 0 auto;  /* Yuqori/Pasti 0, Chap/O'ng avtomatik */
+}
+```
+
+#### Margin Collapse
+
+**Vertikal marginlar birlashadi**:
+
+```html
+<div style="margin-bottom: 30px;">Element 1</div>
+<div style="margin-top: 20px;">Element 2</div>
+```
+
+**Natija**: 50px emas, 30px (kattasi qoladi)
+
+#### Negative margin
+
+**Salbiy qiymat**:
+```css
+div {
+    margin-top: -20px;  /* Yuqoriga 20px */
+}
+```
+
+### box-sizing xususiyati
+
+**Standart** (content-box):
+```css
+div {
+    width: 300px;
+    padding: 20px;
+    border: 5px solid black;
+    /* To'liq kenglik: 300 + 20*2 + 5*2 = 350px */
+}
+```
+
+**border-box** (yaxshiroq):
+```css
+div {
+    box-sizing: border-box;
+    width: 300px;
+    padding: 20px;
+    border: 5px solid black;
+    /* To'liq kenglik: 300px (padding va border ichida) */
+}
+```
+
+**Universal border-box**:
+```css
+* {
+    box-sizing: border-box;
+}
+```
+
+### Width va Height
+
+#### Oddiy o'lcham
+
+```css
+div {
+    width: 300px;
+    height: 200px;
+}
+```
+
+#### Min va Max
+
+```css
+div {
+    min-width: 200px;   /* Eng kichik */
+    max-width: 800px;   /* Eng katta */
+    min-height: 100px;
+    max-height: 500px;
+}
+```
+
+**Responsive uchun**:
+```css
+img {
+    max-width: 100%;
+    height: auto;
+}
+```
+
+### Border Radius (Dumaloq burchaklar)
+
+```css
+div {
+    border-radius: 10px;  /* Hammasi */
+}
+```
+
+**Har bir burchak**:
+```css
+div {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 40px;
+}
+```
+
+**Qisqa yozuv**:
+```css
+/* Yuqori-chap, Yuqori-o'ng, Pasti-o'ng, Pasti-chap */
+border-radius: 10px 20px 30px 40px;
+```
+
+**Doira**:
+```css
+div {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+```
+
+### Box Shadow (Soya)
+
+```css
+div {
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+}
+```
+
+**Sintaksis**:
+```css
+box-shadow: x-offset y-offset blur spread color;
+```
+
+**Misollar**:
+```css
+/* Oddiy */
+box-shadow: 2px 2px 5px gray;
+
+/* Blur bilan */
+box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+/* Ichki soya */
+box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+
+/* Ko'p soya */
+box-shadow: 2px 2px 5px red, -2px -2px 5px blue;
+```
+
+### Outline (Kontur)
+
+**Border dan tashqarida**:
+
+```css
+div {
+    outline: 2px solid red;
+}
+```
+
+**Farqi**:
+- Border - Box Model qismi
+- Outline - Box Model dan tashqarida
+- Outline - joy egallamaydi
+
+```css
+div {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: red;
+    outline-offset: 5px;  /* Border dan masofa */
+}
+```
+
+### Misollar
+
+#### Card dizayni
+
+```css
+.card {
+    width: 300px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+```
+
+#### Button
+
+```css
+.button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+}
+
+.button:hover {
+    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+}
+```
+
+#### Container
+
+```css
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+```
+
+## Dars uchun vazifa
+
+1. Box Model ni amalda ko'ring:
+   - Div yarating (300x200px)
+   - Padding 20px qo'shing
+   - Border 5px solid black
+   - Margin 30px
+   - DevTools (F12) da Box Model ni ko'ring
+
+2. 3 xil card yarating:
+   - Har xilنوع border-radius
+   - Turli box-shadow
+   - Har xil padding/margin
+
+3. Button komponentini yarating:
+   - Oddiy holat
+   - Hover holat (soya bilan)
+   - Active holat
+
+## Uyga vazifa
+
+1. **Product Card** yarating:
+   - Rasm (100% kenglik)
+   - Sarlavha
+   - Narx
+   - "Sotib olish" tugmasi
+   - Box model ishlatib to'liq formatlang
+   - Hover effekt qo'shing
+
+2. **Profile Card**:
+   - Doira rasm (border-radius: 50%)
+   - Ism
+   - Lavozim
+   - Ijtimoiy tarmoq tugmalari
+   - Box shadow bilan
+
+3. **Pricing Table**:
+   - 3 ta pricing card
+   - Har birida:
+     * Sarlavha
+     * Narx
+     * Xususiyatlar ro'yxati
+     * "Choose Plan" tugmasi
+   - O'rtadagi kattaroq va alohida (recommended)
+
+4. Box-sizing farqini amalda ko'ring:
+   - 2 ta bir xil o'lchamdagi div
+   - Birinchisi: content-box
+   - Ikkinchisi: border-box
+   - Padding va border qo'shing
+   - To'liq kengliklarini taqqoslang
+
+5. Quyidagi savolarga javob bering:
+   - Padding va Margin ning farqi nima?
+   - Border va Outline ning farqi?
+   - box-sizing: border-box nima uchun yaxshi?
+   - Margin collapse nima?
+
+6. **Responsive Container** yarating:
+   - max-width: 1200px
+   - Kichik ekranlarda 100%
+   - Padding yon tomonlarda
+   - Markazlangan
+
+7. Box Model ning 4 ta qismini batafsil tushuntiring va har biriga 3 tadan misol keltiring

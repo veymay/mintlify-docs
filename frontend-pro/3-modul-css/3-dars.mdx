@@ -1,0 +1,640 @@
+---
+title: "CSS Flexbox"
+description: "Zamonaviy Layout - Flexbox bilan ishlash"
+---
+
+## TODO
+- Flexbox tushunchasini bilish
+- Flex Container va Flex Item xususiyatlarini o'rganish
+- Amaliy layout'lar yaratish
+
+## Dars mazmuni
+
+### Flexbox nima?
+
+**Flexbox** (Flexible Box Layout) - zamonaviy CSS layout usuli. Elementlarni osonlik bilan joylash va hizalash uchun.
+
+**Afzalliklari**:
+- Oson hizalash
+- Responsive dizayn
+- Tartibni o'zgartirish
+- Bo'sh joyni taqsimlash
+
+### Flexbox asoslari
+
+**Flex Container yaratish**:
+
+```css
+.container {
+    display: flex;
+}
+```
+
+**2 ta qism**:
+1. **Flex Container** - ota element
+2. **Flex Items** - bolalar elementlar
+
+```html
+<div class="container"> <!-- Flex Container -->
+    <div>Item 1</div>   <!-- Flex Item -->
+    <div>Item 2</div>   <!-- Flex Item -->
+    <div>Item 3</div>   <!-- Flex Item -->
+</div>
+```
+
+### O'qlar (Axes)
+
+**2 ta o'q**:
+1. **Main Axis** (asosiy o'q) - flex-direction yo'nalishi
+2. **Cross Axis** (kesishma o'q) - Main Axis ga perpendikulyar
+
+```
+flex-direction: row (default)
+────────────────────────────►
+Main Axis (gorizontal)
+
+│ Cross Axis
+│ (vertikal)
+▼
+```
+
+### Flex Container xususiyatlari
+
+#### flex-direction
+
+**Yo'nalishni belgilash**:
+
+```css
+.container {
+    display: flex;
+    flex-direction: row; /* Default */
+}
+```
+
+**Qiymatlar**:
+- `row` - chapdan o'ngga →
+- `row-reverse` - o'ngdan chapga ←
+- `column` - yuqoridan pastga ↓
+- `column-reverse` - pastdan yuqoriga ↑
+
+```css
+/* Chapdan o'ngga */
+flex-direction: row;
+
+/* O'ngdan chapga */
+flex-direction: row-reverse;
+
+/* Yuqoridan pastga */
+flex-direction: column;
+
+/* Pastdan yuqoriga */
+flex-direction: column-reverse;
+```
+
+#### flex-wrap
+
+**Qatorga o'tish**:
+
+```css
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+```
+
+**Qiymatlar**:
+- `nowrap` - bir qatorda (default)
+- `wrap` - keyingi qatorga o'tadi
+- `wrap-reverse` - teskari yo'nalishda
+
+```css
+/* Joy yetmasa, siqiladi */
+flex-wrap: nowrap;
+
+/* Joy yetmasa, keyingi qatorga */
+flex-wrap: wrap;
+
+/* Keyingi qator yuqorida */
+flex-wrap: wrap-reverse;
+```
+
+#### flex-flow (qisqa yozuv)
+
+```css
+/* flex-direction va flex-wrap */
+flex-flow: row wrap;
+flex-flow: column nowrap;
+```
+
+#### justify-content
+
+**Main Axis bo'yicha hizalash**:
+
+```css
+.container {
+    display: flex;
+    justify-content: center;
+}
+```
+
+**Qiymatlar**:
+- `flex-start` - boshidan (default)
+- `flex-end` - oxiridan
+- `center` - markazda
+- `space-between` - oraliq bir xil, yon tomonlar yopishgan
+- `space-around` - atrofida bir xil bo'shliq
+- `space-evenly` - hamma joyda bir xil bo'shliq
+
+```css
+/* Chapdan */
+justify-content: flex-start;
+
+/* O'ngdan */
+justify-content: flex-end;
+
+/* Markazda */
+justify-content: center;
+
+/* Oraliq teng */
+justify-content: space-between;
+
+/* Atrofida teng */
+justify-content: space-around;
+
+/* Hammasi teng */
+justify-content: space-evenly;
+```
+
+**Misollar**:
+
+```
+flex-start:   [1][2][3]___________
+flex-end:     ___________[1][2][3]
+center:       _____[1][2][3]______
+space-between:[1]____[2]____[3]
+space-around: __[1]__[2]__[3]__
+space-evenly: ___[1]___[2]___[3]___
+```
+
+#### align-items
+
+**Cross Axis bo'yicha hizalash** (bitta qator):
+
+```css
+.container {
+    display: flex;
+    align-items: center;
+}
+```
+
+**Qiymatlar**:
+- `stretch` - cho'zish (default)
+- `flex-start` - yuqoridan
+- `flex-end` - pastdan
+- `center` - markazda
+- `baseline` - matn chizig'i bo'yicha
+
+```css
+/* Cho'ziladi */
+align-items: stretch;
+
+/* Yuqorida */
+align-items: flex-start;
+
+/* Pastda */
+align-items: flex-end;
+
+/* Markazda */
+align-items: center;
+
+/* Baseline */
+align-items: baseline;
+```
+
+#### align-content
+
+**Cross Axis bo'yicha hizalash** (ko'p qator):
+
+```css
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+```
+
+**Qiymatlar** (justify-content kabi):
+- `flex-start`
+- `flex-end`
+- `center`
+- `space-between`
+- `space-around`
+- `stretch`
+
+#### gap
+
+**Oraliq bo'shliq**:
+
+```css
+.container {
+    display: flex;
+    gap: 20px;  /* Hammasi */
+}
+```
+
+**Alohida**:
+```css
+.container {
+    row-gap: 20px;     /* Qatorlar orasida */
+    column-gap: 10px;  /* Ustunlar orasida */
+}
+```
+
+### Flex Item xususiyatlari
+
+#### order
+
+**Tartibni o'zgartirish**:
+
+```css
+.item1 { order: 2; }
+.item2 { order: 1; }
+.item3 { order: 3; }
+```
+
+**Default**: `order: 0`
+
+```html
+<div class="item1">Ko'rinadi 2-chi</div>
+<div class="item2">Ko'rinadi 1-chi</div>
+<div class="item3">Ko'rinadi 3-chi</div>
+```
+
+#### flex-grow
+
+**Bo'sh joyni egallash**:
+
+```css
+.item {
+    flex-grow: 1;
+}
+```
+
+**Default**: `flex-grow: 0` (o'smaydi)
+
+**Misol**:
+```css
+.item1 { flex-grow: 1; }  /* 1 qism */
+.item2 { flex-grow: 2; }  /* 2 qism */
+.item3 { flex-grow: 1; }  /* 1 qism */
+/* Jami 4 qism, item2 2 marta katta */
+```
+
+#### flex-shrink
+
+**Siqilish**:
+
+```css
+.item {
+    flex-shrink: 1;  /* Default */
+}
+```
+
+**0** - siqilmaydi
+**1+** - siqiladi
+
+```css
+.item1 { flex-shrink: 0; }  /* Hech qachon siqilmaydi */
+.item2 { flex-shrink: 1; }  /* Siqiladi */
+```
+
+#### flex-basis
+
+**Boshlang'ich o'lcham**:
+
+```css
+.item {
+    flex-basis: 200px;
+}
+```
+
+**Default**: `flex-basis: auto` (kontent o'lchami)
+
+```css
+/* Aniq o'lcham */
+flex-basis: 200px;
+
+/* Foizda */
+flex-basis: 50%;
+
+/* Avtomatik */
+flex-basis: auto;
+```
+
+#### flex (qisqa yozuv)
+
+```css
+/* flex-grow flex-shrink flex-basis */
+.item {
+    flex: 1 1 200px;
+}
+```
+
+**Tez-tez ishlatiladi**:
+```css
+flex: 1;        /* flex: 1 1 0 */
+flex: auto;     /* flex: 1 1 auto */
+flex: none;     /* flex: 0 0 auto */
+flex: 0 200px;  /* flex: 0 1 200px */
+```
+
+#### align-self
+
+**Bitta itemni alohida hizalash**:
+
+```css
+.item {
+    align-self: center;
+}
+```
+
+**Qiymatlar** (align-items kabi):
+- `auto` (default)
+- `flex-start`
+- `flex-end`
+- `center`
+- `baseline`
+- `stretch`
+
+### Amaliy misollar
+
+#### Markazlash
+
+**Vertikal va gorizontal**:
+
+```css
+.container {
+    display: flex;
+    justify-content: center;  /* Gorizontal */
+    align-items: center;      /* Vertikal */
+    height: 100vh;
+}
+```
+
+#### Navigation
+
+```css
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+```
+
+```html
+<nav class="nav">
+    <div class="logo">Logo</div>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+```
+
+#### Card Grid
+
+```css
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    flex: 1 1 300px;  /* 300px minimal */
+}
+```
+
+#### Holy Grail Layout
+
+```css
+.container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.header {
+    background: #333;
+    color: white;
+    padding: 20px;
+}
+
+.main {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    flex: 0 0 200px;
+    background: #f4f4f4;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.footer {
+    background: #333;
+    color: white;
+    padding: 20px;
+}
+```
+
+#### Responsive Columns
+
+```css
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.column {
+    flex: 1 1 250px;  /* Minimal 250px */
+    min-width: 0;     /* Siqilish uchun */
+}
+```
+
+#### Sticky Footer
+
+```css
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.content {
+    flex: 1;
+}
+
+.footer {
+    margin-top: auto;
+}
+```
+
+#### Equal Height Columns
+
+```css
+.container {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    /* Avtomatik bir xil balandlik */
+}
+```
+
+### Tez-tez ishlatiladigan naqshlar
+
+#### Centering
+
+```css
+/* Bir element */
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ko'p elementlar */
+.parent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+```
+
+#### Split Screen
+
+```css
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.left {
+    flex: 1;
+}
+
+.right {
+    flex: 1;
+}
+```
+
+#### Auto Margins
+
+```css
+.container {
+    display: flex;
+}
+
+.item:last-child {
+    margin-left: auto;  /* O'ngga itaradi */
+}
+```
+
+## Dars uchun vazifa
+
+1. Flexbox Playground:
+   - Container yarating
+   - 5 ta item qo'shing
+   - Turli justify-content qiymatlarini sinab ko'ring
+   - Turli align-items qiymatlarini sinab ko'ring
+
+2. Navigation yarating:
+   - Logo chapda
+   - Linklar o'ngda
+   - Markazlangan
+   - Responsive
+
+3. Card Grid:
+   - 3 ta card
+   - flex-wrap: wrap
+   - gap: 20px
+   - flex: 1 1 300px
+
+4. Holy Grail Layout:
+   - Header
+   - Sidebar (200px)
+   - Content (qolgan joy)
+   - Footer
+
+## Uyga vazifa
+
+1. **Responsive Navigation** yarating:
+   - Logo
+   - Menu (4 ta link)
+   - Login button (o'ngda)
+   - Kichik ekranlarda column
+
+2. **Pricing Cards**:
+   - 3 ta card
+   - Bir xil balandlik
+   - O'rtadagi kattaroq (flex-grow)
+   - Gap va padding
+
+3. **Hero Section**:
+   - Chap tomon: matn
+   - O'ng tomon: rasm
+   - Markazlangan vertikal
+   - Responsive (column mobilda)
+
+4. **Footer**:
+   - 4 ta ustun
+   - Har birida:
+     * Sarlavha
+     * Linklar ro'yxati
+   - Responsive (2-2, keyin 1-1)
+
+5. **Image Gallery**:
+   - flex-wrap: wrap
+   - Har bir rasm: flex: 1 1 200px
+   - gap: 10px
+   - Bir xil balandlik
+
+6. **Dashboard Layout**:
+   - Sidebar (250px, flex: 0 0 250px)
+   - Main content (qolgan joy)
+   - Top bar (100% kenglik)
+   - Sticky sidebar
+
+7. Quyidagi savolarga javob bering:
+   - justify-content va align-items farqi?
+   - flex-grow va flex-shrink qachon ishlatiladi?
+   - flex-basis nima?
+   - gap va margin farqi?
+
+8. **Media Object** pattern yarating:
+   - Chap: rasm (fixed)
+   - O'ng: kontent (flex)
+   - Vertikal markazlangan
+
+9. Flexbox yordamida to'liq landing page yarating:
+   - Hero section
+   - Features (3 ta card)
+   - Testimonials (2 ta)
+   - Footer
